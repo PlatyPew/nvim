@@ -13,7 +13,6 @@ end
 local models = {
     "gpt_4o",
     "gpt_4o_mini",
-    "deepseek_r1",
     "gemini",
     "codestral",
     "mistral_large",

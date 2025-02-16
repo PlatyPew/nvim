@@ -92,12 +92,6 @@ return {
                         endpoint = "https://models.inference.ai.azure.com",
                         model = "gpt-4o-mini",
                     },
-                    deepseek_r1 = {
-                        __inherited_from = "openai",
-                        api_key_name = "GITHUB_TOKEN",
-                        endpoint = "https://models.inference.ai.azure.com",
-                        model = "deepseek-r1",
-                    },
                     codestral = {
                         __inherited_from = "openai",
                         api_key_name = "CODESTRAL_API_KEY",
