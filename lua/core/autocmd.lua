@@ -15,6 +15,7 @@ autocmd("FileType", {
             "NeogitStatus",
             "WhichKey",
             "dashboard",
+            "dbout",
             "lazy",
             "mason",
             "Avante",
