@@ -46,17 +46,11 @@ return {
     },
 
     {
-        "3rd/image.nvim",
-        enabled = vim.fn.executable("magick") == 1,
-        cond = not vim.g.vscode,
-        lazy = true,
-        ft = { "markdown", "quarto" },
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
         opts = {
-            integrations = {
-                markdown = {
-                    only_render_image_at_cursor = true,
-                },
-            },
+            image = { enabled = true, doc = { inline = false } },
         },
     },
 }

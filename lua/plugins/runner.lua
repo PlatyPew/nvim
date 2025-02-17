@@ -89,7 +89,7 @@ return {
         cond = not vim.g.vscode,
         ft = { "markdown", "quarto" },
         version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-        dependencies = "3rd/image.nvim",
+        -- dependencies = "3rd/image.nvim", -- Removed image.nvim first while waiting for molten to work with snacks.nvim
         build = function()
             vim.cmd("UpdateRemotePlugins") -- Run :UpdateRemotePlugins if not working
             vim.cmd(
