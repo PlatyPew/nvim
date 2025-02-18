@@ -35,7 +35,7 @@ Plugins are stored and automatically sourced in `lua/plugins/`
 
 ## 🤖 AI Features
 
-There are 3 AI features that are enabled by default:
+There are 2 AI features that are enabled by default:
 
 1. Supermaven
 2. Avante
@@ -51,11 +51,9 @@ Currently, Avante is configured to use the following models from the following p
 | Model Name           | Provider                  |
 | -------------------- | ------------------------- |
 | codestral-latest     | Codestral Mistral AI      |
-| deepseek-r1          | Deepseek (Ollama)         |
 | gemini-exp-1206      | Google AI                 |
 | gpt-4o               | GitHub Marketplace Models |
 | gpt-4o-mini          | GitHub Marketplace Models |
-| llama3.1-405B        | Meta                      |
 | mistral-large-latest | Mistral AI                |
 
 #### macOS
@@ -64,10 +62,6 @@ Currently, Avante is configured to use the following models from the following p
 # GitHub and Google API Keys
 security add-generic-password -a "GitHub Token" -s "GITHUB_TOKEN" -w "<api_key>"
 security add-generic-password -a "Gemini API Key" -s "GEMINI_API_KEY" -w "<api_key>"
-
-# Qwen2.5 Coder
-brew services start ollama
-ollama pull deepseek-r1:8b
 ```
 
 #### Linux
@@ -78,8 +72,4 @@ mkdir -p ~/.apikeys
 echo "<api_key>" > ~/.apikeys/github_token
 echo "<api_key>" > ~/.apikeys/gemini_api_key
 chmod 600 ~/.apikeys/*
-
-# Qwen2.5 Coder
-sudo systemctl start ollama
-ollama pull qwen2.5-coder:7b
 ```
