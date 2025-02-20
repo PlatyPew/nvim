@@ -40,12 +40,6 @@ return {
     },
 
     {
-        "jbyuki/nabla.nvim",
-        ft = "markdown",
-        lazy = true,
-    },
-
-    {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
