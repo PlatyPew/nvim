@@ -14,6 +14,16 @@ To install, simply run the `./install.sh` script or run this command.
 nvim --headless "+Lazy! sync" +qa
 ```
 
+### 📦 Dependencies
+
+- `gcc` or `clang`
+- `git`
+- `imagemagick`
+- `node` (with `npm`)
+- `python3` (with `pip` and `virtualenv`)
+- `ripgrep`
+- `tectonic`
+
 ## 📁 File Structure
 
 Plugins are stored and automatically sourced in `lua/plugins/`
