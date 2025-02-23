@@ -44,6 +44,14 @@ return {
                 desc = "View Devdocs",
             },
         },
-        config = true,
+        opts = {
+            ensured_installed = function()
+                if vim.g.install then
+                    return { "c", "openjdk~21", "python~3.13", "rust", "typescript" }
+                end
+
+                return {}
+            end,
+        },
     },
 }
