@@ -22,7 +22,7 @@ return {
                     lua_ls = {},
                     basedpyright = {},
                     rust_analyzer = {},
-                    tsserver = {},
+                    ts_ls = {},
                 }
             end
 
@@ -44,9 +44,6 @@ return {
                 ensure_installed = vim.tbl_keys(servers),
                 handlers = {
                     function(server_name)
-                        if server_name == "tsserver" then
-                            server_name = "ts_ls"
-                        end
                         if server_name ~= "jdtls" then
                             require("lspconfig")[server_name].setup({
                                 capabilities = capabilities,
