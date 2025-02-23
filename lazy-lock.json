@@ -3,6 +3,7 @@
   "avante.nvim": { "branch": "main", "commit": "27d3f294a4cdb372ad9248ff4eb03dbf50bc3855" },
   "blink.cmp": { "branch": "main", "commit": "18b352d12b35bca148427b607098df14b75a218f" },
   "catppuccin": { "branch": "main", "commit": "4bb938bbba41d306db18bf0eb0633a5f28fd7ba0" },
+  "devdocs.nvim": { "branch": "main", "commit": "f2c0f23ff1e8f56dc465e468d395b5466670b72a" },
   "dial.nvim": { "branch": "master", "commit": "34bbd9c387c358190e61ce71017faad3dffa7a74" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },

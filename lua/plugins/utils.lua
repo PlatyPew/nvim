@@ -125,6 +125,7 @@ return {
             wk.setup(opts)
 
             wk.add({
+                { "<Leader>D", group = "Docs" },
                 { "<Leader>R", group = "Overseer" },
                 { "<Leader>M", group = "Markdown" },
                 { "<Leader>a", group = "Avante", mode = { "n", "v" } },
