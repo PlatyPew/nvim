@@ -38,14 +38,12 @@ return {
         },
         config = function()
             require("sniprun").setup({
-                display = { "TerminalWithCode", "VirtualTextOk", "Api" },
+                display = { "TerminalWithCode", "VirtualLine", "Api" },
                 selected_interpreters = { "Python3_fifo", "JS_TS_deno" },
                 repl_enable = { "Python3_fifo", "JS_TS_deno" },
                 snipruncolors = {
-                    SniprunVirtualTextOk = {
-                        fg = vim.g.palette.crust,
-                        bg = vim.g.palette.teal,
-                    },
+                    SniprunVirtualTextOk = { fg = vim.g.palette.overlay1 },
+                    SniprunVirtualTextErr = { fg = vim.g.palette.red },
                 },
             })
 
