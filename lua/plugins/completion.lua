@@ -40,7 +40,23 @@ return {
             completion = {
                 list = { selection = { preselect = false, auto_insert = true } },
                 documentation = { auto_show = true, window = { border = "double" } },
-                menu = { border = "rounded", draw = { treesitter = { "lsp" } } },
+                menu = {
+                    border = "rounded",
+                    draw = {
+                        columns = { { "kind_icon" }, { "label", gap = 1 } },
+                        components = {
+                            label = {
+                                text = function(ctx)
+                                    return require("colorful-menu").blink_components_text(ctx)
+                                end,
+                                highlight = function(ctx)
+                                    return require("colorful-menu").blink_components_highlight(ctx)
+                                end,
+                            },
+                        },
+                        treesitter = { "lsp" },
+                    },
+                },
             },
             signature = { enabled = true, window = { border = "single" } },
         },
@@ -50,6 +66,12 @@ return {
         "kristijanhusak/vim-dadbod-completion",
         dependencies = "vim-dadbod",
         ft = { "sql", "mysql", "plsql" },
+    },
+
+    {
+        "xzbdmw/colorful-menu.nvim",
+        lazy = true,
+        config = true,
     },
 
     {
