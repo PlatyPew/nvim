@@ -27,6 +27,7 @@ return {
                     "dadbod",
                     "nerdfont",
                     "conventional_commits",
+                    "avante",
                 },
                 providers = {
                     buffer = {
@@ -55,6 +56,14 @@ return {
                         module = "blink-cmp-conventional-commits",
                         enabled = function()
                             return vim.bo.filetype == "gitcommit"
+                        end,
+                        score_offset = 100,
+                    },
+                    avante = {
+                        module = "blink-cmp-avante",
+                        name = "Avante",
+                        enabled = function()
+                            return vim.bo.filetype == "AvanteInput"
                         end,
                         score_offset = 100,
                     },
@@ -99,6 +108,11 @@ return {
         "kristijanhusak/vim-dadbod-completion",
         dependencies = "vim-dadbod",
         ft = { "sql", "mysql", "plsql" },
+    },
+
+    {
+        "Kaiser-Yang/blink-cmp-avante",
+        ft = "AvanteInput",
     },
 
     {
