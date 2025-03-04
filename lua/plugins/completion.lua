@@ -26,7 +26,6 @@ return {
                     "buffer",
                     "dadbod",
                     "nerdfont",
-                    "conventional_commits",
                     "avante",
                 },
                 providers = {
@@ -50,14 +49,6 @@ return {
                         name = "Nerd Fonts",
                         score_offset = 1,
                         opts = { insert = true },
-                    },
-                    conventional_commits = {
-                        name = "Conventional Commits",
-                        module = "blink-cmp-conventional-commits",
-                        enabled = function()
-                            return vim.bo.filetype == "gitcommit"
-                        end,
-                        score_offset = 100,
                     },
                     avante = {
                         module = "blink-cmp-avante",
@@ -97,11 +88,6 @@ return {
     {
         "MahanRahmati/blink-nerdfont.nvim",
         event = "InsertEnter",
-    },
-
-    {
-        "disrupted/blink-cmp-conventional-commits",
-        ft = "gitcommit",
     },
 
     {
