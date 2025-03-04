@@ -18,7 +18,16 @@ return {
             },
             appearance = { nerd_font_variant = "mono" },
             sources = {
-                default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
+                default = {
+                    "lazydev",
+                    "lsp",
+                    "path",
+                    "snippets",
+                    "buffer",
+                    "dadbod",
+                    "nerdfont",
+                    "conventional_commits",
+                },
                 providers = {
                     buffer = {
                         opts = {
@@ -33,6 +42,20 @@ return {
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
+                        score_offset = 100,
+                    },
+                    nerdfont = {
+                        module = "blink-nerdfont",
+                        name = "Nerd Fonts",
+                        score_offset = 1,
+                        opts = { insert = true },
+                    },
+                    conventional_commits = {
+                        name = "Conventional Commits",
+                        module = "blink-cmp-conventional-commits",
+                        enabled = function()
+                            return vim.bo.filetype == "gitcommit"
+                        end,
                         score_offset = 100,
                     },
                 },
@@ -60,6 +83,16 @@ return {
             },
             signature = { enabled = true, window = { border = "single" } },
         },
+    },
+
+    {
+        "MahanRahmati/blink-nerdfont.nvim",
+        event = "InsertEnter",
+    },
+
+    {
+        "disrupted/blink-cmp-conventional-commits",
+        ft = "gitcommit",
     },
 
     {
