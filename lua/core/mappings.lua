@@ -14,6 +14,10 @@ remap({ "n", "x" }, "<Left>", "<Cmd>vertical resize -2<CR>")
 -- Increase vertical split
 remap({ "n", "x" }, "<Right>", "<Cmd>vertical resize +2<CR>")
 
+-- Splits
+remap("n", "<leader>-", "<C-W>s", { remap = true })
+remap("n", "<leader>|", "<C-W>v", { remap = true })
+
 -- Remap semicolon to colon
 remap({ "n", "x" }, ";", ":")
 
@@ -56,3 +60,22 @@ remap("t", "<C-Esc>", "<C-\\><C-n>")
 -- Mappings for Comment
 remap("n", "gc", "<cmd>set operatorfunc=v:lua.__toggle_contextual<CR>g@")
 remap("x", "gc", "<cmd>set operatorfunc=v:lua.__toggle_contextual<CR>g@")
+
+-- Clear search on escape
+remap({ "i", "n", "s" }, "<esc>", function()
+    vim.cmd("noh")
+    vim.snippet.stop()
+    return "<esc>"
+end, { expr = true })
+
+-- Saner n and N
+remap("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true })
+remap("x", "n", "'Nn'[v:searchforward]", { expr = true })
+remap("o", "n", "'Nn'[v:searchforward]", { expr = true })
+remap("n", "N", "'nN'[v:searchforward].'zv'", { expr = true })
+remap("x", "N", "'nN'[v:searchforward]", { expr = true })
+remap("o", "N", "'nN'[v:searchforward]", { expr = true })
+
+-- better indenting
+remap("v", "<", "<gv")
+remap("v", ">", ">gv")
