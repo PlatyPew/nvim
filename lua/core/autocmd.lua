@@ -7,7 +7,6 @@ autocmd({ "BufNewFile", "BufRead" }, {
     command = "setlocal formatoptions-=cro",
 })
 
-local highlights = augroup("highlights", { clear = true })
 autocmd("FileType", {
     pattern = "*",
     callback = function()
@@ -21,17 +20,19 @@ autocmd("FileType", {
             "Avante",
             "AvanteInput",
             "snacks_picker_input",
+            "markdown",
+            "text",
+            "tex",
         }
 
         if not vim.tbl_contains(ft, vim.bo.filetype) then
             vim.g.colorcolumn = vim.fn.matchadd("ColorColumn", "\\%101v[^\n]")
         end
     end,
-    group = highlights,
+    group = augroup("highlights", { clear = true }),
 })
 
--- Fix oil lazy load but override netrw
-local minifiles = augroup("minifiles_au", {})
+-- Fix mini-files lazy load but override netrw
 autocmd("UIEnter", {
     pattern = "*",
     callback = function()
@@ -39,27 +40,42 @@ autocmd("UIEnter", {
             require("mini.files").open()
         end
     end,
-    group = minifiles,
+    group = augroup("minifiles", {}),
 })
 
-local term = vim.api.nvim_create_augroup("term_au", {})
-vim.api.nvim_create_autocmd("TermOpen", {
-    pattern = "*",
-    command = "setlocal nonumber norelativenumber",
-    group = term,
+-- Resize splits if window got resized
+autocmd("VimResized", {
+    group = augroup("resize_splits", {}),
+    callback = function()
+        local current_tab = vim.fn.tabpagenr()
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabnext " .. current_tab)
+    end,
 })
-vim.api.nvim_create_autocmd("WinEnter", {
-    pattern = "term://*",
-    command = "nohlsearch",
-    group = term,
+
+-- Go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+    group = augroup("last_loc", {}),
+    callback = function(event)
+        local exclude = { "gitcommit" }
+        local buf = event.buf
+        if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+            return
+        end
+        vim.b[buf].lazyvim_last_loc = true
+        local mark = vim.api.nvim_buf_get_mark(buf, '"')
+        local lcount = vim.api.nvim_buf_line_count(buf)
+        if mark[1] > 0 and mark[1] <= lcount then
+            pcall(vim.api.nvim_win_set_cursor, 0, mark)
+        end
+    end,
 })
-vim.api.nvim_create_autocmd("WinEnter", {
-    pattern = "term://*",
-    command = "startinsert",
-    group = term,
-})
-vim.api.nvim_create_autocmd("TermOpen", {
-    pattern = "*",
-    command = "setlocal listchars= | set nocursorline | set nocursorcolumn",
-    group = term,
+
+-- Wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("wrap_spell", {}),
+    pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+    callback = function()
+        vim.opt_local.spell = true
+    end,
 })
