@@ -9,10 +9,9 @@ function _G.DiffviewToggle()
     end
 end
 
---Avante
+-- Avante
 local models = {
     "gpt_4o",
-    "gpt_4o_mini",
     "gemini",
     "codestral",
     "mistral_large",
