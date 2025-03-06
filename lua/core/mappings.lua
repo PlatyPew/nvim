@@ -76,6 +76,9 @@ remap("n", "N", "'nN'[v:searchforward].'zv'", { expr = true })
 remap("x", "N", "'nN'[v:searchforward]", { expr = true })
 remap("o", "N", "'nN'[v:searchforward]", { expr = true })
 
--- better indenting
+-- Better indenting
 remap("v", "<", "<gv")
 remap("v", ">", ">gv")
+
+-- Terminal mappings
+remap("t", "<C-/>", "<Cmd>close<CR>")
