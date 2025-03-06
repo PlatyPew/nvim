@@ -28,11 +28,7 @@ return {
             "AvanteToggle",
             "AvanteSwitchProvider",
         },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "stevearc/dressing.nvim",
-            "HakonHarnes/img-clip.nvim",
-        },
+        dependencies = "nvim-treesitter/nvim-treesitter",
         -- stylua: ignore
         keys = {
             { "<Leader>aa", function() require("avante.api").ask() end, desc = "Ask", mode = { "n", "v" } },

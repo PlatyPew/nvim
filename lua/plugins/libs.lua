@@ -31,10 +31,4 @@ return {
         "MunifTanjim/nui.nvim",
         lazy = true,
     },
-
-    {
-        "stevearc/dressing.nvim",
-        lazy = true,
-        config = true,
-    },
 }
