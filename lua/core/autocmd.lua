@@ -54,7 +54,7 @@ autocmd("VimResized", {
 })
 
 -- Go to last loc when opening a buffer
-vim.api.nvim_create_autocmd("BufReadPost", {
+autocmd("BufReadPost", {
     group = augroup("last_loc", {}),
     callback = function(event)
         local exclude = { "gitcommit" }
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
     group = augroup("wrap_spell", {}),
     pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
     callback = function()
