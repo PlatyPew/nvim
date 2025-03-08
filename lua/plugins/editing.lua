@@ -64,14 +64,16 @@ return {
             local mc = require("multicursor-nvim")
             mc.setup()
 
-            vim.keymap.set({"n", "v"}, "<A-S-up>", function() mc.lineSkipCursor(-1) end)
-            vim.keymap.set({"n", "v"}, "<A-S-down>", function() mc.lineSkipCursor(1) end)
-            vim.keymap.set({"n", "v"}, "<A-left>", mc.prevCursor)
-            vim.keymap.set({"n", "v"}, "<A-right>", mc.nextCursor)
-            vim.keymap.set({"n", "v"}, "<C-q>", function() mc.matchSkipCursor(1) end)
-            vim.keymap.set({"n", "v"}, "<leader>x", mc.deleteCursor)
+            local remap = vim.keymap.set
 
-            vim.keymap.set("n", "<esc>", function()
+            remap({"n", "v"}, "<A-S-up>", function() mc.lineSkipCursor(-1) end)
+            remap({"n", "v"}, "<A-S-down>", function() mc.lineSkipCursor(1) end)
+            remap({"n", "v"}, "<A-left>", mc.prevCursor)
+            remap({"n", "v"}, "<A-right>", mc.nextCursor)
+            remap({"n", "v"}, "<C-q>", function() mc.matchSkipCursor(1) end)
+            remap({"n", "v"}, "<leader>x", mc.deleteCursor)
+
+            remap("n", "<esc>", function()
                 if not mc.cursorsEnabled() then
                     mc.enableCursors()
                 elseif mc.hasCursors() then
@@ -80,7 +82,9 @@ return {
                 end
             end)
 
-            vim.keymap.set("v", "M", mc.matchCursors)
+            remap("x", "I", mc.insertVisual)
+
+            remap("v", "M", mc.matchCursors)
         end,
     },
 
