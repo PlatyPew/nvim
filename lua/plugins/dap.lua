@@ -8,7 +8,7 @@ return {
         dependencies = {
             "mfussenegger/nvim-dap",
             "theHamsta/nvim-dap-virtual-text",
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
             "jay-babu/mason-nvim-dap.nvim",
             "nvim-neotest/nvim-nio",
         },

@@ -148,7 +148,7 @@ local config = {
         },
     },
     -- Needed for auto-completion with method signatures and placeholders
-    capabilities = require('blink.cmp').get_lsp_capabilities()
+    capabilities = require('blink.cmp').get_lsp_capabilities(),
     flags = {
         allow_incremental_sync = true,
     },
