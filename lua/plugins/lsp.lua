@@ -40,6 +40,43 @@ return {
             -- Ensure the servers above are installed
             local mason_lspconfig = require("mason-lspconfig")
 
+            local runtimes
+            if vim.fn.has("macunix") == 1 then
+                home = "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home"
+                runtimes = {
+                    {
+                        name = "JavaSE-11",
+                        path = "/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home",
+                    },
+                    {
+                        name = "JavaSE-17",
+                        path = "/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home",
+                    },
+                    {
+                        name = "JavaSE-21",
+                        path = "/Library/Java/JavaVirtualMachines/openjdk-21.jdk/Contents/Home",
+                    },
+                }
+                config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_macos"
+            else
+                home = "/usr/lib/jvm/default"
+                runtimes = {
+                    {
+                        name = "JavaSE-11",
+                        path = "/usr/lib/jvm/java-11-openjdk",
+                    },
+                    {
+                        name = "JavaSE-17",
+                        path = "/usr/lib/jvm/java-17-openjdk",
+                    },
+                    {
+                        name = "JavaSE-21",
+                        path = "/usr/lib/jvm/java-21-openjdk",
+                    },
+                }
+                config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_linux"
+            end
+
             mason_lspconfig.setup({
                 ensure_installed = vim.tbl_keys(servers),
                 handlers = {
@@ -53,6 +90,14 @@ return {
                                     client.server_capabilities.documentRangeFormattingProvider =
                                         false
                                 end,
+                            })
+                        else
+                            require("lspconfig").jdtls.setup({
+                                settings = {
+                                    java = {
+                                        configuration = { runtimes = runtimes },
+                                    },
+                                },
                             })
                         end
                     end,
@@ -128,8 +173,15 @@ return {
     },
 
     {
-        "mfussenegger/nvim-jdtls",
+        "nvim-java/nvim-java",
+        priority = 1000,
         ft = "java",
+        opts = {
+            jdk = { auto_install = false },
+            spring_boot_tools = { enable = false },
+            java_test = { version = "0.43.1" },
+            jdtls = { version = "v1.46.1" },
+        },
     },
 
     {
@@ -141,5 +193,6 @@ return {
         keys = {
             { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
         }
+,
     },
 }
