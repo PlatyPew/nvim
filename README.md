@@ -4,7 +4,7 @@
 
 光速 (Speed Of Light) is a Neovim setup that has been carefully crafted to be feature-rich yet blazingly fast due to lazy loading as much as possible!
 
-![JPG Compression Be Like](https://github.com/PlatyPew/neovim-init.lua/assets/23520617/93f99d8b-2e1f-4457-a182-51cddc47298d)
+![JPG Compression Be Like](https://github.com/user-attachments/assets/03f5d637-9078-4ca5-9235-545ea5e0d141)
 
 ## 💻 Installation
 
