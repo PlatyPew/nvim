@@ -37,10 +37,10 @@ autocmd("UIEnter", {
     pattern = "*",
     callback = function()
         if vim.fn.isdirectory(vim.fn.expand("%:p")) == 1 then
-            require("mini.files").open()
+            require("oil")
         end
     end,
-    group = augroup("minifiles", {}),
+    group = augroup("oil_au", {}),
 })
 
 -- Resize splits if window got resized
