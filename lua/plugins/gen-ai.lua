@@ -32,7 +32,6 @@ return {
         -- stylua: ignore
         keys = {
             { "<Leader>aa", function() require("avante.api").ask() end, desc = "Ask", mode = { "n", "v" } },
-            { "<Leader>ac", "<Cmd>AvanteChat<CR>", desc = "Chat", mode = { "n", "v" }, },
             { "<Leader>ae", function() require("avante.api").edit() end, desc = "Edit", mode = { "n", "v" } },
             { "<Leader>ar", function() require("avante.api").refresh() end, desc = "Refresh" },
             { "<Leader>ap", function() return vim.bo.filetype == "AvanteInput" and require("avante.clipboard").paste_image() or require("img-clip").paste_image() end, desc = "Paste Image" },
@@ -58,9 +57,7 @@ return {
             local api_names = {
                 "TAVILY_API_KEY", -- Web search
                 "GITHUB_TOKEN",
-                "CODESTRAL_API_KEY",
                 "GEMINI_API_KEY",
-                "MISTRAL_API_KEY",
             }
             for _, api_name in ipairs(api_names) do
                 if vim.env[api_name] == nil then
@@ -70,36 +67,24 @@ return {
 
             -- stylua: ignore
             require("avante").setup({
-                provider = "gpt_4o",
+                provider = "gpt_4_1",
                 gemini = {
-                    -- model = "gemini-1.5-flash-latest", -- Base model
-                    model = "gemini-exp-1206", -- Experimental model
+                    model = "gemini-2.0-flash", -- Base model
+                    -- model = "gemini-2.5-flash-preview-05-20", -- Experimental model
                 },
                 vendors = {
-                    gpt_4o = {
+                    gpt_4_1 = {
                         __inherited_from = "openai",
                         api_key_name = "GITHUB_TOKEN",
                         endpoint = "https://models.inference.ai.azure.com",
-                        model = "gpt-4o",
+                        model = "openai/gpt-4.1",
                     },
-                    gpt_4o_mini = {
+                    --[[ gpt_4_1_mini = {
                         __inherited_from = "openai",
                         api_key_name = "GITHUB_TOKEN",
                         endpoint = "https://models.inference.ai.azure.com",
-                        model = "gpt-4o-mini",
-                    },
-                    codestral = {
-                        __inherited_from = "openai",
-                        api_key_name = "CODESTRAL_API_KEY",
-                        endpoint = "https://codestral.mistral.ai/v1",
-                        model = "codestral-latest",
-                    },
-                    mistral_large = {
-                        __inherited_from = "openai",
-                        api_key_name = "MISTRAL_API_KEY",
-                        endpoint = "https://api.mistral.ai/v1/",
-                        model = "mistral-large-latest",
-                    },
+                        model = "openai/gpt-4.1-mini",
+                    }, ]]
                 },
                 behaviour = {
                     auto_set_keymaps = false,

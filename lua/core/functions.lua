@@ -11,10 +11,9 @@ end
 
 -- Avante
 local models = {
-    "gpt_4o",
+    "gpt_4_1",
+    -- "gpt_4_1_mini",
     "gemini",
-    "codestral",
-    "mistral_large",
 }
 function _G.Avante_select_model()
     vim.ui.select(models, {
