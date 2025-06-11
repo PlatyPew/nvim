@@ -7,7 +7,7 @@ return {
             { "<Leader>Dd", "<Cmd>Neogen<CR>", desc = "Generate Docs" },
         },
         opts = {
-            snippet_engine = "luasnip",
+            snippet_engine = "nvim",
         },
     },
 
