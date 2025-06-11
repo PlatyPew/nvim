@@ -67,24 +67,18 @@ return {
 
             -- stylua: ignore
             require("avante").setup({
-                provider = "gpt_4_1",
-                gemini = {
-                    model = "gemini-2.0-flash", -- Base model
-                    -- model = "gemini-2.5-flash-preview-05-20", -- Experimental model
-                },
-                vendors = {
+                provider = "gemini",
+                providers = {
+                    gemini = {
+                        -- model = "gemini-2.0-flash", -- Base model
+                        model = "gemini-2.5-flash-preview-05-20", -- Experimental model
+                    },
                     gpt_4_1 = {
                         __inherited_from = "openai",
                         api_key_name = "GITHUB_TOKEN",
                         endpoint = "https://models.inference.ai.azure.com",
-                        model = "openai/gpt-4.1",
+                        model = "gpt-4.1",
                     },
-                    --[[ gpt_4_1_mini = {
-                        __inherited_from = "openai",
-                        api_key_name = "GITHUB_TOKEN",
-                        endpoint = "https://models.inference.ai.azure.com",
-                        model = "openai/gpt-4.1-mini",
-                    }, ]]
                 },
                 behaviour = {
                     auto_set_keymaps = false,
