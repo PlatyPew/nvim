@@ -42,7 +42,6 @@ return {
 
             local runtimes
             if vim.fn.has("macunix") == 1 then
-                home = "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home"
                 runtimes = {
                     {
                         name = "JavaSE-11",
@@ -55,11 +54,11 @@ return {
                     {
                         name = "JavaSE-21",
                         path = "/Library/Java/JavaVirtualMachines/openjdk-21.jdk/Contents/Home",
+                        default = true,
                     },
                 }
                 config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_macos"
             else
-                home = "/usr/lib/jvm/default"
                 runtimes = {
                     {
                         name = "JavaSE-11",
@@ -72,6 +71,7 @@ return {
                     {
                         name = "JavaSE-21",
                         path = "/usr/lib/jvm/java-21-openjdk",
+                        default = true,
                     },
                 }
                 config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_linux"
