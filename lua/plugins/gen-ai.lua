@@ -86,12 +86,14 @@ return {
                         api_key_name = "OPENROUTER_API_KEY",
                         endpoint = "https://openrouter.ai/api/v1",
                         model = "deepseek/deepseek-r1-0528-qwen3-8b:free",
+                        disable_tools = true,
                     },
                     ["gpt-4.1"] = {
                         __inherited_from = "openai",
                         api_key_name = "GITHUB_TOKEN",
                         endpoint = "https://models.inference.ai.azure.com",
                         model = "gpt-4.1",
+                        disable_tools = true,
                     },
                 },
                 behaviour = {
