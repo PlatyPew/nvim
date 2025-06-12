@@ -31,10 +31,17 @@ return {
         dependencies = "nvim-treesitter/nvim-treesitter",
         -- stylua: ignore
         keys = {
-            { "<Leader>aa", function() require("avante.api").ask() end, desc = "Ask", mode = { "n", "v" } },
-            { "<Leader>ae", function() require("avante.api").edit() end, desc = "Edit", mode = { "n", "v" } },
+            { "<Leader>aa", function() require("avante.api").ask() end,     desc = "Ask",    mode = { "n", "v" } },
+            { "<Leader>ae", function() require("avante.api").edit() end,    desc = "Edit",   mode = { "n", "v" } },
             { "<Leader>ar", function() require("avante.api").refresh() end, desc = "Refresh" },
-            { "<Leader>ap", function() return vim.bo.filetype == "AvanteInput" and require("avante.clipboard").paste_image() or require("img-clip").paste_image() end, desc = "Paste Image" },
+            {
+                "<Leader>ap",
+                function()
+                    return vim.bo.filetype == "AvanteInput" and
+                        require("avante.clipboard").paste_image() or require("img-clip").paste_image()
+                end,
+                desc = "Paste Image"
+            },
             { "<Leader>as", function() _G.Avante_select_model() end, desc = "Select Model" },
         },
         lazy = true,
@@ -98,7 +105,30 @@ return {
                         prefix = "❯ ",
                     },
                 },
+                system_prompt = function()
+                    local hub = require("mcphub").get_hub_instance()
+                    return hub and hub:get_active_servers_prompt() or ""
+                end,
+                custom_tools = function()
+                    return {
+                        require("mcphub.extensions.avante").mcp_tool(),
+                    }
+                end,
             })
         end,
+    },
+
+    {
+        "ravitemer/mcphub.nvim",
+        build = "bundled_build.lua",
+        lazy = true,
+        cmd = "MCPHub",
+        -- stylua: ignore
+        keys = {
+            { "<Leader>ah", "<Cmd>MCPHub<CR>", desc = "Open MCP Hub", mode = { "n", "v" } },
+        },
+        opts = {
+            use_bundled_binary = true,
+        },
     },
 }

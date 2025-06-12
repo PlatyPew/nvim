@@ -128,7 +128,7 @@ return {
                 { "<Leader>D", group = "Docs" },
                 { "<Leader>R", group = "Overseer" },
                 { "<Leader>M", group = "Markdown" },
-                { "<Leader>a", group = "Avante", mode = { "n", "v" } },
+                { "<Leader>a", group = "AI", mode = { "n", "v" } },
                 { "<Leader>b", group = "Buffers" },
                 { "<Leader>d", group = "DAP" },
                 { "<Leader>f", group = "Picker" },
