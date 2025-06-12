@@ -57,6 +57,7 @@ return {
             local api_names = {
                 "TAVILY_API_KEY", -- Web search
                 "GITHUB_TOKEN",
+                "OPENROUTER_API_KEY",
                 "GEMINI_API_KEY",
             }
             for _, api_name in ipairs(api_names) do
@@ -73,7 +74,13 @@ return {
                         -- model = "gemini-2.0-flash", -- Base model
                         model = "gemini-2.5-flash-preview-05-20", -- Experimental model
                     },
-                    gpt_4_1 = {
+                    ["deepseek-qwen"] = {
+                        __inherited_from = "openai",
+                        api_key_name = "OPENROUTER_API_KEY",
+                        endpoint = "https://openrouter.ai/api/v1",
+                        model = "deepseek/deepseek-r1-0528-qwen3-8b:free",
+                    },
+                    ["gpt-4.1"] = {
                         __inherited_from = "openai",
                         api_key_name = "GITHUB_TOKEN",
                         endpoint = "https://models.inference.ai.azure.com",
