@@ -67,6 +67,8 @@ return {
             { "<leader>lD", function() Snacks.picker.diagnostics_buffer({ layout = "ivy" }) end, desc = "Buffer Diagnostics" },
 
             { "<Leader>u", function() Snacks.picker.undo({ layout = "sidebar" }) end, desc = "Undo History" },
+
+            { "<Leader>O", function() Snacks.explorer() end, desc = "File Explorer" },
         }
 ,
     },
