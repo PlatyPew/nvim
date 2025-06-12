@@ -137,6 +137,11 @@ return {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
+        -- stylua: ignore
+        keys = {
+            { "<leader>nx", function() Snacks.notifier.hide() end, desc = "Hide Notifications" },
+            { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Show Notifications History" },
+        },
         opts = {
             input = { enabled = true },
             notifier = { enabled = true, timeout = 3000 },
