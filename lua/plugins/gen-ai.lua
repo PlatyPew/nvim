@@ -116,6 +116,7 @@ return {
                         require("mcphub.extensions.avante").mcp_tool(),
                     }
                 end,
+                disabled_tools = { "list_files", "search_files", "read_file", "create_file", "rename_file", "delete_file", "create_dir", "rename_dir", "delete_dir", "bash" },
             })
         end,
     },
@@ -131,6 +132,11 @@ return {
         },
         opts = {
             use_bundled_binary = true,
+            extensions = {
+                avante = {
+                    make_slash_commands = true,
+                },
+            },
         },
     },
 }
