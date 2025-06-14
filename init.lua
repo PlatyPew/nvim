@@ -41,7 +41,10 @@ require("lazy").setup({
         { import = "plugins" },
         -- { import = "minimal" },
     },
-    install = { colorscheme = { "catppuccin" } },
+    install = {
+        missing = false,
+        colorscheme = { "catppuccin" }
+    },
     change_detection = { notify = false },
 })
 
