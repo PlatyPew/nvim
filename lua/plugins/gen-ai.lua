@@ -88,6 +88,12 @@ return {
                         model = "deepseek/deepseek-r1-0528-qwen3-8b:free",
                         disable_tools = true,
                     },
+                    ["devstral-small"] = {
+                        __inherited_from = "openai",
+                        api_key_name = "OPENROUTER_API_KEY",
+                        endpoint = "https://openrouter.ai/api/v1",
+                        model = "mistralai/devstral-small:free",
+                    },
                     ["gpt-4.1"] = {
                         __inherited_from = "openai",
                         api_key_name = "GITHUB_TOKEN",

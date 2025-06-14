@@ -13,6 +13,7 @@ end
 local models = {
     "gpt-4.1",
     "deepseek-qwen",
+    "devstral-small",
     "gemini",
 }
 function _G.Avante_select_model()

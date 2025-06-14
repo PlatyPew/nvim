@@ -58,13 +58,12 @@ Supermaven should already be enabled by default, but to use the pro version, run
 
 Currently, Avante is configured to use the following models from the following providers:
 
-| Model Name           | Provider                  |
-| -------------------- | ------------------------- |
-| codestral-latest     | Codestral Mistral AI      |
-| gemini-exp-1206      | Google AI                 |
-| gpt-4o               | GitHub Marketplace Models |
-| gpt-4o-mini          | GitHub Marketplace Models |
-| mistral-large-latest | Mistral AI                |
+| Model Name                     | Provider                  |
+| ------------------------------ | ------------------------- |
+| deepseek-r1-0528-qwen3-8b      | OpenRouter                |
+| devstral-small                 | OpenRouter                |
+| gemini-2.5-flash-preview-05-20 | Google AI                 |
+| gpt-4.1                        | GitHub Marketplace Models |
 
 #### macOS
 
@@ -72,6 +71,7 @@ Currently, Avante is configured to use the following models from the following p
 # GitHub and Google API Keys
 security add-generic-password -a "GitHub Token" -s "GITHUB_TOKEN" -w "<api_key>"
 security add-generic-password -a "Gemini API Key" -s "GEMINI_API_KEY" -w "<api_key>"
+security add-generic-password -a "OpenRouter API Key" -s "OPENROUTER_API_KEY" -w "<api_key>"
 ```
 
 #### Linux
@@ -79,7 +79,8 @@ security add-generic-password -a "Gemini API Key" -s "GEMINI_API_KEY" -w "<api_k
 ```bash
 # GitHub and Google API Keys
 mkdir -p ~/.apikeys
-echo "<api_key>" > ~/.apikeys/github_token
-echo "<api_key>" > ~/.apikeys/gemini_api_key
+echo "<api_key>" > ~/.apikeys/GITHUB_TOKEN
+echo "<api_key>" > ~/.apikeys/GEMINI_API_KEY
+echo "<api_key>" > ~/.apikeys/OPENROUTER_API_KEY
 chmod 600 ~/.apikeys/*
 ```
