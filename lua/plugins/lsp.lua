@@ -5,8 +5,8 @@ return {
         ft = "markdown", -- Fix for jupytext
         cmd = "Mason",
         dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            { "williamboman/mason.nvim", version = "^1.0.0" },
+            { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
             "saghen/blink.cmp",
         },
         config = function()
@@ -40,44 +40,8 @@ return {
             -- Ensure the servers above are installed
             local mason_lspconfig = require("mason-lspconfig")
 
-            local runtimes
-            if vim.fn.has("macunix") == 1 then
-                runtimes = {
-                    {
-                        name = "JavaSE-11",
-                        path = "/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home",
-                    },
-                    {
-                        name = "JavaSE-17",
-                        path = "/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home",
-                    },
-                    {
-                        name = "JavaSE-21",
-                        path = "/Library/Java/JavaVirtualMachines/openjdk-21.jdk/Contents/Home",
-                        default = true,
-                    },
-                }
-                config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_macos"
-            else
-                runtimes = {
-                    {
-                        name = "JavaSE-11",
-                        path = "/usr/lib/jvm/java-11-openjdk",
-                    },
-                    {
-                        name = "JavaSE-17",
-                        path = "/usr/lib/jvm/java-17-openjdk",
-                    },
-                    {
-                        name = "JavaSE-21",
-                        path = "/usr/lib/jvm/java-21-openjdk",
-                        default = true,
-                    },
-                }
-                config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_linux"
-            end
-
             mason_lspconfig.setup({
+                automatic_installation = false,
                 ensure_installed = vim.tbl_keys(servers),
                 handlers = {
                     function(server_name)
@@ -90,14 +54,6 @@ return {
                                     client.server_capabilities.documentRangeFormattingProvider =
                                         false
                                 end,
-                            })
-                        else
-                            require("lspconfig").jdtls.setup({
-                                settings = {
-                                    java = {
-                                        configuration = { runtimes = runtimes },
-                                    },
-                                },
                             })
                         end
                     end,
@@ -174,14 +130,60 @@ return {
 
     {
         "nvim-java/nvim-java",
-        priority = 1000,
         ft = "java",
-        opts = {
-            jdk = { auto_install = false },
-            spring_boot_tools = { enable = false },
-            java_test = { version = "0.43.1" },
-            jdtls = { version = "v1.46.1" },
-        },
+        config = function()
+            local runtimes
+            if vim.fn.has("macunix") == 1 then
+                runtimes = {
+                    {
+                        name = "JavaSE-11",
+                        path = "/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home",
+                    },
+                    {
+                        name = "JavaSE-17",
+                        path = "/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home",
+                    },
+                    {
+                        name = "JavaSE-21",
+                        path = "/Library/Java/JavaVirtualMachines/openjdk-21.jdk/Contents/Home",
+                        default = true,
+                    },
+                }
+                -- config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_macos"
+            else
+                runtimes = {
+                    {
+                        name = "JavaSE-11",
+                        path = "/usr/lib/jvm/java-11-openjdk",
+                    },
+                    {
+                        name = "JavaSE-17",
+                        path = "/usr/lib/jvm/java-17-openjdk",
+                    },
+                    {
+                        name = "JavaSE-21",
+                        path = "/usr/lib/jvm/java-21-openjdk",
+                        default = true,
+                    },
+                }
+                -- config = vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_linux"
+            end
+
+            require("java").setup({
+                jdk = { auto_install = false },
+                spring_boot_tools = { enable = false },
+                java_test = { version = "0.43.1" },
+                jdtls = { version = "v1.46.1" },
+            })
+
+            require("lspconfig").jdtls.setup({
+                settings = {
+                    java = {
+                        configuration = { runtimes = runtimes },
+                    },
+                },
+            })
+        end,
     },
 
     {
@@ -192,7 +194,6 @@ return {
         -- stylua: ignore
         keys = {
             { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-        }
-,
+        },
     },
 }
