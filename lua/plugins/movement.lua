@@ -69,7 +69,7 @@ return {
                     a = ts({
                         a = { "@attribute.outer", "@parameter.outer" },
                         i = { "@attribute.inner", "@parameter.inner" },
-                    }),
+                    }, { use_nvim_treesitter = true }),
                     c = ts({ a = "@class.outer", i = "@class.inner" }), -- class
                     f = ts({ a = "@function.outer", i = "@function.inner" }), -- function
                     o = ts({ -- code block
