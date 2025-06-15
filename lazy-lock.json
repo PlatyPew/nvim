@@ -37,7 +37,7 @@
   "mini.move": { "branch": "main", "commit": "f471ecb98395781827ef1dffee61afe1af0ace29" },
   "mini.splitjoin": { "branch": "main", "commit": "ebde0e2a33ec983ade3b2bb3c495b3751b458e4c" },
   "mini.surround": { "branch": "main", "commit": "1a2b59c77a0c4713a5bd8972da322f842f4821b1" },
-  "molten-nvim": { "branch": "main", "commit": "a286aa914d9a154bc359131aab788b5a077a5a99" },
+  "molten-nvim": { "branch": "main", "commit": "e18ac7395d19a39a8180d7a383a07084940e9090" },
   "multicursor.nvim": { "branch": "main", "commit": "6fba38bccf45cfb681f4ff6098f886213f299a34" },
   "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
   "neogit": { "branch": "master", "commit": "1b4f44374f97d9262caa680e41ecbebcaf1553bd" },

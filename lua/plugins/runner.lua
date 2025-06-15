@@ -86,8 +86,6 @@ return {
         enabled = vim.fn.executable("magick") == 1,
         cond = not vim.g.vscode,
         ft = { "markdown", "quarto" },
-        version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-        -- dependencies = "3rd/image.nvim", -- Removed image.nvim first while waiting for molten to work with snacks.nvim
         build = function()
             vim.cmd("UpdateRemotePlugins") -- Run :UpdateRemotePlugins if not working
             vim.cmd(
@@ -97,7 +95,7 @@ return {
             )
         end,
         init = function()
-            vim.g.molten_image_provider = "image.nvim"
+            vim.g.molten_image_provider = "snacks.nvim"
             vim.g.molten_virt_text_output = true
             vim.g.molten_virt_lines_off_by_1 = true
             vim.g.molten_output_win_border =
