@@ -172,8 +172,6 @@ return {
             require("java").setup({
                 jdk = { auto_install = false },
                 spring_boot_tools = { enable = false },
-                java_test = { version = "0.43.1" },
-                jdtls = { version = "v1.46.1" },
             })
 
             require("lspconfig").jdtls.setup({
