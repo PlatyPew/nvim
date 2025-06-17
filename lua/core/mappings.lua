@@ -15,8 +15,8 @@ remap({ "n", "x" }, "<Left>", "<Cmd>vertical resize -2<CR>")
 remap({ "n", "x" }, "<Right>", "<Cmd>vertical resize +2<CR>")
 
 -- Splits
-remap("n", "<leader>-", "<C-W>s", { remap = true })
-remap("n", "<leader>|", "<C-W>v", { remap = true })
+remap("n", "<leader>-", "<C-W>s", { remap = true, desc = "Split Horizontally" })
+remap("n", "<leader>|", "<C-W>v", { remap = true, desc = "Split Vertically" })
 
 -- Remap semicolon to colon
 remap({ "n", "x" }, ";", ":")

@@ -5,7 +5,7 @@ return {
         cmd = "Oil",
         -- stylua: ignore
         keys = {
-            { "<Leader>o", function() require("oil").toggle_float() end, desc = "File Explorer" },
+            { "<Leader>o", function() require("oil").toggle_float() end, desc = "File System Editor" },
         },
         init = function()
             vim.g.loaded_netrw = 1
@@ -68,7 +68,7 @@ return {
 
             { "<Leader>u", function() Snacks.picker.undo({ layout = "sidebar" }) end, desc = "Undo History" },
 
-            { "<Leader>O", function() Snacks.explorer() end, desc = "File Explorer" },
+            { "<Leader>O", function() Snacks.explorer() end, desc = "File Tree Explorer" },
         }
 ,
     },
