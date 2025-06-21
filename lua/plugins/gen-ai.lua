@@ -80,8 +80,7 @@ return {
                 provider = "gemini",
                 providers = {
                     gemini = {
-                        -- model = "gemini-2.0-flash", -- Base model
-                        model = "gemini-2.5-flash-preview-05-20", -- Experimental model
+                        model = "gemini-2.5-flash", -- Base model
                     },
                     ["deepseek-qwen"] = {
                         __inherited_from = "openai",
