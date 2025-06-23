@@ -55,11 +55,10 @@ return {
                         .system({ "security", "find-generic-password", "-s", api_name, "-w" })
                         :gsub("[\n\r]", "")
                 else
-                    -- echo "<api_key>" > ~/.apikeys/GITHUB_TOKEN && chmod 600 ~/.apikeys/GITHUB_TOKEN
-                    local api_key_path = vim.fn.expand("$HOME/.apikeys/" .. api_name)
-                    if vim.fn.filereadable(api_key_path) == 1 then
-                        vim.env[api_name] = vim.fn.readfile(api_key_path)[1]:gsub("[\n\r]", "")
-                    end
+                    -- printf "<api_key>" | secret-tool store --label="GitHub Token" token GITHUB_TOKEN
+                    vim.env[api_name] = vim.fn
+                        .system({ "secret-tool", "lookup", "token", api_name })
+                        :gsub("[\n\r]", "")
                 end
             end
 
