@@ -24,6 +24,7 @@ return {
                 neogit = true,
                 noice = true,
                 overseer = true,
+                rainbow_delimiters = true,
                 render_markdown = true,
                 snacks = { enabled = true },
                 treesitter = true,
