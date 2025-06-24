@@ -39,13 +39,18 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
     spec = {
         { import = "plugins" },
+        { import = "versions" },
         -- { import = "minimal" },
     },
     install = {
         missing = false,
-        colorscheme = { "catppuccin" }
+        colorscheme = { "catppuccin" },
     },
     change_detection = { notify = false },
+    checker = {
+        enabled = true,
+        notify = true,
+    },
 })
 
 require("core.mappings")
