@@ -5,8 +5,8 @@ return {
         ft = "markdown", -- Fix for jupytext
         cmd = "Mason",
         dependencies = {
-            { "williamboman/mason.nvim", version = "^1.0.0" },
-            { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
+            "mason-org/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
             "saghen/blink.cmp",
         },
         config = function()

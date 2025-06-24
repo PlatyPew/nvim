@@ -3,7 +3,7 @@ return {
         "nvimtools/none-ls.nvim",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
             "jay-babu/mason-null-ls.nvim",
             "nvimtools/none-ls-extras.nvim",
         },
