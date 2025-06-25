@@ -67,6 +67,7 @@ return {
                 "GITHUB_TOKEN",
                 "OPENROUTER_API_KEY",
                 "GEMINI_API_KEY",
+                "MISTRAL_API_KEY",
             }
             for _, api_name in ipairs(api_names) do
                 if vim.env[api_name] == nil then
@@ -78,9 +79,7 @@ return {
             require("avante").setup({
                 provider = "gemini",
                 providers = {
-                    gemini = {
-                        model = "gemini-2.5-flash", -- Base model
-                    },
+                    gemini = { model = "gemini-2.5-flash" },
                     ["deepseek-r1"] = {
                         __inherited_from = "openai",
                         api_key_name = "OPENROUTER_API_KEY",
@@ -88,11 +87,12 @@ return {
                         model = "deepseek/deepseek-r1-0528:free",
                         disable_tools = true,
                     },
-                    ["devstral-small"] = {
+                    ["mistral-large-latest"] = {
                         __inherited_from = "openai",
-                        api_key_name = "OPENROUTER_API_KEY",
-                        endpoint = "https://openrouter.ai/api/v1",
-                        model = "mistralai/devstral-small:free",
+                        api_key_name = "MISTRAL_API_KEY",
+                        endpoint = "https://api.mistral.ai/v1",
+                        model = "mistral-large-latest",
+                        extra_request_body = { max_tokens = 8192 },
                     },
                     ["gpt-4.1"] = {
                         __inherited_from = "openai",
