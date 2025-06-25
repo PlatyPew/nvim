@@ -11,10 +11,10 @@ end
 
 -- Avante
 local models = {
-    "gpt-4.1",
-    "deepseek-qwen",
-    "devstral-small",
     "gemini",
+    "deepseek-r1",
+    "devstral-small",
+    "gpt-4.1",
 }
 function _G.Avante_select_model()
     vim.ui.select(models, {
