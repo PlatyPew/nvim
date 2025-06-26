@@ -44,7 +44,21 @@ return {
                 end,
                 desc = "Paste Image"
             },
-            { "<Leader>as", function() _G.Avante_select_model() end, desc = "Select Model" },
+            {
+                "<Leader>as",
+                function()
+                    _G.select_item(
+                        "Select a provider",
+                        { "gemini", "mistral-large-latest", "deepseek-r1", "gpt-4.1" },
+                        function(choice)
+                            if choice then
+                                vim.cmd("AvanteSwitchProvider " .. choice)
+                            end
+                        end
+                    )
+                end,
+                desc = "Select Model"
+            },
         },
         lazy = true,
         config = function()

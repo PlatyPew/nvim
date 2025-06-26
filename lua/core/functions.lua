@@ -9,26 +9,20 @@ function _G.DiffviewToggle()
     end
 end
 
--- Avante
-local models = {
-    "gemini",
-    "deepseek-r1",
-    "mistral-large-latest",
-    "gpt-4.1",
-}
-function _G.Avante_select_model()
-    vim.ui.select(models, {
-        prompt = "Select a provider",
+-- Select item
+function _G.select_item(prompt, items, on_choice)
+    vim.validate({
+        prompt = { prompt, "string" },
+        items = { items, "table" },
+        on_choice = { on_choice, "function" },
+    })
+
+    vim.ui.select(items, {
+        prompt = prompt,
         format_item = function(item)
             return item
         end,
-    }, function(choice)
-        if choice then
-            vim.cmd("AvanteSwitchProvider " .. choice)
-        else
-            print("No model selected")
-        end
-    end)
+    }, on_choice)
 end
 
 -- Load Secret Keys
