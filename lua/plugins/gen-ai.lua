@@ -61,7 +61,67 @@ return {
             },
         },
         lazy = true,
-        config = function()
+        opts = {
+            provider = "gemini",
+            providers = {
+                gemini = { model = "gemini-2.5-flash" },
+                ["deepseek-r1"] = {
+                    __inherited_from = "openai",
+                    api_key_name = "OPENROUTER_API_KEY",
+                    endpoint = "https://openrouter.ai/api/v1",
+                    model = "deepseek/deepseek-r1-0528:free",
+                    disable_tools = true,
+                },
+                ["mistral-large-latest"] = {
+                    __inherited_from = "openai",
+                    api_key_name = "MISTRAL_API_KEY",
+                    endpoint = "https://api.mistral.ai/v1",
+                    model = "mistral-large-latest",
+                    extra_request_body = { max_tokens = 8192 },
+                },
+                ["gpt-4.1"] = {
+                    __inherited_from = "openai",
+                    api_key_name = "GITHUB_TOKEN",
+                    endpoint = "https://models.inference.ai.azure.com",
+                    model = "gpt-4.1",
+                    disable_tools = true,
+                },
+            },
+            behaviour = {
+                auto_set_keymaps = false,
+                support_paste_from_clipboard = true,
+            },
+            hints = { enabled = false },
+            mappings = { files = false },
+            windows = {
+                width = 40,
+                input = {
+                    prefix = "❯ ",
+                },
+            },
+            system_prompt = function()
+                local hub = require("mcphub").get_hub_instance()
+                return hub and hub:get_active_servers_prompt() or ""
+            end,
+            custom_tools = function()
+                return {
+                    require("mcphub.extensions.avante").mcp_tool(),
+                }
+            end,
+            disabled_tools = {
+                "list_files",
+                "search_files",
+                "read_file",
+                "create_file",
+                "rename_file",
+                "delete_file",
+                "create_dir",
+                "rename_dir",
+                "delete_dir",
+                "bash",
+            },
+        },
+        config = function(_, opts)
             _G.load_secret_keys({
                 "TAVILY_API_KEY", -- Web search
                 "GITHUB_TOKEN",
@@ -70,56 +130,7 @@ return {
                 "MISTRAL_API_KEY",
             })
 
-            -- stylua: ignore
-            require("avante").setup({
-                provider = "gemini",
-                providers = {
-                    gemini = { model = "gemini-2.5-flash" },
-                    ["deepseek-r1"] = {
-                        __inherited_from = "openai",
-                        api_key_name = "OPENROUTER_API_KEY",
-                        endpoint = "https://openrouter.ai/api/v1",
-                        model = "deepseek/deepseek-r1-0528:free",
-                        disable_tools = true,
-                    },
-                    ["mistral-large-latest"] = {
-                        __inherited_from = "openai",
-                        api_key_name = "MISTRAL_API_KEY",
-                        endpoint = "https://api.mistral.ai/v1",
-                        model = "mistral-large-latest",
-                        extra_request_body = { max_tokens = 8192 },
-                    },
-                    ["gpt-4.1"] = {
-                        __inherited_from = "openai",
-                        api_key_name = "GITHUB_TOKEN",
-                        endpoint = "https://models.inference.ai.azure.com",
-                        model = "gpt-4.1",
-                        disable_tools = true,
-                    },
-                },
-                behaviour = {
-                    auto_set_keymaps = false,
-                    support_paste_from_clipboard = true,
-                },
-                hints = { enabled = false },
-                mappings = { files = false },
-                windows = {
-                    width = 40,
-                    input = {
-                        prefix = "❯ ",
-                    },
-                },
-                system_prompt = function()
-                    local hub = require("mcphub").get_hub_instance()
-                    return hub and hub:get_active_servers_prompt() or ""
-                end,
-                custom_tools = function()
-                    return {
-                        require("mcphub.extensions.avante").mcp_tool(),
-                    }
-                end,
-                disabled_tools = { "list_files", "search_files", "read_file", "create_file", "rename_file", "delete_file", "create_dir", "rename_dir", "delete_dir", "bash" },
-            })
+            require("avante").setup(opts)
         end,
     },
 
