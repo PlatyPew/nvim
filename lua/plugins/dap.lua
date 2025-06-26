@@ -2,7 +2,8 @@ return {
     {
         "rcarriga/nvim-dap-ui",
         keys = {
-            { "<Leader>du", "<Cmd>lua require'dapui'.toggle()<CR>", desc = "Toggle DAP UI" },
+            -- stylua: ignore
+            { "<Leader>du", function() require'dapui'.toggle() end, desc = "Toggle DAP UI" },
         },
         lazy = true,
         dependencies = {
