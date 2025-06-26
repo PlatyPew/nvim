@@ -48,32 +48,13 @@ return {
         },
         lazy = true,
         config = function()
-            local load_api_key = function(api_name)
-                if vim.fn.has("macunix") == 1 then
-                    -- security add-generic-password -a "GitHub Token" -s "GITHUB_TOKEN" -w "<api_key>"
-                    vim.env[api_name] = vim.fn
-                        .system({ "security", "find-generic-password", "-s", api_name, "-w" })
-                        :gsub("[\n\r]", "")
-                else
-                    -- printf "<api_key>" | secret-tool store --label="GitHub Token" token GITHUB_TOKEN
-                    vim.env[api_name] = vim.fn
-                        .system({ "secret-tool", "lookup", "token", api_name })
-                        :gsub("[\n\r]", "")
-                end
-            end
-
-            local api_names = {
+            _G.load_secret_keys({
                 "TAVILY_API_KEY", -- Web search
                 "GITHUB_TOKEN",
                 "OPENROUTER_API_KEY",
                 "GEMINI_API_KEY",
                 "MISTRAL_API_KEY",
-            }
-            for _, api_name in ipairs(api_names) do
-                if vim.env[api_name] == nil then
-                    load_api_key(api_name)
-                end
-            end
+            })
 
             -- stylua: ignore
             require("avante").setup({
