@@ -14,6 +14,21 @@ function _G.select_item(prompt, items, on_choice)
     }, on_choice)
 end
 
+-- Select file from picker
+function _G.select_file(on_choice)
+    vim.validate({
+        on_choice = { on_choice, "function" },
+    })
+
+    Snacks.picker.files({
+        cwd = vim.fn.getcwd(),
+        confirm = function(picker, item)
+            picker:close()
+            on_choice(item)
+        end,
+    })
+end
+
 -- Load Secret Keys
 -- MacOS: Apple KeyChain
 -- security add-generic-password -a "GitHub Token" -s "GITHUB_TOKEN" -w "<api_key>"

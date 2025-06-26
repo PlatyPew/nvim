@@ -144,16 +144,6 @@ return {
                 dap.configurations[vim.bo.filetype][1].args = t
             end
 
-            function _G.dap_program()
-                Snacks.picker.files({
-                    cwd = vim.fn.getcwd(),
-                    confirm = function(picker, item)
-                        picker:close()
-                        dap.configurations[vim.bo.filetype][1].program = item.file
-                    end,
-                })
-            end
-
             require("overseer").enable_dap()
 
             -- stylua: ignore start
@@ -171,7 +161,12 @@ return {
             remap("n", "<Leader>db", "<Cmd>DapToggleBreakpoint<CR>", { desc = "Toggle Breakpoint" })
             remap("n", "<Leader>dc", "<Cmd>DapContinue<CR>", { desc = "Continue" })
             remap("n", "<Leader>de", "<Cmd>DapEval<CR>", { desc = "Evaluate" })
-            remap("n", "<Leader>dp", function() _G.dap_program() end, { desc = "Set Executable Path" })
+            remap("n", "<Leader>dp", function()
+                _G.select_file(function(item)
+                    dap.configurations[vim.bo.filetype][1].program = item.file
+                end
+                )
+            end, { desc = "Set Executable Path" })
             remap("n", "<Leader>do", "<Cmd>DapStepOut<CR>", { desc = "Step Out" })
             remap("n", "<Leader>ds", "<Cmd>DapStepOver<CR>", { desc = "Step Over" })
             remap("n", "<Leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
