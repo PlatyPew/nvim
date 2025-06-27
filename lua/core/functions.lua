@@ -36,19 +36,23 @@ end
 -- Linux: Gnome Keyring
 -- printf "<api_key>" | secret-tool store --label="GitHub Token" token GITHUB_TOKEN
 function _G.load_secret_keys(env_names)
-    local function access_vault(env_name)
-        if vim.fn.has("macunix") == 1 then
-            vim.env[env_name] = vim.fn
-                .system({ "security", "find-generic-password", "-s", env_name, "-w" })
-                :gsub("[\n\r]", "")
-        else
-            vim.env[env_name] =
-                vim.fn.system({ "secret-tool", "lookup", "token", env_name }):gsub("[\n\r]", "")
-        end
-    end
+    vim.validate({
+        env_names = { env_names, { "string", "table" } },
+    })
 
     if type(env_names) == "string" then
         env_names = { env_names }
+    end
+
+    local function access_vault(env_name)
+        local cmd
+        if vim.fn.has("macunix") == 1 then
+            cmd = { "security", "find-generic-password", "-s", env_name, "-w" }
+        else
+            cmd = { "secret-tool", "lookup", "token", env_name }
+        end
+
+        vim.env[env_name] = vim.trim(vim.fn.system(cmd))
     end
 
     for _, env_name in ipairs(env_names) do
