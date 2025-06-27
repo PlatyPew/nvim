@@ -1,5 +1,5 @@
 return {
-    { "avante.nvim", version = "*" },
+    -- { "avante.nvim", version = "*" }, -- Latest version needed to fix replace_in_file
     { "blink.cmp", version = "*" },
     { "grug-far.nvim", version = "*" },
     { "kulala.nvim", version = "*" },

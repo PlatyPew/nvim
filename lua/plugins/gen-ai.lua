@@ -49,7 +49,7 @@ return {
                 function()
                     _G.select_item(
                         "Select a provider",
-                        { "gemini", "mistral-large-latest", "deepseek-r1", "gpt-4.1" },
+                        { "gemini", "mistral-large-latest", "deepseek-r1", "gpt-4.1", "llama-3.3" },
                         function(choice)
                             if choice then
                                 vim.cmd("AvanteSwitchProvider " .. choice)
@@ -63,8 +63,16 @@ return {
         lazy = true,
         opts = {
             provider = "gemini",
+            cursor_applying_provider = "llama-3.3",
             providers = {
                 gemini = { model = "gemini-2.5-flash" },
+                ["llama-3.3"] = {
+                    __inherited_from = "openai",
+                    api_key_name = "GROQ_API_KEY",
+                    endpoint = "https://api.groq.com/openai/v1",
+                    model = "llama-3.3-70b-versatile",
+                    extra_request_body = { max_completion_tokens = 32768 },
+                },
                 ["deepseek-r1"] = {
                     __inherited_from = "openai",
                     api_key_name = "OPENROUTER_API_KEY",
@@ -90,6 +98,7 @@ return {
             behaviour = {
                 auto_set_keymaps = false,
                 support_paste_from_clipboard = true,
+                enable_cursor_planning_mode = true,
             },
             hints = { enabled = false },
             mappings = { files = false },
@@ -128,6 +137,7 @@ return {
                 "OPENROUTER_API_KEY",
                 "GEMINI_API_KEY",
                 "MISTRAL_API_KEY",
+                "GROQ_API_KEY",
             })
 
             require("avante").setup(opts)
