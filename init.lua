@@ -47,10 +47,6 @@ require("lazy").setup({
         colorscheme = { "catppuccin" },
     },
     change_detection = { notify = false },
-    checker = {
-        enabled = true,
-        notify = true,
-    },
 })
 
 require("core.mappings")
