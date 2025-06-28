@@ -51,7 +51,11 @@ function _G.load_secret_keys(env_names)
             cmd = { "secret-tool", "lookup", "token", env_name }
         end
 
-        vim.env[env_name] = vim.trim(vim.fn.system(cmd))
+        local obj = vim.system(cmd, { text = true }):wait()
+
+        if obj.code == 0 then
+            vim.env[env_name] = vim.trim(obj.stdout)
+        end
     end
 
     for _, env_name in ipairs(env_names) do
