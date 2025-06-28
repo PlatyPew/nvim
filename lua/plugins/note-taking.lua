@@ -34,7 +34,7 @@ return {
                 function()
                     _G.select_file(function(item)
                         require("img-clip").paste_image({}, "./" .. item.file)
-                    end, { "png", "jpg", "jpeg", "webp" })
+                    end, { "png", "jpg", "jpeg", "webp" }, true)
                 end,
                 desc = "Paste image from files",
             },
