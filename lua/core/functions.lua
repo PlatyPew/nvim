@@ -15,16 +15,23 @@ function _G.select_item(prompt, items, on_choice)
 end
 
 -- Select file from picker
-function _G.select_file(on_choice, ft)
+function _G.select_file(on_choice, ft, hidden, ignored)
     vim.validate({
         on_choice = { on_choice, "function" },
         ft = { ft, "table", true },
+        hidden = { hidden, "boolean", true },
+        ignored = { ignored, "boolean", true },
     })
+
+    hidden = hidden or false
+    ignored = ignored or false
 
     Snacks.picker.files({
         cwd = vim.fn.getcwd(),
         ft = ft,
-        confirm = function(picker, item)
+        hidden = hidden,
+        ignored = ignored,
+        confirm = function(picker, item, _)
             picker:close()
             on_choice(item)
         end,

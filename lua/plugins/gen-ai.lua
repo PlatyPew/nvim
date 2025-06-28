@@ -34,7 +34,17 @@ return {
             { "<Leader>aa", function() require("avante.api").ask() end,     desc = "Ask",    mode = { "n", "v" } },
             { "<Leader>ae", function() require("avante.api").edit() end,    desc = "Edit",   mode = { "n", "v" } },
             { "<Leader>ar", function() require("avante.api").refresh() end, desc = "Refresh" },
-            { "<Leader>ac", function() require("avante.api").add_buffer_files() end,    desc = "Add File",   mode = { "n", "v" } },
+            { "<Leader>aC", function() require("avante.api").add_buffer_files() end, desc = "Add Buffer Files", mode = { "n", "v" } },
+            {
+                "<Leader>ac",
+                function()
+                    _G.select_file(function(item)
+                        require("avante.api").add_selected_file(item._path)
+                    end, {}, true, true)
+                end,
+                desc = "Add Selected Files",
+                mode = { "n", "v" }
+            },
             { "<Leader>aS", function() require("avante.api").stop() end,    desc = "Stop",   mode = { "n", "v" } },
             {
                 "<Leader>ap",
