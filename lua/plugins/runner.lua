@@ -18,9 +18,13 @@ return {
         },
         -- stylua: ignore
         keys = {
-            { "<Leader>RO", "<Cmd>OverseerToggle right<CR>", desc = "Toggles overseer window" },
-            { "<Leader>RR", "<Cmd>OverseerRun<CR>", desc = "Run builtin" },
-            { "<Leader>Rr", "<Cmd>OverseerRunCmd<CR>", desc = "Run command" },
+            { "<Leader>rc", "<Cmd>OverseerRun<CR>", desc = "Run command" },
+            { "<Leader>rd", "<Cmd>OverseerDeleteBundle<CR>", desc = "Delete bundle" },
+            { "<Leader>rl", "<Cmd>OverseerLoadBundle<CR>", desc = "Load bundle" },
+            { "<Leader>ro", "<Cmd>OverseerToggle<CR>", desc = "Toggles overseer window" },
+            { "<Leader>rq", "<Cmd>OverseerClearCache<CR>", desc = "Clear cache" },
+            { "<Leader>rr", "<Cmd>OverseerQuickAction<CR>", desc = "Run action" },
+            { "<Leader>rs", "<Cmd>OverseerSaveBundle<CR>", desc = "Save bundle" },
         },
         opts = { dap = false },
     },
@@ -32,9 +36,9 @@ return {
         -- stylua: ignore
         keys = {
             --[[ { "<Leader>r", "<Plug>SnipRunOperator" }, ]]
-            { "<Leader>rc", "<Plug>SnipReset", desc = "Reset SnipRun" },
-            { "<Leader>rq", "<Plug>SnipClose", desc = "Close SnipRun" },
-            { "<Leader>rr", "<Plug>SnipRun", desc = "Run Code", mode = { "n", "v" } },
+            { "<Leader>RC", "<Plug>SnipReset", desc = "Reset SnipRun" },
+            { "<Leader>RQ", "<Plug>SnipClose", desc = "Close SnipRun" },
+            { "<Leader>RR", "<Plug>SnipRun", desc = "Run Code", mode = { "n", "v" } },
         },
         config = function()
             require("sniprun").setup({
