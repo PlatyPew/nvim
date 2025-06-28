@@ -40,7 +40,7 @@ return {
                 function()
                     _G.select_file(function(item)
                         require("avante.api").add_selected_file(item._path)
-                    end, {}, true, true)
+                    end, {hidden = true, ignored = true})
                 end,
                 desc = "Add Selected Files",
                 mode = { "n", "v" }

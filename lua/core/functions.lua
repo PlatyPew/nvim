@@ -1,10 +1,8 @@
 -- Select item
 function _G.select_item(prompt, items, on_choice)
-    vim.validate({
-        prompt = { prompt, "string" },
-        items = { items, "table" },
-        on_choice = { on_choice, "function" },
-    })
+    vim.validate("prompt", prompt, "string")
+    vim.validate("items", items, "table")
+    vim.validate("on_choice", on_choice, "function")
 
     vim.ui.select(items, {
         prompt = prompt,
@@ -15,27 +13,21 @@ function _G.select_item(prompt, items, on_choice)
 end
 
 -- Select file from picker
-function _G.select_file(on_choice, ft, hidden, ignored)
-    vim.validate({
-        on_choice = { on_choice, "function" },
-        ft = { ft, "table", true },
-        hidden = { hidden, "boolean", true },
-        ignored = { ignored, "boolean", true },
-    })
+function _G.select_file(on_choice, opts)
+    vim.validate("on_choice", on_choice, "function")
+    vim.validate("opts", opts, "table", true)
 
-    hidden = hidden or false
-    ignored = ignored or false
+    opts = opts or {}
 
-    Snacks.picker.files({
+    opts = vim.tbl_deep_extend("force", {
         cwd = vim.fn.getcwd(),
-        ft = ft,
-        hidden = hidden,
-        ignored = ignored,
         confirm = function(picker, item, _)
             picker:close()
             on_choice(item)
         end,
-    })
+    }, opts)
+
+    Snacks.picker.files(opts)
 end
 
 -- Load Secret Keys
@@ -45,9 +37,7 @@ end
 -- Linux: Gnome Keyring
 -- printf "<api_key>" | secret-tool store --label="GitHub Token" token GITHUB_TOKEN
 function _G.load_secret_keys(env_names)
-    vim.validate({
-        env_names = { env_names, { "string", "table" } },
-    })
+    vim.validate("env_names", env_names, { "string", "table" })
 
     if type(env_names) == "string" then
         env_names = { env_names }
