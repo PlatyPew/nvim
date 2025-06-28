@@ -31,6 +31,7 @@ return {
                 winblend = 0,
             },
             keymaps = {
+                ["g?"] = { "actions.show_help", mode = "n" },
                 ["<BS>"] = "actions.parent",
                 ["<C-c>"] = false,
                 ["q"] = "actions.close",
