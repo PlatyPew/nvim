@@ -14,7 +14,30 @@ return {
         enabled = vim.fn.executable("pngpaste") == 1 or vim.fn.executable("xclip") == 1,
         cmd = "PasteImage",
         keys = {
-            { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste Image" },
+            {
+                "<leader>p",
+                function()
+                    vim.system({ "pngpaste", "-" }, { text = true }, function(obj)
+                        vim.schedule(function()
+                            if obj.code ~= 0 and vim.fn.has("macunix") == 1 then
+                                vim.cmd('normal "+p')
+                            else
+                                require("img-clip").paste_image()
+                            end
+                        end)
+                    end)
+                end,
+                desc = "Paste from clipboard",
+            },
+            {
+                "<leader>P",
+                function()
+                    _G.select_file(function(item)
+                        require("img-clip").paste_image({}, "./" .. item.file)
+                    end, { "png", "jpg", "jpeg", "webp" })
+                end,
+                desc = "Paste image from files",
+            },
         },
     },
 

@@ -15,13 +15,15 @@ function _G.select_item(prompt, items, on_choice)
 end
 
 -- Select file from picker
-function _G.select_file(on_choice)
+function _G.select_file(on_choice, ft)
     vim.validate({
         on_choice = { on_choice, "function" },
+        ft = { ft, "table", true },
     })
 
     Snacks.picker.files({
         cwd = vim.fn.getcwd(),
+        ft = ft,
         confirm = function(picker, item)
             picker:close()
             on_choice(item)
