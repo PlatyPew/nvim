@@ -59,7 +59,14 @@ return {
                 function()
                     _G.select_item(
                         "Select a provider",
-                        { "gemini", "mistral-large-latest", "deepseek-r1", "gpt-4.1", "llama-3.3" },
+                        {
+                            "gemini-2.5-pro",
+                            "gemini-2.5-flash",
+                            "mistral-large-latest",
+                            "deepseek-r1",
+                            "gpt-4.1",
+                            "llama-3.3"
+                        },
                         function(choice)
                             if choice then
                                 vim.cmd("AvanteSwitchProvider " .. choice)
@@ -72,10 +79,17 @@ return {
         },
         lazy = true,
         opts = {
-            provider = "gemini",
+            provider = "gemini-2.5-flash",
             cursor_applying_provider = "llama-3.3",
             providers = {
-                gemini = { model = "gemini-2.5-flash" },
+                ["gemini-2.5-flash"] = {
+                    __inherited_from = "gemini",
+                    model = "gemini-2.5-flash",
+                },
+                ["gemini-2.5-pro"] = {
+                    __inherited_from = "gemini",
+                    model = "gemini-2.5-pro",
+                },
                 ["llama-3.3"] = {
                     __inherited_from = "openai",
                     api_key_name = "GROQ_API_KEY",
