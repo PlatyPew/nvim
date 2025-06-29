@@ -72,7 +72,6 @@ Currently, Avante is configured to use the following models from the following p
 | mistral-large-latest | Mistral AI                |
 | deepseek-r1          | OpenRouter                |
 | llama-3.3            | Groq                      |
-| gpt-4.1              | GitHub Marketplace Models |
 
 #### macOS
 
@@ -83,7 +82,6 @@ security add-generic-password -a "Gemini API Key" -s "GEMINI_API_KEY" -w "<api_k
 security add-generic-password -a "Mistral API Key" -s "MISTRAL_API_KEY" -w "<api_key>"
 security add-generic-password -a "OpenRouter API Key" -s "OPENROUTER_API_KEY" -w "<api_key>"
 security add-generic-password -a "Groq Token" -s "GROQ_API_KEY" -w "<api_key>"
-security add-generic-password -a "GitHub Token" -s "GITHUB_TOKEN" -w "<api_key>"
 ```
 
 #### Linux
@@ -91,12 +89,10 @@ security add-generic-password -a "GitHub Token" -s "GITHUB_TOKEN" -w "<api_key>"
 How to store API Keys
 
 ```bash
-# GitHub and Google API Keys
 printf "<api_key>" | secret-tool store --label="Gemini API Key" token GEMINI_API_KEY
 printf "<api_key>" | secret-tool store --label="Mistral API Key" token MISTRAL_API_KEY
 printf "<api_key>" | secret-tool store --label="OpenRouter API Key" token OPENROUTER_API_KEY
 printf "<api_key>" | secret-tool store --label="Groq API Key" token GROQ_API_KEY
-printf "<api_key>" | secret-tool store --label="GitHub Token" token GITHUB_TOKEN
 ```
 
 ### McpHub

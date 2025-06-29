@@ -64,7 +64,6 @@ return {
                             "gemini-2.5-flash",
                             "mistral-large-latest",
                             "deepseek-r1",
-                            "gpt-4.1",
                             "llama-3.3"
                         },
                         function(choice)
@@ -111,13 +110,6 @@ return {
                     model = "mistral-large-latest",
                     extra_request_body = { max_tokens = 8192 },
                 },
-                ["gpt-4.1"] = {
-                    __inherited_from = "openai",
-                    api_key_name = "GITHUB_TOKEN",
-                    endpoint = "https://models.inference.ai.azure.com",
-                    model = "gpt-4.1",
-                    disable_tools = true,
-                },
             },
             behaviour = {
                 auto_set_keymaps = false,
@@ -145,7 +137,6 @@ return {
         config = function(_, opts)
             _G.load_secret_keys({
                 "TAVILY_API_KEY", -- Web search
-                "GITHUB_TOKEN",
                 "OPENROUTER_API_KEY",
                 "GEMINI_API_KEY",
                 "MISTRAL_API_KEY",
