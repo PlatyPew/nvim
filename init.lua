@@ -21,7 +21,8 @@ end
 require("core.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+local init_spec = vim.loop.fs_stat(lazypath)
+if not init_spec then
     vim.fn.system({
         "git",
         "clone",
@@ -43,7 +44,7 @@ require("lazy").setup({
         -- { import = "minimal" },
     },
     install = {
-        missing = false,
+        missing = not init_spec,
         colorscheme = { "catppuccin" },
     },
     change_detection = { notify = false },
