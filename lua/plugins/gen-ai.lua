@@ -60,9 +60,8 @@ return {
                     _G.select_item(
                         "Select a provider",
                         {
-                            "gemini-2.5-pro",
                             "gemini-2.5-flash",
-                            "mistral-large-latest",
+                            "devstral-medium",
                             "deepseek-r1",
                             "llama-3.3"
                         },
@@ -85,10 +84,6 @@ return {
                     __inherited_from = "gemini",
                     model = "gemini-2.5-flash",
                 },
-                ["gemini-2.5-pro"] = {
-                    __inherited_from = "gemini",
-                    model = "gemini-2.5-pro",
-                },
                 ["llama-3.3"] = {
                     __inherited_from = "openai",
                     api_key_name = "GROQ_API_KEY",
@@ -103,12 +98,12 @@ return {
                     model = "deepseek/deepseek-r1-0528:free",
                     disable_tools = true,
                 },
-                ["mistral-large-latest"] = {
+                ["devstral-medium"] = {
                     __inherited_from = "openai",
                     api_key_name = "MISTRAL_API_KEY",
                     endpoint = "https://api.mistral.ai/v1",
-                    model = "mistral-large-latest",
-                    extra_request_body = { max_tokens = 8192 },
+                    model = "devstral-medium-latest",
+                    extra_request_body = { max_tokens = 16384 },
                 },
             },
             behaviour = {
