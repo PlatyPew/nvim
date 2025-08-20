@@ -61,6 +61,7 @@ return {
                         "Select a provider",
                         {
                             "gemini-2.5-flash",
+                            "gemini-2.5-pro",
                             "devstral-medium",
                             "deepseek-r1",
                             "llama-3.3"
@@ -83,6 +84,10 @@ return {
                 ["gemini-2.5-flash"] = {
                     __inherited_from = "gemini",
                     model = "gemini-2.5-flash",
+                },
+                ["gemini-2.5-pro"] = {
+                    __inherited_from = "gemini",
+                    model = "gemini-2.5-pro",
                 },
                 ["llama-3.3"] = {
                     __inherited_from = "openai",
