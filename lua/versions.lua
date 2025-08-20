@@ -1,6 +1,7 @@
 return {
     -- { "avante.nvim", version = "*" }, -- Latest version needed to fix replace_in_file
     { "blink.cmp", version = "*" },
+    { "catppuccin", version = "*" },
     { "grug-far.nvim", version = "*" },
     { "kulala.nvim", version = "*" },
     { "mason-lspconfig.nvim", lazy = true, version = "^1.0.0" },
@@ -27,7 +28,6 @@ return {
 
     -- { "blink-cmp-avante", version = "*" },
     -- { "blink-nerdfont.nvim", version = "*" },
-    -- { "catppuccin", version = "*" },
     -- { "colorful-menu.nvim", version = "*" },
     -- { "Comment.nvim", version = "*" },
     -- { "devdocs.nvim", version = "*" },
