@@ -1,6 +1,6 @@
 return {
     {
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         keys = {
             { "ys" },
             { "cs" },
@@ -45,7 +45,7 @@ return {
     },
 
     {
-        "echasnovski/mini.splitjoin",
+        "nvim-mini/mini.splitjoin",
         keys = {
             { "gS", desc = "Toggle Split Join", move = { "n", "x" } },
         },

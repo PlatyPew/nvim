@@ -1,6 +1,6 @@
 return {
     {
-        "echasnovski/mini.basics",
+        "nvim-mini/mini.basics",
         event = "VeryLazy",
         opts = {
             mappings = { windows = true },

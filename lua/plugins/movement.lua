@@ -21,7 +21,7 @@ return {
     },
 
     {
-        "echasnovski/mini.move",
+        "nvim-mini/mini.move",
         -- stylua: ignore
         keys = {
             { "H", function() MiniMove.move_selection("left") end, desc = "Move Left", mode = "x" },
@@ -40,7 +40,7 @@ return {
     },
 
     {
-        "echasnovski/mini.bracketed",
+        "nvim-mini/mini.bracketed",
         keys = { "[", "]" },
         opts = {
             diagnostic = { suffix = "" },
@@ -54,7 +54,7 @@ return {
     },
 
     {
-        "echasnovski/mini.ai",
+        "nvim-mini/mini.ai",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
         config = function()

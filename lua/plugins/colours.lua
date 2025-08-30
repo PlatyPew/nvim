@@ -103,7 +103,7 @@ return {
     },
 
     {
-        "echasnovski/mini.hipatterns",
+        "nvim-mini/mini.hipatterns",
         event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
