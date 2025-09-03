@@ -126,7 +126,7 @@ return {
 
             wk.add({
                 { "<Leader>D", group = "Docs" },
-                { "<Leader>R", group = "Overseer" },
+                { "<Leader>R", group = "Sniprun" },
                 { "<Leader>M", group = "Markdown" },
                 { "<Leader>a", group = "AI", mode = { "n", "v" } },
                 { "<Leader>b", group = "Buffers" },
@@ -144,7 +144,7 @@ return {
                     { "<Leader>lI", "<Cmd>LspInfo<CR>", desc = "LSP Info" },
                 },
                 { "<Leader>n", group = "Notifier" },
-                { "<Leader>r", group = "Sniprun" },
+                { "<Leader>r", group = "Overseer" },
                 { "<Leader>q", group = "Quickfix" },
 
                 { "<Leader>j", group = "Molten", mode = "v" },
