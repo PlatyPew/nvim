@@ -170,7 +170,7 @@ return {
                 java_test = { version = "0.43.1" },
             })
 
-            vim.lsp.config.jdtls.setup({
+            require("lspconfig").jdtls.setup({
                 settings = {
                     java = {
                         configuration = { runtimes = runtimes },
