@@ -31,7 +31,7 @@ return {
             capabilities.offsetEncoding = { "utf-16" }
 
             if require("jit").os == "Linux" and require("jit").arch == "arm64" then
-                vim.lsp.config.clangd.setup({ capabilities = capabilities })
+                require("lspconfig").clangd.setup({ capabilities = capabilities })
             end
 
             -- Setup mason so it can manage external tooling
@@ -46,7 +46,7 @@ return {
                 handlers = {
                     function(server_name)
                         if server_name ~= "jdtls" then
-                            vim.lsp.config[server_name].setup({
+                            require("lspconfig")[server_name].setup({
                                 capabilities = capabilities,
                                 settings = servers[server_name],
                                 on_attach = function(client)
