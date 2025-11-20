@@ -38,26 +38,9 @@ return {
             require("mason").setup()
 
             -- Ensure the servers above are installed
-            local mason_lspconfig = require("mason-lspconfig")
-
-            mason_lspconfig.setup({
-                automatic_installation = false,
+            require("mason-lspconfig").setup({
                 ensure_installed = vim.tbl_keys(servers),
-                handlers = {
-                    function(server_name)
-                        if server_name ~= "jdtls" then
-                            require("lspconfig")[server_name].setup({
-                                capabilities = capabilities,
-                                settings = servers[server_name],
-                                on_attach = function(client)
-                                    client.server_capabilities.documentFormattingProvider = false
-                                    client.server_capabilities.documentRangeFormattingProvider =
-                                        false
-                                end,
-                            })
-                        end
-                    end,
-                },
+                automatic_enable = true,
             })
 
             vim.diagnostic.config({
