@@ -47,10 +47,9 @@ return {
                     executable = {
                         command = "node",
                         args = {
-                            require("mason-registry")
-                                .get_package("js-debug-adapter")
-                                :get_install_path()
-                                .. "/js-debug/src/dapDebugServer.js",
+                            vim.fn.expand(
+                                "$MASON/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+                            ),
                             "${port}",
                         },
                     },
@@ -61,9 +60,7 @@ return {
                 type = "executable",
                 command = "node",
                 args = {
-                    require("mason-registry")
-                        .get_package("firefox-debug-adapter")
-                        :get_install_path() .. "/dist/adapter.bundle.js",
+                    vim.fn.expand("$MASON/packages/firefox-debug-adapter/dist/adapter.bundle.js"),
                 },
             }
 
