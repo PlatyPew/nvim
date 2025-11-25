@@ -142,6 +142,7 @@ return {
                 {
                     { "<Leader>l", group = "LSP" },
                     { "<Leader>lI", "<Cmd>LspInfo<CR>", desc = "LSP Info" },
+                    { "<Leader>lr", vim.lsp.buf.rename, desc = "Rename" },
                 },
                 { "<Leader>n", group = "Notifier" },
                 { "<Leader>r", group = "Overseer" },

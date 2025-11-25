@@ -18,10 +18,6 @@ return {
             ignore_install = {},
             modules = {},
             auto_install = true,
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
             highlight = {
                 enable = true,
                 disable = {},

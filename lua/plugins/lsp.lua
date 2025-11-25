@@ -70,7 +70,6 @@ return {
             { "gp", "<Cmd>Lspsaga goto_definition<CR>", desc = "Goto Definition" },
             { "gh", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
             { "K", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
-            { "gr", "<Cmd>Lspsaga rename<CR>", desc = "Rename Variable" },
             { "gx", "<Cmd>Lspsaga finder<CR>", desc = "Find Reference" },
 
             { "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "Previous Diagnostic" },
@@ -79,7 +78,6 @@ return {
             { "<Leader>lc", "<Cmd>Lspsaga code_action<CR>", desc = "Code Action" },
             { "<Leader>lh", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
             { "<Leader>lp", "<Cmd>Lspsaga goto_definition<CR>", desc = "Goto Definition" },
-            { "<Leader>lr", "<Cmd>Lspsaga rename<CR>", desc = "Rename Variable" },
             { "<Leader>lx", "<Cmd>Lspsaga finder<CR>", desc = "Find Reference" },
         },
         opts = {
@@ -168,9 +166,5 @@ return {
         priority = 1000,
         lazy = false,
         opts = { rename = { enabled = true } },
-        -- stylua: ignore
-        keys = {
-            { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-        },
     },
 }
