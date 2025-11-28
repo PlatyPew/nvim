@@ -161,6 +161,7 @@ return {
             remap("n", "<Leader>do", "<Cmd>DapStepOut<CR>", { desc = "Step Out" })
             remap("n", "<Leader>ds", "<Cmd>DapStepOver<CR>", { desc = "Step Over" })
             remap("n", "<Leader>du", function() require("dap-view").toggle() end, { desc = "Toggle DAP UI" })
+            remap("n", "<Leader>dw", "<Cmd>DapViewWatch<CR>", { desc = "DAP Watch Variable" })
             -- stylua: ignore end
         end,
     },
@@ -184,6 +185,7 @@ return {
                 },
                 controls = { enabled = true },
             },
+            windows = { terminal = { position = "right", start_hidden = false } },
         },
     },
 
