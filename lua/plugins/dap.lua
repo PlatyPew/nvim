@@ -3,9 +3,8 @@ return {
         "mfussenegger/nvim-dap",
         lazy = true,
         dependencies = {
-            "theHamsta/nvim-dap-virtual-text",
-            "mason-org/mason.nvim",
-            "jay-babu/mason-nvim-dap.nvim",
+            { "theHamsta/nvim-dap-virtual-text", config = true },
+            { "jay-babu/mason-nvim-dap.nvim", dependencies = "mason-org/mason.nvim" },
             "nvim-neotest/nvim-nio",
         },
         config = function()
@@ -29,8 +28,6 @@ return {
                 automatic_setup = true,
                 handlers = {},
             })
-
-            require("nvim-dap-virtual-text").setup({})
 
             for _, adapters in ipairs({ "pwa-node", "pwa-chrome" }) do
                 dap.adapters[adapters] = {
