@@ -1,13 +1,8 @@
 return {
     {
-        "igorlfs/nvim-dap-view",
-        keys = {
-            -- stylua: ignore
-            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
-        },
+        "mfussenegger/nvim-dap",
         lazy = true,
         dependencies = {
-            "mfussenegger/nvim-dap",
             "theHamsta/nvim-dap-virtual-text",
             "mason-org/mason.nvim",
             "jay-babu/mason-nvim-dap.nvim",
@@ -36,12 +31,6 @@ return {
             })
 
             require("nvim-dap-virtual-text").setup({})
-
-            require("dap-view").setup({
-                winbar = {
-                    controls = { enabled = true },
-                },
-            })
 
             for _, adapters in ipairs({ "pwa-node", "pwa-chrome" }) do
                 dap.adapters[adapters] = {
@@ -174,5 +163,22 @@ return {
             remap("n", "<Leader>du", function() require("dap-view").toggle() end, { desc = "Toggle DAP UI" })
             -- stylua: ignore end
         end,
+    },
+
+    {
+        "igorlfs/nvim-dap-view",
+        keys = {
+            -- stylua: ignore
+            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
+        },
+        lazy = true,
+        dependencies = {
+            "mfussenegger/nvim-dap",
+        },
+        opts = {
+            winbar = {
+                controls = { enabled = true },
+            },
+        },
     },
 }
