@@ -1,14 +1,25 @@
 return {
     {
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = {
+            "mason-org/mason.nvim",
+            dependencies = "neovim/nvim-lspconfig",
+            config = true,
+        },
+        lazy = true,
+    },
+
+    {
+        "saghen/blink.cmp",
+        dependencies = { "neovim/nvim-lspconfig" },
+        lazy = true,
+    },
+
+    {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
         ft = "markdown", -- Fix for jupytext
         cmd = "Mason",
-        dependencies = {
-            "mason-org/mason.nvim",
-            "mason-org/mason-lspconfig.nvim",
-            "saghen/blink.cmp",
-        },
         config = function()
             vim.lsp.set_log_level("off")
 
@@ -33,9 +44,6 @@ return {
             if require("jit").os == "Linux" and require("jit").arch == "arm64" then
                 require("lspconfig").clangd.setup({ capabilities = capabilities })
             end
-
-            -- Setup mason so it can manage external tooling
-            require("mason").setup()
 
             -- Ensure the servers above are installed
             require("mason-lspconfig").setup({
