@@ -1,9 +1,9 @@
 return {
     {
-        "rcarriga/nvim-dap-ui",
+        "igorlfs/nvim-dap-view",
         keys = {
             -- stylua: ignore
-            { "<Leader>du", function() require'dapui'.toggle() end, desc = "Toggle DAP UI" },
+            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
         },
         lazy = true,
         dependencies = {
@@ -37,7 +37,11 @@ return {
 
             require("nvim-dap-virtual-text").setup({})
 
-            require("dapui").setup()
+            require("dap-view").setup({
+                winbar = {
+                    controls = { enabled = true },
+                },
+            })
 
             for _, adapters in ipairs({ "pwa-node", "pwa-chrome" }) do
                 dap.adapters[adapters] = {
@@ -167,7 +171,7 @@ return {
             end, { desc = "Set Executable Path" })
             remap("n", "<Leader>do", "<Cmd>DapStepOut<CR>", { desc = "Step Out" })
             remap("n", "<Leader>ds", "<Cmd>DapStepOver<CR>", { desc = "Step Over" })
-            remap("n", "<Leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
+            remap("n", "<Leader>du", function() require("dap-view").toggle() end, { desc = "Toggle DAP UI" })
             -- stylua: ignore end
         end,
     },
