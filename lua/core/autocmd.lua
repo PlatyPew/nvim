@@ -96,3 +96,10 @@ autocmd("LspAttach", {
         end
     end,
 })
+
+autocmd({ "FileType" }, {
+    pattern = { "dap-view", "dap-view-term", "dap-repl" },
+    callback = function(args)
+        vim.keymap.set("n", "q", "<C-w>q", { buffer = args.buf })
+    end,
+})

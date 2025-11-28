@@ -167,18 +167,35 @@ return {
 
     {
         "igorlfs/nvim-dap-view",
-        keys = {
-            -- stylua: ignore
-            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
-        },
         lazy = true,
         dependencies = {
             "mfussenegger/nvim-dap",
         },
         opts = {
             winbar = {
+                sections = {
+                    "watches",
+                    "scopes",
+                    "exceptions",
+                    "breakpoints",
+                    "threads",
+                    "repl",
+                    "disassembly",
+                },
                 controls = { enabled = true },
             },
         },
+    },
+
+    {
+        "Jorenar/nvim-dap-disasm",
+        dependencies = {
+            "igorlfs/nvim-dap-view",
+        },
+        keys = {
+            -- stylua: ignore
+            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
+        },
+        config = true,
     },
 }
