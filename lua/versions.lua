@@ -1,5 +1,5 @@
 return {
-    -- { "avante.nvim", version = "*" }, -- Latest version needed to fix replace_in_file
+    { "avante.nvim", commit = "4d9d2de" },
     { "blink.cmp", version = "*" },
     { "catppuccin", version = "*" },
     { "grug-far.nvim", version = "*" },
