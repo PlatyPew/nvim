@@ -59,13 +59,7 @@ return {
                 function()
                     _G.select_item(
                         "Select a provider",
-                        {
-                            "gemini-2.5-flash",
-                            "gemini-2.5-pro",
-                            "devstral-medium",
-                            "deepseek-r1",
-                            "llama-3.3"
-                        },
+                        { "gemini-2.5-flash", "gemini-cli" },
                         function(choice)
                             if choice then
                                 vim.cmd("AvanteSwitchProvider " .. choice)
@@ -85,10 +79,6 @@ return {
                     __inherited_from = "gemini",
                     model = "gemini-2.5-flash",
                 },
-                ["gemini-2.5-pro"] = {
-                    __inherited_from = "gemini",
-                    model = "gemini-2.5-pro",
-                },
                 ["llama-3.3"] = {
                     __inherited_from = "openai",
                     api_key_name = "GROQ_API_KEY",
@@ -96,25 +86,18 @@ return {
                     model = "llama-3.3-70b-versatile",
                     extra_request_body = { max_completion_tokens = 32768 },
                 },
-                ["deepseek-r1"] = {
-                    __inherited_from = "openai",
-                    api_key_name = "OPENROUTER_API_KEY",
-                    endpoint = "https://openrouter.ai/api/v1",
-                    model = "deepseek/deepseek-r1-0528:free",
-                    disable_tools = true,
-                },
-                ["devstral-medium"] = {
-                    __inherited_from = "openai",
-                    api_key_name = "MISTRAL_API_KEY",
-                    endpoint = "https://api.mistral.ai/v1",
-                    model = "devstral-medium-latest",
-                    extra_request_body = { max_tokens = 16384 },
+            },
+            acp_providers = {
+                ["gemini-cli"] = {
+                    command = "gemini",
+                    args = { "--experimental-acp" },
+                    env = { NODE_NO_WARNINGS = "1" },
                 },
             },
+            mode = "legacy",
             behaviour = {
                 auto_set_keymaps = false,
                 support_paste_from_clipboard = true,
-                enable_cursor_planning_mode = true,
             },
             hints = { enabled = false },
             mappings = { files = false },
@@ -137,9 +120,7 @@ return {
         config = function(_, opts)
             _G.load_secret_keys({
                 "TAVILY_API_KEY", -- Web search
-                "OPENROUTER_API_KEY",
                 "GEMINI_API_KEY",
-                "MISTRAL_API_KEY",
                 "GROQ_API_KEY",
             })
 
