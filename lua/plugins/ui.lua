@@ -104,6 +104,8 @@ return {
                             },
                             padding = 1,
                             filetype_names = {
+                                ["dap-view"] = " Debug",
+                                ["dap-view-term"] = "Debug Term",
                                 Avante = " Avante Chat",
                                 AvanteInput = " Avante Chat",
                                 NeogitStatus = " Neogit",

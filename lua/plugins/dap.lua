@@ -163,14 +163,15 @@ return {
         opts = {
             winbar = {
                 sections = {
-                    "watches",
+                    "repl",
                     "scopes",
-                    "exceptions",
                     "breakpoints",
                     "threads",
-                    "repl",
+                    "watches",
                     "disassembly",
+                    "exceptions",
                 },
+                default_section = "repl",
                 controls = { enabled = true },
             },
             windows = { terminal = { position = "right", start_hidden = false } },
