@@ -122,43 +122,8 @@ return {
                 },
             }
 
-            function _G.dap_args()
-                local num = tonumber(vim.fn.input("Number of arguments: "))
-                local t = {}
-                for i = 1, num do
-                    t[i] = vim.fn.input("Argument " .. i .. ": ")
-                end
-
-                dap.configurations[vim.bo.filetype][1].args = t
-            end
-
             require("overseer").enable_dap()
 
-            -- stylua: ignore start
-            local remap = vim.keymap.set
-            remap("n", "<F5>", "<Cmd>DapContinue<CR>", { desc = "Continue" })
-            remap("n", "<F6>", "<Cmd>DapToggleBreakpoint<CR>", { desc = "Toggle Breakpoint" })
-            remap("n", "<F10>", "<Cmd>DapStepOver<CR>", { desc = "Step Over" })
-            remap("n", "<F11>", "<Cmd>DapStepInto<CR>", { desc = "Step Into" })
-            remap("n", "<F12>", "<Cmd>DapStepOut<CR>", { desc = "Step Out" })
-
-            remap("n", "<Leader>dC", "<Cmd>DapTerminate<CR>", { desc = "Close" })
-            remap("n", "<Leader>dR", "<Cmd>DapToggleRepl<CR>", { desc = "REPL" })
-            remap("n", "<Leader>dS", "<Cmd>DapStepInto<CR>", { desc = "Step Into" })
-            remap("n", "<Leader>da", function() _G.dap_args() end, { desc = "Set Program Arguments" })
-            remap("n", "<Leader>db", "<Cmd>DapToggleBreakpoint<CR>", { desc = "Toggle Breakpoint" })
-            remap("n", "<Leader>dc", "<Cmd>DapContinue<CR>", { desc = "Continue" })
-            remap("n", "<Leader>de", "<Cmd>DapEval<CR>", { desc = "Evaluate" })
-            remap("n", "<Leader>dp", function()
-                _G.select_file(function(item)
-                    dap.configurations[vim.bo.filetype][1].program = item.file
-                end
-                )
-            end, { desc = "Set Executable Path" })
-            remap("n", "<Leader>do", "<Cmd>DapStepOut<CR>", { desc = "Step Out" })
-            remap("n", "<Leader>ds", "<Cmd>DapStepOver<CR>", { desc = "Step Over" })
-            remap("n", "<Leader>du", function() require("dap-view").toggle() end, { desc = "Toggle DAP UI" })
-            remap("n", "<Leader>dw", "<Cmd>DapViewWatch<CR>", { desc = "DAP Watch Variable" })
             -- stylua: ignore end
         end,
     },
@@ -166,8 +131,34 @@ return {
     {
         "igorlfs/nvim-dap-view",
         lazy = true,
-        dependencies = {
-            "mfussenegger/nvim-dap",
+        dependencies = "mfussenegger/nvim-dap",
+        -- stylua: ignore
+        keys = {
+            { "<F5>", function() require("dap").continue() end, desc = "Continue" },
+            { "<F6>", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint"},
+            { "<F10>", function() require("dap").step_over() end, desc = "Step Over" },
+            { "<F11>", function() require("dap").step_into() end, desc = "Step Into" },
+            { "<F12>", function() require("dap").step_out() end, desc = "Step Out" },
+            { "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint"},
+            { "<Leader>dc", function() require("dap").continue() end, desc = "Continue" },
+            { "<Leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+            { "<Leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+            { "<Leader>dq", function() require("dap").close() end, desc = "Close" },
+            { "<Leader>ds", function() require("dap").step_over() end, desc = "Step Over" },
+            { "<Leader>dw", "<Cmd>DapViewWatch<CR>", desc = "Watch Variable" },
+            { "<Leader>da", function()
+                local num = tonumber(vim.fn.input("Number of arguments: "))
+                local t = {}
+                for i = 1, num do
+                    t[i] = vim.fn.input("Argument " .. i .. ": ")
+                end
+                require("dap").configurations[vim.bo.filetype][1].args = t
+            end, desc = "Set Program Arguments" },
+            { "<Leader>dp", function()
+                _G.select_file(function(item)
+                    require("dap").configurations[vim.bo.filetype][1].program = item.file
+                end)
+            end, desc = "Set Executable Path"},
         },
         opts = {
             winbar = {
@@ -188,12 +179,10 @@ return {
 
     {
         "Jorenar/nvim-dap-disasm",
-        dependencies = {
-            "igorlfs/nvim-dap-view",
-        },
+        dependencies = "igorlfs/nvim-dap-view",
+        -- stylua: ignore
         keys = {
-            -- stylua: ignore
-            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
+            { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle UI" },
         },
         config = true,
     },
