@@ -34,7 +34,7 @@ return {
             { "<Leader>aa", function() require("avante.api").ask() end,     desc = "Ask",    mode = { "n", "v" } },
             { "<Leader>ae", function() require("avante.api").edit() end,    desc = "Edit",   mode = { "n", "v" } },
             { "<Leader>ar", function() require("avante.api").refresh() end, desc = "Refresh" },
-            { "<Leader>aC", function() require("avante.api").add_buffer_files() end, desc = "Add Buffer Files", mode = { "n", "v" } },
+            { "<Leader>aq", function() require("avante.api").add_buffer_files() end, desc = "Add Buffer Files", mode = { "n", "v" } },
             {
                 "<Leader>ac",
                 function()
@@ -59,7 +59,7 @@ return {
                 function()
                     _G.select_item(
                         "Select a provider",
-                        { "gemini-2.5-flash", "gemini-cli" },
+                        { "gemini-2.5-flash", "gemini-2.5-pro", "gemini-cli" },
                         function(choice)
                             if choice then
                                 vim.cmd("AvanteSwitchProvider " .. choice)
@@ -72,20 +72,18 @@ return {
         },
         lazy = true,
         opts = {
+            mode = "legacy",
             provider = "gemini-2.5-flash",
-            cursor_applying_provider = "llama-3.3",
             providers = {
                 ["gemini-2.5-flash"] = {
                     __inherited_from = "gemini",
                     model = "gemini-2.5-flash",
                 },
-                ["llama-3.3"] = {
-                    __inherited_from = "openai",
-                    api_key_name = "GROQ_API_KEY",
-                    endpoint = "https://api.groq.com/openai/v1",
-                    model = "llama-3.3-70b-versatile",
-                    extra_request_body = { max_completion_tokens = 32768 },
+                ["gemini-2.5-pro"] = {
+                    __inherited_from = "gemini",
+                    model = "gemini-2.5-pro",
                 },
+                morph = { model = "auto" },
             },
             acp_providers = {
                 ["gemini-cli"] = {
@@ -94,9 +92,9 @@ return {
                     env = { NODE_NO_WARNINGS = "1" },
                 },
             },
-            mode = "legacy",
             behaviour = {
                 auto_set_keymaps = false,
+                enable_fastapply = true,
                 support_paste_from_clipboard = true,
             },
             hints = { enabled = false },
@@ -119,9 +117,9 @@ return {
         },
         config = function(_, opts)
             _G.load_secret_keys({
-                "TAVILY_API_KEY", -- Web search
                 "GEMINI_API_KEY",
-                "GROQ_API_KEY",
+                "MORPH_API_KEY", -- Fast apply
+                "TAVILY_API_KEY", -- Web search
             })
 
             require("avante").setup(opts)
