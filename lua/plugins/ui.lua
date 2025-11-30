@@ -104,8 +104,10 @@ return {
                             },
                             padding = 1,
                             filetype_names = {
+                                ["dap-repl"] = " Debug",
                                 ["dap-view"] = " Debug",
-                                ["dap-view-term"] = "Debug Term",
+                                ["dap-view-term"] = "Debug Shell",
+                                ["dap_disassembly"] = " Debug",
                                 Avante = " Avante Chat",
                                 AvanteInput = " Avante Chat",
                                 NeogitStatus = " Neogit",
