@@ -147,31 +147,49 @@ return {
             { "<Leader>ds", function() require("dap").step_over() end, desc = "Step Over" },
             { "<Leader>dw", "<Cmd>DapViewWatch<CR>", desc = "Watch Variable" },
             { "<Leader>da", function()
-                local num = tonumber(vim.fn.input("Number of arguments: "))
                 local t = {}
-                for i = 1, num do
-                    t[i] = vim.fn.input("Argument " .. i .. ": ")
+
+                local args = vim.fn.input({
+                    prompt = "Arguments",
+                    completion = "file"
+                })
+
+                if args ~= "" then
+                    local safestr = args:gsub('(["\'])(.-)%1', function(quote, content)
+                        return quote .. content:gsub(" ", "\0") .. quote
+                    end)
+
+                    for word in safestr:gmatch("%S+") do
+                        local restored = word:gsub("%z", " ")
+                        local cleaned = restored:gsub('^["\'](.-)["\']$', '%1')
+                        table.insert(t, cleaned)
+                    end
                 end
+
                 require("dap").configurations[vim.bo.filetype][1].args = t
+
+                vim.notify(vim.inspect(t), "info", { title = "Debug Args" })
             end, desc = "Set Program Arguments" },
             { "<Leader>dp", function()
                 _G.select_file(function(item)
                     require("dap").configurations[vim.bo.filetype][1].program = item.file
-                end)
+
+                    vim.notify(item.file, "info", { title = "Debug Binary" })
+                end, { ignored = true })
             end, desc = "Set Executable Path"},
         },
         opts = {
             winbar = {
                 sections = {
-                    "repl",
-                    "scopes",
                     "breakpoints",
+                    "scopes",
                     "threads",
                     "watches",
                     "disassembly",
                     "exceptions",
+                    "repl",
                 },
-                default_section = "repl",
+                default_section = "breakpoints",
                 controls = { enabled = true },
             },
             windows = { terminal = { position = "right", start_hidden = false } },
