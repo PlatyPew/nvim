@@ -6,7 +6,7 @@ return {
     { "kulala.nvim", version = "*" },
     { "mason-lspconfig.nvim", lazy = true, version = "*" },
     { "mason.nvim", lazy = true, version = "*" },
-    { "mcphub.nvim", version = "*" },
+    { "mcphub.nvim", commit = "8ff40b5" },
     { "mini.ai", version = "*" },
     { "mini.basics", version = "*" },
     { "mini.bracketed", version = "*" },
