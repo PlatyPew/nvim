@@ -88,6 +88,9 @@ return {
                 AvanteReversedSubtitle = { fg = vim.g.palette.sapphire },
                 AvanteThirdTitle = { fg = vim.g.palette.text, bg = vim.g.palette.surface1 },
                 AvanteReversedThirdTitle = { fg = vim.g.palette.surface1 },
+
+                TreesitterContext = { bg = vim.g.palette.surface0 },
+                TreesitterContextBottom = { style = {} },
             }
 
             catppuccin.setup(opts)

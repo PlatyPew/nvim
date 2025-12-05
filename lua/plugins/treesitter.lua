@@ -85,14 +85,8 @@ return {
         opts = {
             enable = true,
             multiwindow = true,
-            max_lines = 1,
+            max_lines = "10%",
         },
-        config = function(_, opts)
-            require("treesitter-context").setup(opts)
-            local hl = vim.api.nvim_set_hl
-            hl(0, "TreesitterContextBottom", { underline = true, sp = "Grey" })
-            hl(0, "TreesitterContextLineNumberBottom", { underline = true, sp = "Grey" })
-        end,
     },
 
     {
