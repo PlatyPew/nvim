@@ -9,32 +9,33 @@ return {
             "HiPhish/rainbow-delimiters.nvim",
         },
         init = function()
-            vim.o.foldenable = false
-            vim.o.foldlevel = 20
-            vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+            vim.wo.foldenable = false
+            vim.wo.foldmethod = "expr"
+            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
         end,
         opts = {
-            sync_install = false,
-            ignore_install = {},
-            modules = {},
             auto_install = true,
             highlight = {
                 enable = true,
-                disable = {},
                 additional_vim_regex_highlighting = false,
             },
+            indent = { enable = true },
             refactor = {
                 highlight_definitions = { enable = true },
                 smart_rename = {
                     enable = true,
                     keymaps = {
-                        smart_rename = "gR",
+                        smart_rename = "gnr",
                     },
                 },
-            },
-            indent = {
-                enable = true,
-                disable = { "lua" },
+                navigation = {
+                    enable = true,
+                    keymaps = {
+                        goto_definition = "gnd",
+                        goto_next_usage = "]]",
+                        goto_previous_usage = "[[",
+                    },
+                },
             },
         },
         config = function(_, opts)

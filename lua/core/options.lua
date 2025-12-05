@@ -1,7 +1,6 @@
 local opt = vim.o
 
 -- Optimisation
-opt.foldmethod = "expr"
 opt.ruler = false
 
 -- Colouring
