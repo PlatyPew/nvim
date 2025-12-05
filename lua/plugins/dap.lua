@@ -106,22 +106,6 @@ return {
                 }
             end
 
-            dap.configurations.java = {
-                {
-                    name = "Debug Launch (2GB)",
-                    type = "java",
-                    request = "launch",
-                    vmArgs = "" .. "-Xmx2g ",
-                },
-                {
-                    name = "Debug Attach (5005)",
-                    type = "java",
-                    request = "attach",
-                    hostName = "127.0.0.1",
-                    port = 5005,
-                },
-            }
-
             require("overseer").enable_dap()
 
             -- stylua: ignore end
