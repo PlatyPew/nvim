@@ -11,7 +11,6 @@ return {
                 servers = {
                     bashls = {},
                     clangd = {},
-                    jdtls = {},
                     lua_ls = {},
                     basedpyright = {},
                     rust_analyzer = {},

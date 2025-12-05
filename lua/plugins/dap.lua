@@ -19,7 +19,6 @@ return {
                     "python",
                     "codelldb",
                     "js-debug-adapter",
-                    "java-debug-adapter",
                 }
             end
 
