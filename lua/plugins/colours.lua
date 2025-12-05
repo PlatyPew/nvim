@@ -30,6 +30,7 @@ return {
                 treesitter = true,
                 which_key = true,
 
+                -- Need to be adjusted when it becomes lsp_styles
                 native_lsp = {
                     enabled = true,
                     virtual_text = {
@@ -40,11 +41,11 @@ return {
                         ok = { "italic" },
                     },
                     underlines = {
-                        errors = { "underline" },
-                        hints = { "underline" },
-                        warnings = { "underline" },
-                        information = { "underline" },
-                        ok = { "underline" },
+                        errors = { "undercurl" },
+                        hints = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
+                        ok = { "undercurl" },
                     },
                     inlay_hints = {
                         background = true,
