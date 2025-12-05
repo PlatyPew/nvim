@@ -79,6 +79,23 @@ return {
     },
 
     {
+        "nvim-treesitter/nvim-treesitter-context",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            enable = true,
+            multiwindow = true,
+            max_lines = 1,
+        },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
+            local hl = vim.api.nvim_set_hl
+            hl(0, "TreesitterContextBottom", { underline = true, sp = "Grey" })
+            hl(0, "TreesitterContextLineNumberBottom", { underline = true, sp = "Grey" })
+        end,
+    },
+
+    {
         "windwp/nvim-ts-autotag",
         dependencies = "nvim-treesitter/nvim-treesitter",
         ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "xml" },
