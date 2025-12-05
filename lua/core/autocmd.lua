@@ -11,18 +11,19 @@ autocmd("FileType", {
     pattern = "*",
     callback = function()
         local ft = {
+            "Avante",
+            "AvanteInput",
             "NeogitStatus",
             "WhichKey",
             "dashboard",
             "dbout",
             "lazy",
-            "mason",
-            "Avante",
-            "AvanteInput",
-            "snacks_picker_input",
             "markdown",
-            "text",
+            "mason",
+            "qf",
+            "snacks_picker_input",
             "tex",
+            "text",
         }
 
         if not vim.tbl_contains(ft, vim.bo.filetype) then
