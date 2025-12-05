@@ -1,28 +1,10 @@
 return {
     {
         "mason-org/mason-lspconfig.nvim",
-        dependencies = {
-            "mason-org/mason.nvim",
-            dependencies = "neovim/nvim-lspconfig",
-            config = true,
-        },
-        lazy = true,
-    },
-
-    {
-        "saghen/blink.cmp",
-        dependencies = { "neovim/nvim-lspconfig" },
-        lazy = true,
-    },
-
-    {
-        "neovim/nvim-lspconfig",
         event = "BufReadPre",
-        ft = "markdown", -- Fix for jupytext
-        cmd = "Mason",
+        dependencies = { "mason-org/mason.nvim" },
+        lazy = true,
         config = function()
-            vim.lsp.set_log_level("off")
-
             local servers = {}
 
             if vim.g.install then
@@ -37,12 +19,8 @@ return {
                 }
             end
 
-            -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
-            capabilities.offsetEncoding = { "utf-16" }
-
             if require("jit").os == "Linux" and require("jit").arch == "arm64" then
-                require("lspconfig").clangd.setup({ capabilities = capabilities })
+                vim.lsp.config("clangd", {})
             end
 
             -- Ensure the servers above are installed
@@ -50,6 +28,31 @@ return {
                 ensure_installed = vim.tbl_keys(servers),
                 automatic_enable = true,
             })
+        end,
+    },
+
+    {
+        "mason-org/mason.nvim",
+        dependencies = { "neovim/nvim-lspconfig" },
+        lazy = true,
+        cmd = "Mason",
+        config = true,
+    },
+
+    {
+        "neovim/nvim-lspconfig",
+        ft = "markdown", -- Fix for jupytext
+        keys = {
+            {
+                "<Leader>li",
+                function()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                end,
+                desc = "Toggle Inlay Hints",
+            },
+        },
+        init = function()
+            vim.lsp.set_log_level("off")
 
             vim.diagnostic.config({
                 signs = {
@@ -61,11 +64,6 @@ return {
                     },
                 },
             })
-
-            -- stylua: ignore start
-            local remap = vim.keymap.set
-            remap("n", "<Leader>li", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
-            -- stylua: ignore end
         end,
     },
 
