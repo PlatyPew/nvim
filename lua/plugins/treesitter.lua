@@ -7,6 +7,7 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter-refactor",
             "HiPhish/rainbow-delimiters.nvim",
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         init = function()
             vim.wo.foldenable = false
@@ -34,6 +35,36 @@ return {
                         goto_definition = "gnd",
                         goto_next_usage = "]]",
                         goto_previous_usage = "[[",
+                    },
+                },
+            },
+            textobjects = {
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ["]f"] = "@function.outer",
+                        ["]o"] = {
+                            query = { "@conditional.outer", "@loop.outer" },
+                        },
+                    },
+                    goto_next_end = {
+                        ["]F"] = "@function.outer",
+                        ["]O"] = {
+                            query = { "@conditional.outer", "@loop.outer" },
+                        },
+                    },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                        ["[o"] = {
+                            query = { "@conditional.outer", "@loop.outer" },
+                        },
+                    },
+                    goto_previous_end = {
+                        ["[F"] = "@function.outer",
+                        ["[O"] = {
+                            query = { "@conditional.outer", "@loop.outer" },
+                        },
                     },
                 },
             },
