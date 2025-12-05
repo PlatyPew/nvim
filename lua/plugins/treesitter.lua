@@ -88,7 +88,7 @@ return {
             max_lines = 1,
         },
         config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
+            require("treesitter-context").setup(opts)
             local hl = vim.api.nvim_set_hl
             hl(0, "TreesitterContextBottom", { underline = true, sp = "Grey" })
             hl(0, "TreesitterContextLineNumberBottom", { underline = true, sp = "Grey" })
