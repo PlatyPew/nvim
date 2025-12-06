@@ -48,7 +48,6 @@ return {
     -- { "jupytext.nvim", version = "*" },
     -- { "lazydev.nvim", version = "*" },
     -- { "lspsaga.nvim", version = "*" },
-    -- { "lua-async-await", version = "*" },
     -- { "lualine.nvim", version = "*" },
     -- { "markdown-preview.nvim", version = "*" },
     -- { "mason-null-ls.nvim", version = "*" },
