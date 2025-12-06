@@ -152,6 +152,7 @@ return {
             require("java").setup({
                 jdk = { auto_install = false },
                 spring_boot_tools = { enable = false },
+                jdtls = { version = "1.52.0" },
             })
 
             vim.lsp.config("jdtls", {
