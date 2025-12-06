@@ -105,11 +105,11 @@ autocmd({ "FileType" }, {
     end,
 })
 
--- Delete quickfix list item
+-- Quickfix list
 autocmd("FileType", {
     pattern = "qf",
     desc = "Attach keymaps for quickfix list",
-    callback = function()
+    callback = function(args)
         vim.keymap.set("n", "dd", function()
             local qf_list = vim.fn.getqflist()
 
@@ -129,5 +129,7 @@ autocmd("FileType", {
             silent = true,
             desc = "Remove quickfix item under cursor",
         })
+
+        vim.keymap.set("n", "q", "<C-w>q", { buffer = args.buf, desc = "Close quickfix list" })
     end,
 })
