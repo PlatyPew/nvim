@@ -24,6 +24,7 @@ return {
     { "nvim-java-test", version = "*", ft = "java" },
     { "nvim-lspconfig", version = "*" },
     { "nvim-treesitter", version = "*" },
+    { "nvim-treesitter-context", version = "*" },
     { "oil.nvim", version = "*" },
     { "otter.nvim", version = "*" },
     { "overseer.nvim", version = "*" },
