@@ -97,6 +97,7 @@ remap("v", ">", ">gv")
 -- Terminal mappings
 remap("t", "<C-/>", "<Cmd>close<CR>")
 
-remap("n", "[0", function()
+-- Tree sitter context mappings
+remap("n", "g0", function()
     require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true })
