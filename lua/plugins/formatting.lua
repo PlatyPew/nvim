@@ -65,12 +65,6 @@ return {
                     require("none-ls.formatting.rustfmt"),
                 },
             })
-
-            -- stylua: ignore start
-            local remap = vim.keymap.set
-            remap("n", "g=", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Buffer" })
-            remap("n", "<Leader>F", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Buffer" })
-            -- stylua: ignore end
         end,
     },
 }

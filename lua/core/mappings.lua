@@ -101,3 +101,18 @@ remap("t", "<C-/>", "<Cmd>close<CR>")
 remap("n", "g0", function()
     require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true })
+
+-- Smart Formatting
+remap("n", "g=", function()
+    local ft = vim.bo.filetype
+    vim.lsp.buf.format({
+        async = true,
+        filter = function(client)
+            if ft == "java" then
+                return client.name == "jdtls"
+            else
+                return client.name == "null-ls"
+            end
+        end,
+    })
+end, { desc = "Format Buffer" })
