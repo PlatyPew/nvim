@@ -45,7 +45,7 @@ return {
                 desc = "Add Selected Files",
                 mode = { "n", "v" }
             },
-            { "<Leader>aS", function() require("avante.api").stop() end,    desc = "Stop",   mode = { "n", "v" } },
+            { "<Leader>aq", function() require("avante.api").stop() end,    desc = "Stop",   mode = { "n", "v" } },
             {
                 "<Leader>ap",
                 function()
@@ -59,7 +59,7 @@ return {
                 function()
                     _G.select_item(
                         "Select a provider",
-                        { "gemini-2.5-flash", "gemini-2.5-pro", "gemini-cli" },
+                        { "gemini-3-flash", "gemini-3-pro", "gemini-cli" },
                         function(choice)
                             if choice then
                                 vim.cmd("AvanteSwitchProvider " .. choice)
@@ -73,15 +73,15 @@ return {
         lazy = true,
         opts = {
             mode = "legacy",
-            provider = "gemini-2.5-flash",
+            provider = "gemini-3-flash",
             providers = {
-                ["gemini-2.5-flash"] = {
+                ["gemini-3-flash"] = {
                     __inherited_from = "gemini",
-                    model = "gemini-2.5-flash",
+                    model = "gemini-3-flash-preview",
                 },
-                ["gemini-2.5-pro"] = {
+                ["gemini-3-pro"] = {
                     __inherited_from = "gemini",
-                    model = "gemini-2.5-pro",
+                    model = "gemini-3-pro-preview",
                 },
                 morph = { model = "auto" },
             },
