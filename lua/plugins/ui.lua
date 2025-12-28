@@ -117,6 +117,7 @@ return {
                                 lazy = "󰒲 Lazy",
                                 mason = "󰇚 Mason",
                                 oil = "Oil",
+                                qf = " Quickfix",
                                 sagafinder = " References",
                                 sagarename = " Rename",
                                 snacks_picker_input = " Picker",
