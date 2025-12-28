@@ -114,5 +114,7 @@ autocmd("FileType", {
         })
 
         vim.keymap.set("n", "q", "<C-w>q", { buffer = args.buf, desc = "Close quickfix list" })
+
+        vim.opt_local.winfixbuf = true
     end,
 })
