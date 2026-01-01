@@ -133,7 +133,7 @@ return {
                 local t = {}
 
                 local args = vim.fn.input({
-                    prompt = "Arguments",
+                    prompt = "Arguments (Ctrl-C to cancel)",
                     completion = "file"
                 })
 
