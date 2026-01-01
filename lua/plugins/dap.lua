@@ -160,6 +160,20 @@ return {
                     vim.notify(item.file, "info", { title = "Debug Binary" })
                 end, { ignored = true })
             end, desc = "Set Executable Path"},
+            { "<Leader>dP", function()
+                local program = require("dap").configurations[vim.bo.filetype][1].program
+                local args = require("dap").configurations[vim.bo.filetype][1].args
+
+                if type(program) == "function" then
+                    program = ""
+                end
+
+                if args == nil then
+                    args = {}
+                end
+
+                vim.notify(vim.inspect(vim.list_extend({ program }, args)), "info", { title = "Debug Args" })
+            end, desc = "Show Program Arguments" },
         },
         opts = {
             winbar = {
