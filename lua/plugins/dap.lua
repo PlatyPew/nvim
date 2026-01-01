@@ -178,6 +178,7 @@ return {
         opts = {
             winbar = {
                 sections = {
+                    "console",
                     "breakpoints",
                     "scopes",
                     "threads",
@@ -189,7 +190,6 @@ return {
                 default_section = "breakpoints",
                 controls = { enabled = true },
             },
-            windows = { terminal = { position = "right", start_hidden = false } },
         },
     },
 
