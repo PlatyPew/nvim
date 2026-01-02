@@ -28,6 +28,8 @@ return {
                 handlers = {},
             })
 
+            dap.defaults.fallback.auto_continue_if_many_stopped = false
+
             for _, adapters in ipairs({ "pwa-node", "pwa-chrome" }) do
                 dap.adapters[adapters] = {
                     type = "server",
