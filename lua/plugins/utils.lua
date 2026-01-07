@@ -153,4 +153,25 @@ return {
             })
         end,
     },
+
+    {
+        "mistweaverco/snap.nvim",
+        cmd = "Snap",
+        keys = {
+            { "<Leader>c", "<Cmd>Snap<CR>", desc = "Capture Screen", mode = { "n", "v" } },
+        },
+        opts = {
+            output_dir = vim.fn.expand("~") .. "/Desktop",
+            filename_pattern = "neovim_%t",
+            font_settings = {
+                size = 15,
+                fonts = {
+                    default = { name = "Iosevka Nerd Font Mono" },
+                    bold = { name = "Iosevka Nerd Font Mono" },
+                    italic = { name = "Iosevka Nerd Font Mono" },
+                    bold_italic = { name = "Iosevka Nerd Font Mono" },
+                },
+            },
+        },
+    },
 }

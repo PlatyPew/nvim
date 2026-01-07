@@ -32,6 +32,7 @@ return {
     { "overseer.nvim", version = "*" },
     { "render-markdown.nvim", version = "*" },
     { "snacks.nvim", version = "*" },
+    { "snap.nvim", version = "*" },
     { "sniprun", version = "*" },
     { "ultimate-autopair.nvim", branch = "v0.6" },
     { "which-key.nvim", version = "^3.0.0" },
