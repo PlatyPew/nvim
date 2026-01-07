@@ -43,7 +43,7 @@ return {
         ft = "markdown", -- Fix for jupytext
         keys = {
             {
-                "<Leader>li",
+                "<Leader>lI",
                 function()
                     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
                 end,
@@ -80,8 +80,11 @@ return {
             { "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "Previous Diagnostic" },
             { "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", desc = "Next Diagnostic" },
 
+            { "<Leader>lO", "<Cmd>Lspsaga outline<CR>", desc = "Outline" },
             { "<Leader>lc", "<Cmd>Lspsaga code_action<CR>", desc = "Code Action" },
             { "<Leader>lh", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
+            { "<Leader>li", "<Cmd>Lspsaga incoming_calls<CR>", desc = "Incoming Calls" },
+            { "<Leader>lo", "<Cmd>Lspsaga outgoing_calls<CR>", desc = "Outgoing Calls" },
             { "<Leader>lp", "<Cmd>Lspsaga goto_definition<CR>", desc = "Goto Definition" },
             { "<Leader>lx", "<Cmd>Lspsaga finder<CR>", desc = "Find Reference" },
         },
@@ -91,6 +94,12 @@ return {
             },
             finder = {
                 keys = { toggle_or_open = "<CR>" },
+            },
+            callhierarchy = {
+                keys = { edit = "<CR>" },
+            },
+            outline = {
+                keys = { jump = "<CR>" },
             },
             rename = { in_select = false },
             lightbulb = { enable = false },
