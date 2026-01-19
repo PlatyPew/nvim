@@ -181,6 +181,21 @@ return {
 
                 vim.notify(vim.inspect(vim.list_extend({ program }, args)), "info", { title = "Debug Args" })
             end, desc = "Show Program Arguments" },
+            { "<Leader>dB", function()
+                _G.select_item(
+                    "Breakpoint Type",
+                    { "Condition", "Hit Count" },
+                    function(choice)
+                        if not choice then return end
+
+                        if choice == "Condition" then
+                            require("dap").set_breakpoint(vim.fn.input("Set Condition: "))
+                        elseif choice == "Hit Count" then
+                            require("dap").set_breakpoint(nil, vim.fn.input("Set Hit Count: "))
+                        end
+                    end
+                )
+            end, desc = "Set Conditional Breakpoint" },
         },
         opts = {
             winbar = {
