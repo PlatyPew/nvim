@@ -10,7 +10,9 @@ return {
         config = function()
             local dap = require("dap")
 
-            vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Conditional" })
+            vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Comment" })
+            vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "Conditional" })
+            vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error" })
             vim.fn.sign_define("DapStopped", { text = "", texthl = "String" })
 
             local ensure_installed = {}
