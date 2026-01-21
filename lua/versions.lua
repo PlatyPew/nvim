@@ -15,6 +15,7 @@ return {
     { "mini.move", version = "*" },
     { "mini.splitjoin", version = "*" },
     { "mini.surround", version = "*" },
+    { "minuet-ai.nvim", version = "*" },
     { "molten-nvim", version = "^1.0.0" },
     { "nvim-dap", lazy = true, commit = "7bb46cc" },
     { "nvim-java", version = "*" },
