@@ -27,6 +27,14 @@ return {
             require("mason-nvim-dap").setup({
                 ensure_installed = ensure_installed,
                 automatic_setup = true,
+                filetypes = {
+                    firefox = {
+                        "javascript",
+                        "typescript",
+                        "javascriptreact",
+                        "typescriptreact",
+                    },
+                },
                 handlers = {
                     function(config)
                         require("mason-nvim-dap").default_setup(config)
@@ -42,90 +50,44 @@ return {
                         end
                         require("mason-nvim-dap").default_setup(config)
                     end,
+
+                    firefox = function(config)
+                        config.adapters = {
+                            type = "executable",
+                            command = "node",
+                            args = {
+                                vim.fn.expand(
+                                    "$MASON/packages/firefox-debug-adapter/dist/adapter.bundle.js"
+                                ),
+                            },
+                        }
+
+                        config.configurations = {
+                            {
+                                type = "firefox",
+                                request = "launch",
+                                name = "Attach - Firefox",
+                                reAttach = true,
+                                url = "http://localhost:3000",
+                                webRoot = "${workspaceFolder}",
+                                firefoxExecutable = function()
+                                    if vim.fn.has("macunix") == 1 then
+                                        return "/Applications/Firefox.app/Contents/MacOS/firefox"
+                                    else
+                                        return "/usr/bin/firefox"
+                                    end
+                                end,
+                            },
+                        }
+
+                        require("mason-nvim-dap").default_setup(config)
+                    end,
                 },
             })
 
             dap.defaults.fallback.auto_continue_if_many_stopped = false
 
-            for _, adapters in ipairs({ "pwa-node", "pwa-chrome" }) do
-                dap.adapters[adapters] = {
-                    type = "server",
-                    host = "localhost",
-                    port = "${port}",
-                    executable = {
-                        command = "node",
-                        args = {
-                            vim.fn.expand(
-                                "$MASON/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
-                            ),
-                            "${port}",
-                        },
-                    },
-                }
-            end
-
-            dap.adapters.firefox = {
-                type = "executable",
-                command = "node",
-                args = {
-                    vim.fn.expand("$MASON/packages/firefox-debug-adapter/dist/adapter.bundle.js"),
-                },
-            }
-
-            for _, language in ipairs({
-                "typescript",
-                "javascript",
-                "typescriptreact",
-                "javascriptreact",
-            }) do
-                dap.configurations[language] = {
-                    {
-                        type = "pwa-node",
-                        request = "launch",
-                        name = "Launch file",
-                        program = "${file}",
-                        cwd = vim.fn.getcwd(),
-                        sourceMaps = true,
-                    },
-                    {
-                        type = "pwa-node",
-                        request = "attach",
-                        name = "Attach",
-                        processId = require("dap.utils").pick_process,
-                        cwd = vim.fn.getcwd(),
-                        sourceMaps = true,
-                    },
-                    {
-                        type = "pwa-chrome",
-                        name = "Attach - Chrome",
-                        request = "attach",
-                        program = "${file}",
-                        cwd = vim.fn.getcwd(),
-                        sourceMaps = true,
-                        protocol = "inspector",
-                        port = 9222, -- Start Chrome google-chrome --remote-debugging-port=9222
-                        webRoot = "${workspaceFolder}",
-                    },
-                    {
-                        type = "firefox",
-                        request = "launch",
-                        name = "Attach - Firefox",
-                        reAttach = true,
-                        url = "http://localhost:3000",
-                        webRoot = "${workspaceFolder}",
-                        firefoxExecutable = function()
-                            if vim.fn.has("macunix") == 1 then
-                                return "/Applications/Firefox.app/Contents/MacOS/firefox"
-                            else
-                                return "/usr/bin/firefox"
-                            end
-                        end,
-                    },
-                }
-            end
-
             require("overseer").enable_dap()
-
             -- stylua: ignore end
         end,
     },
