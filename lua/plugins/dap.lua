@@ -27,7 +27,22 @@ return {
             require("mason-nvim-dap").setup({
                 ensure_installed = ensure_installed,
                 automatic_setup = true,
-                handlers = {},
+                handlers = {
+                    function(config)
+                        require("mason-nvim-dap").default_setup(config)
+                    end,
+
+                    codelldb = function(config)
+                        for _, cfg in ipairs(config.configurations or {}) do
+                            cfg.initCommands = cfg.initCommands or {}
+                            table.insert(
+                                cfg.initCommands,
+                                "settings set target.x86-disassembly-flavor intel"
+                            )
+                        end
+                        require("mason-nvim-dap").default_setup(config)
+                    end,
+                },
             })
 
             dap.defaults.fallback.auto_continue_if_many_stopped = false

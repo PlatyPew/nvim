@@ -81,10 +81,21 @@ autocmd("FileType", {
     end,
 })
 
+-- Use q to exit of dap view
 autocmd({ "FileType" }, {
+    group = augroup("dap_quit", {}),
     pattern = { "dap-view", "dap-view-term", "dap-repl" },
     callback = function(args)
         vim.keymap.set("n", "q", "<C-w>q", { buffer = args.buf })
+    end,
+})
+
+-- Enter insert mode for dap-repl immediately
+autocmd({ "FileType", "BufEnter" }, {
+    group = augroup("dap_repl_insert", {}),
+    pattern = "dap-repl",
+    callback = function()
+        vim.cmd("startinsert")
     end,
 })
 
