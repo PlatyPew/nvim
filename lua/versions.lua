@@ -1,5 +1,5 @@
 return {
-    { "avante.nvim", commit = "a9e9890" },
+    { "avante.nvim", commit = "e1e70be" },
     { "blink.cmp", version = "*" },
     { "catppuccin", version = "*" },
     { "grug-far.nvim", version = "*" },
