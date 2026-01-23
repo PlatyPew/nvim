@@ -43,10 +43,19 @@ return {
                     },
                 },
                 virtualtext = {
-                    auto_trigger_ft = { "c", "cpp", "rust", "javascript", "typescript", "python" },
+                    auto_trigger_ft = {
+                        "c",
+                        "cpp",
+                        "java",
+                        "javascript",
+                        "lua",
+                        "python",
+                        "rust",
+                        "typescript",
+                    },
                     keymap = {
                         accept = "<M-CR>",
-                        accept_line = "<M-w>",
+                        accept_line = "<M-\\>",
                         dismiss = "<M-]>",
                     },
                 },
