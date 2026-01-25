@@ -2,6 +2,7 @@ return {
     { "avante.nvim", commit = "e1e70be" },
     { "blink.cmp", version = "*" },
     { "catppuccin", version = "*" },
+    { "codediff.nvim", version = "*" },
     { "grug-far.nvim", version = "*" },
     { "kulala.nvim", version = "*" },
     { "live-preview.nvim", version = "*" },

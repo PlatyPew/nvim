@@ -39,10 +39,8 @@ return {
             remap("n", "<Leader>gS", "<Cmd>Gitsigns stage_buffer<CR>", { desc = "Stage Buffer" })
             remap("n", "<Leader>gU", "<Cmd>Gitsigns reset_buffer_index<CR>", { desc = "Reset Buffer Index" })
             remap("n", "<Leader>gb", "<Cmd>Gitsigns blame_line<CR>", { desc = "Blame Line" })
-            remap("n", "<Leader>gd", function()
-            end, { desc = "Show Diff" })
-            remap("n", "<Leader>gh", function()
-            end, { desc = "Open History" })
+            remap("n", "<Leader>gd", "<Cmd>CodeDiff<CR>", { desc = "Show Diff" })
+            remap("n", "<Leader>gh", "<Cmd>CodeDiff history<CR>", { desc = "Open History" })
             remap("n", "<Leader>gp", "<Cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
             remap("n", "<Leader>gr", "<Cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
             remap("n", "<Leader>gs", "<Cmd>Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
@@ -63,5 +61,11 @@ return {
         opts = {
             kind = "auto",
         },
+    },
+
+    {
+        "esmuellert/codediff.nvim",
+        cmd = "CodeDiff",
+        config = true,
     },
 }

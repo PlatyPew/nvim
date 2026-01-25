@@ -129,3 +129,21 @@ autocmd("FileType", {
         vim.opt_local.winfixbuf = true
     end,
 })
+
+-- Clean up empty [No Name] buffer when opening a new tab
+autocmd("TabNewEntered", {
+    group = augroup("TabCleanUp", { clear = true }),
+    callback = function()
+        local buf = vim.api.nvim_get_current_buf()
+
+        if vim.api.nvim_buf_get_name(buf) ~= "" or vim.bo[buf].buftype ~= "" then
+            return
+        end
+
+        -- Switch to alternate buffer if possible, then delete [No Name]
+        if vim.fn.bufnr("#") > 0 then
+            vim.cmd("buffer #")
+            pcall(vim.api.nvim_buf_delete, buf, { force = true })
+        end
+    end,
+})

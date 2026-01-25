@@ -104,6 +104,8 @@ return {
                             },
                             padding = 1,
                             filetype_names = {
+                                ["codediff-explorer"] = " CodeDiff",
+                                ["codediff-history"] = " CodeDiff",
                                 ["dap-repl"] = " Debug",
                                 ["dap-view"] = " Debug",
                                 ["dap-view-term"] = "Debug Shell",
