@@ -40,14 +40,9 @@ return {
             remap("n", "<Leader>gU", "<Cmd>Gitsigns reset_buffer_index<CR>", { desc = "Reset Buffer Index" })
             remap("n", "<Leader>gb", "<Cmd>Gitsigns blame_line<CR>", { desc = "Blame Line" })
             remap("n", "<Leader>gd", function()
-                local view = require("diffview.lib").get_current_view()
-                if view then
-                    vim.cmd.DiffviewClose()
-                else
-                    vim.cmd.DiffviewOpen()
-                end
             end, { desc = "Show Diff" })
-            remap("n", "<Leader>gh", "<Cmd>DiffviewFileHistory<CR>", { desc = "Open History" })
+            remap("n", "<Leader>gh", function()
+            end, { desc = "Open History" })
             remap("n", "<Leader>gp", "<Cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
             remap("n", "<Leader>gr", "<Cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
             remap("n", "<Leader>gs", "<Cmd>Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
@@ -64,9 +59,6 @@ return {
         cmd = "Neogit",
         keys = {
             { "<Leader>gg", "<Cmd>Neogit<CR>", desc = "Open Neogit" },
-        },
-        dependencies = {
-            "sindrets/diffview.nvim",
         },
         opts = {
             kind = "auto",

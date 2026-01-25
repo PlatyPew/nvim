@@ -15,7 +15,6 @@ return {
                 dadbod_ui = true,
                 dap = true,
                 dap_ui = true,
-                diffview = true,
                 flash = true,
                 grug_far = true,
                 lsp_saga = true,

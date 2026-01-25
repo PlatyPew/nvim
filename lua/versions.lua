@@ -45,7 +45,6 @@ return {
     -- { "Comment.nvim", version = "*" },
     -- { "devdocs.nvim", version = "*" },
     -- { "dial.nvim", version = "*" },
-    -- { "diffview.nvim", version = "*" },
     -- { "emmet-vim", version = "*" },
     -- { "faster.nvim", version = "*" },
     -- { "flash.nvim", version = "*" },
