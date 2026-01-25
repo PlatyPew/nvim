@@ -35,15 +35,45 @@ return {
         event = { "BufReadPost", "BufNewFile" },
     },
 
-    --[[ {
-        "nvim-treesitter/nvim-treesitter-refactor",
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPost", "BufNewFile" },
-    },
-
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         dependencies = "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPost", "BufNewFile" },
-    }, ]]
+        init = function()
+            vim.g.no_plugin_maps = true
+        end,
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
+                move = { set_jumps = true },
+            })
+
+            local move = require("nvim-treesitter-textobjects.move")
+
+            local remap = vim.keymap.set
+            remap({ "n", "x", "o" }, "]f", function()
+                move.goto_next_start("@function.outer", "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "]o", function()
+                move.goto_next_start({ "@conditional.outer", "@loop.outer" }, "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "]F", function()
+                move.goto_next_end("@function.outer", "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "]O", function()
+                move.goto_next_end({ "@conditional.outer", "@loop.outer" }, "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "[f", function()
+                move.goto_previous_start("@function.outer", "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "[o", function()
+                move.goto_previous_start({ "@conditional.outer", "@loop.outer" }, "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "[F", function()
+                move.goto_previous_end("@function.outer", "textobjects")
+            end)
+            remap({ "n", "x", "o" }, "[O", function()
+                move.goto_previous_end({ "@conditional.outer", "@loop.outer" }, "textobjects")
+            end)
+        end,
+    },
 }
