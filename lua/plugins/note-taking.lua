@@ -1,12 +1,22 @@
 return {
     {
-        "iamcco/markdown-preview.nvim",
-        ft = "markdown",
-        cmd = "MarkdownPreviewToggle",
-        build = "cd app && npm install && git checkout .",
-        init = function()
-            vim.g.mkdp_filetypes = { "markdown" }
-        end,
+        "brianhuster/live-preview.nvim",
+        dependencies = "folke/snacks.nvim",
+        keys = {
+            {
+                "<Leader>MM",
+                function()
+                    local livepreview = require("livepreview")
+                    if livepreview.is_running() then
+                        livepreview.close()
+                    else
+                        vim.cmd("LivePreview start")
+                    end
+                end,
+                desc = "Toggle Markdown Preview",
+            },
+        },
+        config = true,
     },
 
     {
