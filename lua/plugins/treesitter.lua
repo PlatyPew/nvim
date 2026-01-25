@@ -6,7 +6,6 @@ return {
         build = ":TSUpdate",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-refactor", lazy = true },
-            { "HiPhish/rainbow-delimiters.nvim", lazy = true },
             { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
         },
         init = function()
@@ -94,5 +93,11 @@ return {
         dependencies = "nvim-treesitter/nvim-treesitter",
         ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "xml" },
         config = true,
+    },
+
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        lazy = true,
+        event = { "BufReadPost", "BufNewFile" },
     },
 }
