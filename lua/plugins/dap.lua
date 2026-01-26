@@ -112,7 +112,7 @@ return {
             { "<Leader>do", function() require("dap").step_out() end, desc = "Step Out" },
             { "<Leader>dq", function() require("dap").close() end, desc = "Close" },
             { "<Leader>ds", function() require("dap").step_over() end, desc = "Step Over" },
-            { "<Leader>dw", function() require("nvim-dap-virtual-text").toggle() end, desc = "Toggle Virtual Text" },
+            { "<Leader>dv", function() require("nvim-dap-virtual-text").toggle() end, desc = "Toggle Virtual Text" },
             { "<Leader>dw", "<Cmd>DapViewWatch<CR>", desc = "Watch Variable" },
             { "<Leader>da", function()
                 local t = {}

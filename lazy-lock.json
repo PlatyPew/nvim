@@ -48,7 +48,7 @@
   "nvim-bqf": { "branch": "main", "commit": "daa1a130632dc2b05a9a73538bac058dfa4e0b86" },
   "nvim-dap": { "branch": "master", "commit": "7bb46cc612bb127d7b0e3e9ed695267d830824ec" },
   "nvim-dap-disasm": { "branch": "master", "commit": "e9c85c1b061dc78537807fc8a9e1266604b35aad" },
-  "nvim-dap-view": { "branch": "main", "commit": "9492aef2994d86887cee040a5057ce6ad3960d7a" },
+  "nvim-dap-view": { "branch": "main", "commit": "bd67e84de295455a5cd994b8f227438e8c696ea9" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6" },
   "nvim-java": { "branch": "main", "commit": "d196b25eda89ae957110f2966d1753889dc197b2" },
   "nvim-java-core": { "branch": "main", "commit": "229ebcdfa33c75cf746f97c46c2893b2de3626e5" },
@@ -80,6 +80,6 @@
   "vim-dadbod": { "branch": "master", "commit": "6d1d41da4873a445c5605f2005ad2c68c99d8770" },
   "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
   "vim-dadbod-ui": { "branch": "master", "commit": "48c4f271da13d380592f4907e2d1d5558044e4e5" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "c45243dc1f32ac6bcf6068e5300f3b2b237e576a" },
+  "vim-tmux-navigator": { "branch": "master", "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432" },
   "which-key.nvim": { "branch": "main", "commit": "fcbf4eea17cb299c02557d576f0d568878e354a4" }
 }
