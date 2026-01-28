@@ -7,41 +7,24 @@ autocmd({ "BufNewFile", "BufRead" }, {
     command = "setlocal formatoptions-=cro",
 })
 
+-- Colour column for selected programming languages
 autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-        local ft = {
-            "Avante",
-            "AvanteInput",
-            "NeogitStatus",
-            "WhichKey",
-            "dashboard",
-            "dbout",
-            "lazy",
-            "markdown",
-            "mason",
-            "qf",
-            "snacks_picker_input",
-            "tex",
-            "text",
-        }
-
-        if not vim.tbl_contains(ft, vim.bo.filetype) then
-            vim.g.colorcolumn = vim.fn.matchadd("ColorColumn", "\\%101v[^\n]")
-        end
-    end,
     group = augroup("highlights", { clear = true }),
+    pattern = { "c", "cpp", "rust", "javascript", "typescript", "java", "python", "lua", "go" },
+    callback = function()
+        vim.g.colorcolumn = vim.fn.matchadd("ColorColumn", "\\%101v[^\n]")
+    end,
 })
 
--- Fix mini-files lazy load but override netrw
+-- Fix oil lazy load but override netrw
 autocmd("UIEnter", {
+    group = augroup("oil_au", {}),
     pattern = "*",
     callback = function()
         if vim.fn.isdirectory(vim.fn.expand("%:p")) == 1 then
             require("oil")
         end
     end,
-    group = augroup("oil_au", {}),
 })
 
 -- Resize splits if window got resized
