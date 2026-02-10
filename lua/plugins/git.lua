@@ -66,6 +66,8 @@ return {
     {
         "esmuellert/codediff.nvim",
         cmd = "CodeDiff",
-        config = true,
+        opts = {
+            explorer = { initial_focus = "modified" },
+        },
     },
 }
