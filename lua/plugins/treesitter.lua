@@ -5,9 +5,9 @@ return {
         event = "BufRead",
         build = ":TSUpdate",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter-refactor",
-            "HiPhish/rainbow-delimiters.nvim",
-            "nvim-treesitter/nvim-treesitter-textobjects",
+            { "nvim-treesitter/nvim-treesitter-refactor", lazy = true },
+            { "HiPhish/rainbow-delimiters.nvim", lazy = true },
+            { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
         },
         init = function()
             vim.wo.foldenable = false
