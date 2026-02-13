@@ -51,34 +51,58 @@ return {
                         require("mason-nvim-dap").default_setup(config)
                     end,
 
-                    firefox = function(config)
-                        config.adapters = {
-                            type = "executable",
-                            command = "node",
-                            args = {
-                                vim.fn.expand(
-                                    "$MASON/packages/firefox-debug-adapter/dist/adapter.bundle.js"
-                                ),
+                    js = function(config)
+                        local dap = require("dap")
+
+                        dap.adapters["pwa-node"] = {
+                            type = "server",
+                            host = "localhost",
+                            port = "${port}",
+                            executable = {
+                                command = "node",
+                                args = {
+                                    vim.fn.expand(
+                                        "$MASON/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+                                    ),
+                                    "${port}",
+                                },
                             },
                         }
 
-                        config.configurations = {
+                        dap.adapters["pwa-firefox"] = dap.adapters["pwa-node"]
+
+                        local js_config = {
                             {
-                                type = "firefox",
+                                type = "pwa-node",
                                 request = "launch",
-                                name = "Attach - Firefox",
-                                reAttach = true,
+                                name = "Launch Node (current file)",
+                                program = "${file}",
+                                cwd = "${workspaceFolder}",
+                                sourceMaps = true,
+                                console = "integratedTerminal",
+                            },
+
+                            {
+                                type = "pwa-node",
+                                request = "attach",
+                                name = "Attach Node (pick process)",
+                                processId = require("dap.utils").pick_process,
+                                cwd = "${workspaceFolder}",
+                            },
+
+                            {
+                                type = "pwa-firefox",
+                                request = "launch",
+                                name = "Launch Firefox (localhost:3000)",
                                 url = "http://localhost:3000",
                                 webRoot = "${workspaceFolder}",
-                                firefoxExecutable = function()
-                                    if vim.fn.has("macunix") == 1 then
-                                        return "/Applications/Firefox.app/Contents/MacOS/firefox"
-                                    else
-                                        return "/usr/bin/firefox"
-                                    end
-                                end,
                             },
                         }
+
+                        dap.configurations.javascript = js_config
+                        dap.configurations.typescript = js_config
+                        dap.configurations.javascriptreact = js_config
+                        dap.configurations.typescriptreact = js_config
 
                         require("mason-nvim-dap").default_setup(config)
                     end,
