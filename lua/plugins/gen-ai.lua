@@ -34,7 +34,7 @@ return {
                         api_key = "TERM",
                         name = "Ollama",
                         end_point = "http://localhost:11434/v1/completions",
-                        model = "qwen2.5-coder:7b",
+                        model = "qwen3.5-coder:9b",
                         optional = {
                             temperature = 0.3,
                             max_tokens = 32,
@@ -104,7 +104,7 @@ return {
                 function()
                     _G.select_item(
                         "Select a provider",
-                        { "gemini-3-flash", "gemini-3-pro", "gemini-cli" },
+                        { "gemini-3-flash", "ollama", "gemini-cli" },
                         function(choice)
                             if choice then
                                 vim.cmd("AvanteSwitchProvider " .. choice)
@@ -124,18 +124,13 @@ return {
                     __inherited_from = "gemini",
                     model = "gemini-3-flash-preview",
                 },
-                ["gemini-3-pro"] = {
-                    __inherited_from = "gemini",
-                    model = "gemini-3-pro-preview",
+                ollama = {
+                    model = "qwen3.5:9b",
+                    -- is_env_set = require("avante.providers.ollama").check_endpoint_alive,
                 },
                 morph = { model = "auto" },
             },
             acp_providers = {
-                ["gemini-cli"] = {
-                    command = "gemini",
-                    args = { "--experimental-acp" },
-                    env = { NODE_NO_WARNINGS = "1" },
-                },
             },
             behaviour = {
                 auto_set_keymaps = false,
