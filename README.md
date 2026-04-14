@@ -55,25 +55,9 @@ Plugins are stored and automatically sourced in `lua/plugins/`
 There are 3 AI features that are enabled by default:
 
 1. Supermaven
-2. Avante
-3. McpHub
+2. Sidekick
 
-### Supermaven
-
-Supermaven should already be enabled by default, but to use the pro version, run `:SupermavenUsePro` and follow the instructions.
-
-### Avante
-
-Currently, Avante is configured to use the following models from the following providers:
-
-| Model Name           | Provider                  |
-| -------------------- | ------------------------- |
-| gemini-2.5-flash     | Google AI                 |
-| mistral-large-latest | Mistral AI                |
-| deepseek-r1          | OpenRouter                |
-| llama-3.3            | Groq                      |
-
-#### macOS
+### macOS
 
 How to store API Keys
 
@@ -84,7 +68,7 @@ security add-generic-password -a "OpenRouter API Key" -s "OPENROUTER_API_KEY" -w
 security add-generic-password -a "Groq Token" -s "GROQ_API_KEY" -w "<api_key>"
 ```
 
-#### Linux
+### Linux
 
 How to store API Keys
 
@@ -93,61 +77,4 @@ printf "<api_key>" | secret-tool store --label="Gemini API Key" token GEMINI_API
 printf "<api_key>" | secret-tool store --label="Mistral API Key" token MISTRAL_API_KEY
 printf "<api_key>" | secret-tool store --label="OpenRouter API Key" token OPENROUTER_API_KEY
 printf "<api_key>" | secret-tool store --label="Groq API Key" token GROQ_API_KEY
-```
-
-### McpHub
-
-Currently, McpHub is configured to use the following servers from the following authors:
-
-| MCP Server          | Author/Provider      |
-| ------------------- | -------------------- |
-| Playwright          | executeautomation    |
-| Sequential Thinking | modelcontextprotocol |
-| Context7            | upstash              |
-| Neovim              | Native               |
-| Docker MCP Toolkit  | Docker               |
-
-#### Configuration
-
-```json
-{
-  "mcpServers": {
-    "docker-desktop-mcp-toolkit": {
-      "disabled": true,
-      "autoApprove": [],
-      "command": "docker",
-      "args": ["mcp", "gateway", "run"]
-    },
-    "github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking": {
-      "autoApprove": ["sequentialthinking"],
-      "custom_instructions": {
-        "text": "Input parameters should use camelCase, not snake_case. For example, thoughts_needed should be changed to thoughtsNeeded."
-      },
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "command": "npx",
-      "disabled": true
-    },
-    "github.com/upstash/context7-mcp": {
-      "disabled": false,
-      "autoApprove": ["resolve-library-id", "get-library-docs"],
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
-    },
-    "github.com/executeautomation/mcp-playwright": {
-      "disabled": true,
-      "command": "npx",
-      "args": ["-y", "@executeautomation/playwright-mcp-server"]
-    }
-  },
-  "nativeMCPServers": {
-    "neovim": {
-      "disabled": true,
-      "autoApprove": []
-    },
-    "mcphub": {
-      "disabled": false,
-      "autoApprove": ["get_current_servers", "toggle_mcp_server"]
-    }
-  }
-}
 ```
