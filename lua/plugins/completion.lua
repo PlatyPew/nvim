@@ -25,7 +25,6 @@ return {
                     "buffer",
                     "dadbod",
                     "nerdfont",
-                    "avante",
                 },
                 providers = {
                     buffer = {
@@ -48,14 +47,6 @@ return {
                         name = "Nerd Fonts",
                         score_offset = 1,
                         opts = { insert = true },
-                    },
-                    avante = {
-                        module = "blink-cmp-avante",
-                        name = "Avante",
-                        enabled = function()
-                            return vim.bo.filetype == "AvanteInput"
-                        end,
-                        score_offset = 100,
                     },
                 },
             },
@@ -96,11 +87,6 @@ return {
     },
 
     {
-        "Kaiser-Yang/blink-cmp-avante",
-        ft = "AvanteInput",
-    },
-
-    {
         "xzbdmw/colorful-menu.nvim",
         lazy = true,
         config = true,
@@ -109,7 +95,6 @@ return {
     {
         "jmbuhr/otter.nvim",
         cond = not vim.g.vscode,
-        dependencies = "nvim-treesitter/nvim-treesitter",
         ft = { "markdown", "quarto" },
         config = function()
             require("otter").activate()

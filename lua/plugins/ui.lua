@@ -109,8 +109,6 @@ return {
                                 ["dap-view"] = " Debug",
                                 ["dap-view-term"] = "Debug Shell",
                                 ["dap_disassembly"] = " Debug",
-                                Avante = " Avante Chat",
-                                AvanteInput = " Avante Chat",
                                 NeogitStatus = " Neogit",
                                 OverseerList = " Overseer",
                                 checkhealth = " Health Check",

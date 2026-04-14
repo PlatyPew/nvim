@@ -1,7 +1,16 @@
+local has_supermaven
+local function supermaven_exists()
+    if has_supermaven == nil then
+        local s = vim.loop.fs_stat(vim.env.HOME .. "/.supermaven")
+        has_supermaven = s and s.type == "directory"
+    end
+    return has_supermaven
+end
+
 return {
     {
         "supermaven-inc/supermaven-nvim",
-        enabled = vim.fn.hostname():sub(1, 3) ~= "XT-",
+        enabled = supermaven_exists,
         build = function()
             local api = require("supermaven-nvim.api")
             api.start()
@@ -9,7 +18,7 @@ return {
         end,
         event = "InsertEnter",
         opts = {
-            ignore_filetypes = { "AvanteInput", "gitcommit", "dap-repl" },
+            ignore_filetypes = { "gitcommit", "dap-repl" },
             log_level = "off",
             keymaps = {
                 accept_suggestion = "<M-CR>",
@@ -19,10 +28,42 @@ return {
         },
     },
 
+    {
+        "folke/sidekick.nvim",
+        cmd = "Sidekick",
+        -- stylua: ignore
+        keys = {
+            { "<Leader>aa", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,  desc = "Toggle AI",         mode = { "n" } },
+            { "<Leader>ae", function() require("sidekick.cli").send({ msg = "{selection}" }) end,              desc = "Send Context",      mode = { "n", "x" } },
+            { "<Leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end,                   desc = "Send File",         mode = { "n", "x" } },
+            { "<Leader>ap", function() require("sidekick.cli").prompt() end,                                   desc = "Select Prompt",     mode = { "n", "x" } },
+            { "<Leader>aq", function() require("sidekick.cli").close() end,                                    desc = "Close AI Session",  mode = { "n" } },
+            { "<Leader>as", function() require("sidekick.cli").select() end,                                   desc = "Select AI Tool",    mode = { "n" } },
+        },
+        opts = {
+            nes = { enabled = false },
+            copilot = { status = { enabled = false } },
+            cli = {
+                mux = {
+                    backend = "tmux",
+                    enabled = true,
+                },
+                picker = "snacks",
+                tools = {
+                    claude = {},
+                },
+                win = {
+                    layout = "right",
+                    split = { width = 80 },
+                },
+            },
+        },
+    },
+
     -- When supermaven eventually gets deprecated
     {
         "milanglacier/minuet-ai.nvim",
-        enabled = vim.fn.hostname():sub(1, 3) == "XT-",
+        enabled = not supermaven_exists,
         event = "InsertEnter",
         config = function()
             require("minuet").setup({
@@ -61,127 +102,5 @@ return {
                 },
             })
         end,
-    },
-
-    {
-        "yetone/avante.nvim",
-        build = "make",
-        cmd = {
-            "AvanteChat",
-            "AvanteAsk",
-            "AvanteEdit",
-            "AvanteToggle",
-            "AvanteSwitchProvider",
-        },
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        -- stylua: ignore
-        keys = {
-            { "<Leader>aa", function() require("avante.api").ask() end,     desc = "Ask",    mode = { "n", "v" } },
-            { "<Leader>ae", function() require("avante.api").edit() end,    desc = "Edit",   mode = { "n", "v" } },
-            { "<Leader>ar", function() require("avante.api").refresh() end, desc = "Refresh" },
-            { "<Leader>aq", function() require("avante.api").add_buffer_files() end, desc = "Add Buffer Files", mode = { "n", "v" } },
-            {
-                "<Leader>ac",
-                function()
-                    _G.select_file(function(item)
-                        require("avante.api").add_selected_file(item._path)
-                    end, {hidden = true, ignored = true})
-                end,
-                desc = "Add Selected Files",
-                mode = { "n", "v" }
-            },
-            { "<Leader>aq", function() require("avante.api").stop() end,    desc = "Stop",   mode = { "n", "v" } },
-            {
-                "<Leader>ap",
-                function()
-                    return vim.bo.filetype == "AvanteInput" and
-                        require("avante.clipboard").paste_image() or require("img-clip").paste_image()
-                end,
-                desc = "Paste Image"
-            },
-            {
-                "<Leader>as",
-                function()
-                    _G.select_item(
-                        "Select a provider",
-                        { "gemini-3-flash", "ollama", "gemini-cli" },
-                        function(choice)
-                            if choice then
-                                vim.cmd("AvanteSwitchProvider " .. choice)
-                            end
-                        end
-                    )
-                end,
-                desc = "Select Model"
-            },
-        },
-        lazy = true,
-        opts = {
-            mode = "legacy",
-            provider = "gemini-3-flash",
-            providers = {
-                ["gemini-3-flash"] = {
-                    __inherited_from = "gemini",
-                    model = "gemini-3-flash-preview",
-                },
-                ollama = {
-                    model = "qwen3.5:9b",
-                    -- is_env_set = require("avante.providers.ollama").check_endpoint_alive,
-                },
-                morph = { model = "auto" },
-            },
-            acp_providers = {
-            },
-            behaviour = {
-                auto_set_keymaps = false,
-                enable_fastapply = true,
-                support_paste_from_clipboard = true,
-            },
-            hints = { enabled = false },
-            mappings = { files = false },
-            windows = {
-                width = 40,
-                input = {
-                    prefix = "❯ ",
-                },
-            },
-            system_prompt = function()
-                local hub = require("mcphub").get_hub_instance()
-                return hub and hub:get_active_servers_prompt() or ""
-            end,
-            custom_tools = function()
-                return {
-                    require("mcphub.extensions.avante").mcp_tool(),
-                }
-            end,
-        },
-        config = function(_, opts)
-            _G.load_secret_keys({
-                "GEMINI_API_KEY",
-                "MORPH_API_KEY", -- Fast apply
-                "TAVILY_API_KEY", -- Web search
-            })
-
-            require("avante").setup(opts)
-        end,
-    },
-
-    {
-        "ravitemer/mcphub.nvim",
-        build = "bundled_build.lua",
-        lazy = true,
-        cmd = "MCPHub",
-        -- stylua: ignore
-        keys = {
-            { "<Leader>ah", "<Cmd>MCPHub<CR>", desc = "Open MCP Hub", mode = { "n", "v" } },
-        },
-        opts = {
-            use_bundled_binary = true,
-            extensions = {
-                avante = {
-                    make_slash_commands = true,
-                },
-            },
-        },
     },
 }
