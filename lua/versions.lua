@@ -1,5 +1,4 @@
 return {
-    { "avante.nvim", commit = "98b7fc2" },
     { "blink.cmp", version = "*" },
     { "catppuccin", version = "*" },
     { "codediff.nvim", version = "*" },
@@ -8,7 +7,6 @@ return {
     { "live-preview.nvim", version = "*" },
     { "mason-lspconfig.nvim", lazy = true, version = "*" },
     { "mason.nvim", lazy = true, version = "*" },
-    { "mcphub.nvim", commit = "5193329" },
     { "mini.ai", version = "*" },
     { "mini.basics", version = "*" },
     { "mini.bracketed", version = "*" },
@@ -38,7 +36,6 @@ return {
     { "ultimate-autopair.nvim", branch = "v0.6" },
     { "which-key.nvim", version = "^3.0.0" },
 
-    -- { "blink-cmp-avante", version = "*" },
     -- { "blink-nerdfont.nvim", version = "*" },
     -- { "colorful-menu.nvim", version = "*" },
     -- { "Comment.nvim", version = "*" },

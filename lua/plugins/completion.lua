@@ -25,7 +25,6 @@ return {
                     "buffer",
                     "dadbod",
                     "nerdfont",
-                    "avante",
                 },
                 providers = {
                     buffer = {
@@ -48,14 +47,6 @@ return {
                         name = "Nerd Fonts",
                         score_offset = 1,
                         opts = { insert = true },
-                    },
-                    avante = {
-                        module = "blink-cmp-avante",
-                        name = "Avante",
-                        enabled = function()
-                            return vim.bo.filetype == "AvanteInput"
-                        end,
-                        score_offset = 100,
                     },
                 },
             },
@@ -93,11 +84,6 @@ return {
         "kristijanhusak/vim-dadbod-completion",
         dependencies = "tpope/vim-dadbod",
         ft = { "sql", "mysql", "plsql" },
-    },
-
-    {
-        "Kaiser-Yang/blink-cmp-avante",
-        ft = "AvanteInput",
     },
 
     {

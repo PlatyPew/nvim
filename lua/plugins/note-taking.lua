@@ -57,11 +57,11 @@ return {
     {
         "MeanderingProgrammer/render-markdown.nvim",
         cond = not vim.g.vscode,
-        ft = { "markdown", "quarto", "Avante" },
+        ft = { "markdown", "quarto" },
         dependencies = {},
         opts = {
             latex_enabled = false,
-            file_types = { "markdown", "quarto", "Avante" },
+            file_types = { "markdown", "quarto" },
             highlights = { code = "" },
             -- code = { above = "", below = "" },
         },

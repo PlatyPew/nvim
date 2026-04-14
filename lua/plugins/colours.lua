@@ -81,13 +81,6 @@ return {
 
                 LspInlayHint = { fg = vim.g.palette.surface1, italic = true },
 
-                AvanteTitle = { fg = vim.g.palette.crust, bg = vim.g.palette.green },
-                AvanteReversedTitle = { fg = vim.g.palette.green },
-                AvanteSubtitle = { fg = vim.g.palette.crust, bg = vim.g.palette.sapphire },
-                AvanteReversedSubtitle = { fg = vim.g.palette.sapphire },
-                AvanteThirdTitle = { fg = vim.g.palette.text, bg = vim.g.palette.surface1 },
-                AvanteReversedThirdTitle = { fg = vim.g.palette.surface1 },
-
                 TreesitterContext = { bg = vim.g.palette.surface0 },
                 TreesitterContextBottom = { style = {} },
             }
