@@ -33,12 +33,12 @@ return {
         cmd = "Sidekick",
         -- stylua: ignore
         keys = {
-            { "<Leader>aa", function() require("sidekick.cli").send() end,                      desc = "Send Context",      mode = { "v" } },
-            { "<Leader>aa", function() require("sidekick.cli").toggle() end,                    desc = "Toggle AI",         mode = { "n" } },
-            { "<Leader>af", function() require("sidekick.cli").send({ context = "file" }) end,  desc = "Send File",         mode = { "n" } },
-            { "<Leader>ap", function() require("sidekick.cli").prompt() end,                    desc = "Select Prompt",     mode = { "n", "v" } },
-            { "<Leader>aq", function() require("sidekick.cli").close() end,                     desc = "Close AI Session",  mode = { "n" } },
-            { "<Leader>as", function() require("sidekick.cli").select() end,                    desc = "Select AI Tool",    mode = { "n" } },
+            { "<Leader>aa", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,  desc = "Toggle AI",         mode = { "n" } },
+            { "<Leader>ae", function() require("sidekick.cli").send({ msg = "{selection}" }) end,              desc = "Send Context",      mode = { "n", "x" } },
+            { "<Leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end,                   desc = "Send File",         mode = { "n", "x" } },
+            { "<Leader>ap", function() require("sidekick.cli").prompt() end,                                   desc = "Select Prompt",     mode = { "n", "x" } },
+            { "<Leader>aq", function() require("sidekick.cli").close() end,                                    desc = "Close AI Session",  mode = { "n" } },
+            { "<Leader>as", function() require("sidekick.cli").select() end,                                   desc = "Select AI Tool",    mode = { "n" } },
         },
         opts = {
             nes = { enabled = false },
