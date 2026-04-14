@@ -44,10 +44,6 @@ return {
             nes = { enabled = false },
             copilot = { status = { enabled = false } },
             cli = {
-                mux = {
-                    backend = "tmux",
-                    enabled = true,
-                },
                 picker = "snacks",
                 tools = {
                     claude = {},
