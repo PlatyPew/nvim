@@ -1,6 +1,7 @@
 return {
     {
         "romus204/tree-sitter-manager.nvim",
+        event = "BufRead",
         opts = { auto_install = true },
     },
 
@@ -37,6 +38,11 @@ return {
             multiwindow = true,
             max_lines = "10%",
         },
+    },
+
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        event = { "BufReadPost", "BufNewFile" },
     },
 
     -- TODO: nvim-ts-autotag causes "Invalid node type tab" query error on HTML files
