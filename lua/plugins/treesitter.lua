@@ -51,10 +51,16 @@ return {
         config = true,
     },
 
-    -- TODO: nvim-treesitter-refactor has been archived with no replacement.
-    -- Create a plugin to re-add these features:
-    --   - highlight_definitions (alternative: vim.lsp.buf.document_highlight)
-    --   - smart_rename with keymap "gnr" (alternative: vim.lsp.buf.rename)
-    --   - navigation: goto_definition "gnd", goto_next_usage "]]", goto_previous_usage "[["
-    --     (alternative: vim.lsp.buf.definition, vim.lsp.buf.references)
+    {
+        "PlatyPew/nvim-treesitter-locals",
+        opts = {
+            highlight_definitions = true,
+            keymaps = {
+                smart_rename = "gnr",
+                goto_definition = "gnd",
+                goto_next_usage = "]]",
+                goto_previous_usage = "[[",
+            },
+        },
+    },
 }
