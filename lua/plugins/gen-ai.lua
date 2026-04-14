@@ -73,7 +73,6 @@ return {
             "AvanteToggle",
             "AvanteSwitchProvider",
         },
-        dependencies = "nvim-treesitter/nvim-treesitter",
         -- stylua: ignore
         keys = {
             { "<Leader>aa", function() require("avante.api").ask() end,     desc = "Ask",    mode = { "n", "v" } },

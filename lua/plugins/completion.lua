@@ -109,7 +109,6 @@ return {
     {
         "jmbuhr/otter.nvim",
         cond = not vim.g.vscode,
-        dependencies = "nvim-treesitter/nvim-treesitter",
         ft = { "markdown", "quarto" },
         config = function()
             require("otter").activate()

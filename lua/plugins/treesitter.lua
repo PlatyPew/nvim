@@ -1,86 +1,36 @@
 return {
     {
-        -- Highlight, edit, and navigate code
-        "nvim-treesitter/nvim-treesitter",
-        event = "BufRead",
-        build = ":TSUpdate",
-        dependencies = {
-            { "nvim-treesitter/nvim-treesitter-refactor", lazy = true },
-            { "HiPhish/rainbow-delimiters.nvim", lazy = true },
-            { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
-        },
-        init = function()
-            vim.wo.foldenable = false
-            vim.wo.foldmethod = "expr"
-            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        end,
-        opts = {
-            auto_install = true,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = true },
-            refactor = {
-                highlight_definitions = { enable = true },
-                smart_rename = {
-                    enable = true,
-                    keymaps = {
-                        smart_rename = "gnr",
-                    },
-                },
-                navigation = {
-                    enable = true,
-                    keymaps = {
-                        goto_definition = "gnd",
-                        goto_next_usage = "]]",
-                        goto_previous_usage = "[[",
-                    },
-                },
-            },
-            textobjects = {
-                move = {
-                    enable = true,
-                    set_jumps = true,
-                    goto_next_start = {
-                        ["]f"] = "@function.outer",
-                        ["]o"] = {
-                            query = { "@conditional.outer", "@loop.outer" },
-                        },
-                    },
-                    goto_next_end = {
-                        ["]F"] = "@function.outer",
-                        ["]O"] = {
-                            query = { "@conditional.outer", "@loop.outer" },
-                        },
-                    },
-                    goto_previous_start = {
-                        ["[f"] = "@function.outer",
-                        ["[o"] = {
-                            query = { "@conditional.outer", "@loop.outer" },
-                        },
-                    },
-                    goto_previous_end = {
-                        ["[F"] = "@function.outer",
-                        ["[O"] = {
-                            query = { "@conditional.outer", "@loop.outer" },
-                        },
-                    },
-                },
-            },
-        },
-        config = function(_, opts)
-            if vim.g.install then
-                opts.ensure_installed = "all"
-            end
+        "romus204/tree-sitter-manager.nvim",
+        opts = { auto_install = true },
+    },
 
-            require("nvim-treesitter.configs").setup(opts)
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        event = "BufRead",
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
+                move = { set_jumps = true },
+            })
+
+            local move = require("nvim-treesitter-textobjects.move")
+            local remap = vim.keymap.set
+            local modes = { "n", "x", "o" }
+
+            -- stylua: ignore start
+            remap(modes, "]f", function() move.goto_next_start("@function.outer", "textobjects") end)
+            remap(modes, "]o", function() move.goto_next_start({ "@conditional.outer", "@loop.outer" }, "textobjects") end)
+            remap(modes, "]F", function() move.goto_next_end("@function.outer", "textobjects") end)
+            remap(modes, "]O", function() move.goto_next_end({ "@conditional.outer", "@loop.outer" }, "textobjects") end)
+            remap(modes, "[f", function() move.goto_previous_start("@function.outer", "textobjects") end)
+            remap(modes, "[o", function() move.goto_previous_start({ "@conditional.outer", "@loop.outer" }, "textobjects") end)
+            remap(modes, "[F", function() move.goto_previous_end("@function.outer", "textobjects") end)
+            remap(modes, "[O", function() move.goto_previous_end({ "@conditional.outer", "@loop.outer" }, "textobjects") end)
+            -- stylua: ignore end
         end,
     },
 
     {
         "nvim-treesitter/nvim-treesitter-context",
-        dependencies = "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPost", "BufNewFile" },
         opts = {
             enable = true,
@@ -89,10 +39,19 @@ return {
         },
     },
 
-    {
-        "windwp/nvim-ts-autotag",
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "xml" },
-        config = true,
-    },
+    -- TODO: nvim-ts-autotag causes "Invalid node type tab" query error on HTML files
+    -- when leaving insert mode (InsertLeave triggers rename_tag -> parser:parse(true)).
+    -- Likely a treesitter parser/query version mismatch. Re-enable once resolved.
+    -- {
+    --     "windwp/nvim-ts-autotag",
+    --     ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "xml" },
+    --     config = true,
+    -- },
+
+    -- TODO: nvim-treesitter-refactor has been archived with no replacement.
+    -- Create a plugin to re-add these features:
+    --   - highlight_definitions (alternative: vim.lsp.buf.document_highlight)
+    --   - smart_rename with keymap "gnr" (alternative: vim.lsp.buf.rename)
+    --   - navigation: goto_definition "gnd", goto_next_usage "]]", goto_previous_usage "[["
+    --     (alternative: vim.lsp.buf.definition, vim.lsp.buf.references)
 }
