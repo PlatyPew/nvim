@@ -1,7 +1,16 @@
+local has_supermaven
+local function supermaven_exists()
+    if has_supermaven == nil then
+        local s = vim.loop.fs_stat(vim.env.HOME .. "/.supermaven")
+        has_supermaven = s and s.type == "directory"
+    end
+    return has_supermaven
+end
+
 return {
     {
         "supermaven-inc/supermaven-nvim",
-        enabled = vim.fn.hostname():sub(1, 3) ~= "XT-",
+        enabled = supermaven_exists,
         build = function()
             local api = require("supermaven-nvim.api")
             api.start()
@@ -22,7 +31,7 @@ return {
     -- When supermaven eventually gets deprecated
     {
         "milanglacier/minuet-ai.nvim",
-        enabled = vim.fn.hostname():sub(1, 3) == "XT-",
+        enabled = not supermaven_exists,
         event = "InsertEnter",
         config = function()
             require("minuet").setup({
