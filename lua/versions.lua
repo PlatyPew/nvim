@@ -30,6 +30,7 @@ return {
     { "otter.nvim", version = "*" },
     { "overseer.nvim", version = "*" },
     { "render-markdown.nvim", version = "*" },
+    { "sidekick.nvim", version = "*" },
     { "snacks.nvim", version = "*" },
     { "snap.nvim", version = "*" },
     { "sniprun", version = "*" },

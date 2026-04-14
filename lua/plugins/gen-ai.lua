@@ -28,6 +28,38 @@ return {
         },
     },
 
+    {
+        "folke/sidekick.nvim",
+        cmd = "Sidekick",
+        -- stylua: ignore
+        keys = {
+            { "<Leader>aa", function() require("sidekick.cli").send() end,                      desc = "Send Context",      mode = { "v" } },
+            { "<Leader>aa", function() require("sidekick.cli").toggle() end,                    desc = "Toggle AI",         mode = { "n" } },
+            { "<Leader>af", function() require("sidekick.cli").send({ context = "file" }) end,  desc = "Send File",         mode = { "n" } },
+            { "<Leader>ap", function() require("sidekick.cli").prompt() end,                    desc = "Select Prompt",     mode = { "n", "v" } },
+            { "<Leader>aq", function() require("sidekick.cli").close() end,                     desc = "Close AI Session",  mode = { "n" } },
+            { "<Leader>as", function() require("sidekick.cli").select() end,                    desc = "Select AI Tool",    mode = { "n" } },
+        },
+        opts = {
+            nes = { enabled = false },
+            copilot = { status = { enabled = false } },
+            cli = {
+                mux = {
+                    backend = "tmux",
+                    enabled = true,
+                },
+                picker = "snacks",
+                tools = {
+                    claude = {},
+                },
+                win = {
+                    layout = "right",
+                    split = { width = 80 },
+                },
+            },
+        },
+    },
+
     -- When supermaven eventually gets deprecated
     {
         "milanglacier/minuet-ai.nvim",
