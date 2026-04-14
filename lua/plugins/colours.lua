@@ -60,9 +60,8 @@ return {
             end
 
             local function transparency()
-                catppuccin.setup({
-                    transparent_background = not catppuccin.options.transparent_background,
-                })
+                opts.transparent_background = not catppuccin.options.transparent_background
+                catppuccin.setup(opts)
                 vim.cmd.colorscheme("catppuccin")
                 vim.cmd("edit")
             end
@@ -70,20 +69,30 @@ return {
 
             vim.g.palette = require("catppuccin.palettes").get_palette()
 
-            opts.custom_highlights = {
-                ColorColumn = { fg = vim.g.palette.red, bg = vim.g.palette.crust },
-                VertSplit = { fg = vim.g.palette.overlay0 },
+            opts.custom_highlights = function(colors)
+                local hl = {
+                    ColorColumn = { fg = colors.red, bg = colors.crust },
+                    VertSplit = { fg = colors.overlay0 },
 
-                SnacksDashboardHeader = { fg = vim.g.palette.yellow },
-                SnacksDashboardFooter = { fg = vim.g.palette.peach },
+                    SnacksDashboardHeader = { fg = colors.yellow },
+                    SnacksDashboardFooter = { fg = colors.peach },
 
-                TSDefinitionUsage = { underline = true },
+                    TSDefinitionUsage = { underline = true },
 
-                LspInlayHint = { fg = vim.g.palette.surface1, italic = true },
+                    LspInlayHint = { fg = colors.surface1, italic = true },
 
-                TreesitterContext = { bg = vim.g.palette.surface0 },
-                TreesitterContextBottom = { style = {} },
-            }
+                    TreesitterContext = { bg = colors.surface0 },
+                    TreesitterContextBottom = { style = {} },
+                }
+
+                if opts.transparent_background then
+                    hl.NormalFloat = { bg = "NONE" }
+                    hl.FloatBorder = { bg = "NONE" }
+                    hl.FloatTitle = { bg = "NONE" }
+                end
+
+                return hl
+            end
 
             catppuccin.setup(opts)
 
