@@ -45,14 +45,11 @@ return {
         event = { "BufReadPost", "BufNewFile" },
     },
 
-    -- TODO: nvim-ts-autotag causes "Invalid node type tab" query error on HTML files
-    -- when leaving insert mode (InsertLeave triggers rename_tag -> parser:parse(true)).
-    -- Likely a treesitter parser/query version mismatch. Re-enable once resolved.
-    -- {
-    --     "windwp/nvim-ts-autotag",
-    --     ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "xml" },
-    --     config = true,
-    -- },
+    {
+        "windwp/nvim-ts-autotag",
+        ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "xml" },
+        config = true,
+    },
 
     -- TODO: nvim-treesitter-refactor has been archived with no replacement.
     -- Create a plugin to re-add these features:
