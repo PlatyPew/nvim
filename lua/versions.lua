@@ -4,7 +4,7 @@ return {
     { "codediff.nvim", version = "*" },
     { "grug-far.nvim", version = "*" },
     { "kulala.nvim", version = "*" },
-    { "live-preview.nvim", version = "*" },
+    { "live-preview.nvim", commit = "c1fcf75" },
     { "mason-lspconfig.nvim", lazy = true, version = "*" },
     { "mason.nvim", lazy = true, version = "*" },
     { "mini.ai", version = "*" },
