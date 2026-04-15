@@ -59,7 +59,9 @@ return {
     -- When supermaven eventually gets deprecated
     {
         "milanglacier/minuet-ai.nvim",
-        enabled = not supermaven_exists,
+        enabled = function()
+            return not supermaven_exists()
+        end,
         event = "InsertEnter",
         config = function()
             require("minuet").setup({
