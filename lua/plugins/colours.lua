@@ -14,7 +14,6 @@ return {
                 blink_cmp = true,
                 dadbod_ui = true,
                 dap = true,
-                dap_ui = true,
                 flash = true,
                 grug_far = true,
                 lsp_saga = true,
