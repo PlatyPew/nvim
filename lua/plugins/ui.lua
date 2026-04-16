@@ -58,11 +58,6 @@ return {
                     lualine_b = { "branch", "diff" },
                     lualine_c = { "filename", "filesize" },
                     lualine_x = {
-                        {
-                            require("noice").api.status.mode.get,
-                            cond = require("noice").api.status.mode.has,
-                            color = { fg = vim.g.palette.overlay0 },
-                        },
                         "%S",
                         "%l:%c",
                         {
