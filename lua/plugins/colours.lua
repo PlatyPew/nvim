@@ -27,27 +27,25 @@ return {
                 snacks = { enabled = true },
                 treesitter = true,
                 which_key = true,
-
-                -- Need to be adjusted when it becomes lsp_styles
-                native_lsp = {
-                    enabled = true,
-                    virtual_text = {
-                        errors = { "italic" },
-                        hints = { "italic" },
-                        warnings = { "italic" },
-                        information = { "italic" },
-                        ok = { "italic" },
-                    },
-                    underlines = {
-                        errors = { "undercurl" },
-                        hints = { "undercurl" },
-                        warnings = { "undercurl" },
-                        information = { "undercurl" },
-                        ok = { "undercurl" },
-                    },
-                    inlay_hints = {
-                        background = true,
-                    },
+            },
+            lsp_styles = {
+                enabled = true,
+                virtual_text = {
+                    errors = { "italic" },
+                    hints = { "italic" },
+                    warnings = { "italic" },
+                    information = { "italic" },
+                    ok = { "italic" },
+                },
+                underlines = {
+                    errors = { "undercurl" },
+                    hints = { "undercurl" },
+                    warnings = { "undercurl" },
+                    information = { "undercurl" },
+                    ok = { "undercurl" },
+                },
+                inlay_hints = {
+                    background = true,
                 },
             },
         },

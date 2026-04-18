@@ -1,6 +1,6 @@
 return {
     { "blink.cmp", version = "^1.0.0" },
-    { "catppuccin", version = "^1.0.0" },
+    { "catppuccin", version = "^2.0.0" },
     { "codediff.nvim", version = "^2.0.0" },
     { "dial.nvim", version = "0.x.x" },
     { "gitsigns.nvim", version = "^2.0.0" },
