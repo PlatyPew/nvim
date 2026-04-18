@@ -58,6 +58,16 @@ return {
                     lualine_b = { "branch", "diff" },
                     lualine_c = { "filename", "filesize" },
                     lualine_x = {
+                        {
+                            function()
+                                local reg = vim.fn.reg_recording()
+                                if reg ~= "" then
+                                    return "recording @" .. reg
+                                end
+                                return ""
+                            end,
+                            color = { fg = vim.g.palette.overlay0 },
+                        },
                         "%S",
                         "%l:%c",
                         {
