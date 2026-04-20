@@ -53,6 +53,7 @@ return {
 
     {
         "PlatyPew/nvim-treesitter-locals",
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
             highlight_definitions = true,
             keymaps = {

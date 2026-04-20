@@ -4,7 +4,7 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "mason-org/mason.nvim",
-            "jay-babu/mason-null-ls.nvim",
+            { "jay-babu/mason-null-ls.nvim", lazy = true },
             "nvimtools/none-ls-extras.nvim",
         },
         config = function()
