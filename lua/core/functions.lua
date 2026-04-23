@@ -36,21 +36,6 @@ function _G.__toggle_contextual(vmode)
         return line:match("^%s*$") ~= nil
     end
 
-    local function parse_commentstring(cs)
-        local left, right = cs:match("^(.-)%s*%%s%s*(.-)$")
-        return vim.trim(left or ""), vim.trim(right or "")
-    end
-
-    local function replace_range(start_row, replaced_count, new_lines)
-        vim.api.nvim_buf_set_lines(
-            0,
-            start_row - 1,
-            start_row - 1 + replaced_count,
-            false,
-            new_lines
-        )
-    end
-
     local function line_is_commented(line, left, right)
         if is_blank(line) then
             return true
@@ -59,13 +44,7 @@ function _G.__toggle_contextual(vmode)
         if content:sub(1, #left) ~= left then
             return false
         end
-        if right == "" then
-            return true
-        end
-        if #content < #left + #right then
-            return false
-        end
-        return content:sub(-#right) == right
+        return right == "" or (#content >= #left + #right and content:sub(-#right) == right)
     end
 
     local function all_lines_commented(lines, left, right)
@@ -105,19 +84,42 @@ function _G.__toggle_contextual(vmode)
         return indent .. left .. " " .. content
     end
 
-    local function toggle_line_comment(lines, start_row)
-        local cs = vim.bo.commentstring
+    local function replace_range(start_row, count, new_lines)
+        vim.api.nvim_buf_set_lines(0, start_row - 1, start_row - 1 + count, false, new_lines)
+    end
+
+    local function get_lang_at(row)
+        local ok, parser = pcall(vim.treesitter.get_parser, 0)
+        if not ok or not parser then
+            return vim.bo.filetype
+        end
+        local tree = parser:language_for_range({ row - 1, 0, row - 1, 0 })
+        return tree and tree:lang() or vim.bo.filetype
+    end
+
+    local function get_commentstring_for(ft)
+        if ft == vim.bo.filetype then
+            return vim.bo.commentstring
+        end
+        local ok, cs = pcall(vim.filetype.get_option, ft, "commentstring")
+        if ok and type(cs) == "string" and cs ~= "" then
+            return cs
+        end
+        return vim.bo.commentstring
+    end
+
+    local function toggle_line_comment(lines, start_row, ft)
+        local cs = get_commentstring_for(ft)
         if cs == "" then
             return
         end
-
-        local left, right = parse_commentstring(cs)
+        local l, r = cs:match("^(.-)%s*%%s%s*(.-)$")
+        local left, right = vim.trim(l or ""), vim.trim(r or "")
         if left == "" then
             return
         end
 
         local transform = all_lines_commented(lines, left, right) and uncomment_line or comment_line
-
         local new_lines = {}
         for i, line in ipairs(lines) do
             new_lines[i] = transform(line, left, right)
@@ -125,21 +127,16 @@ function _G.__toggle_contextual(vmode)
         replace_range(start_row, #lines, new_lines)
     end
 
-    local function is_block_wrapped(lines, open, close)
-        local first = vim.trim(lines[1])
-        local last = vim.trim(lines[#lines])
-        return first:sub(1, #open) == open and last:sub(-#close) == close
-    end
-
     local function strip_block_markers(lines, open, close)
-        local stripped = vim.deepcopy(lines)
-        stripped[1] = stripped[1]:gsub(vim.pesc(open) .. "%s?", "", 1)
-        stripped[#stripped] = stripped[#stripped]:gsub("%s?" .. vim.pesc(close) .. "$", "", 1)
-
         local result = {}
-        for i, line in ipairs(stripped) do
-            local is_edge = i == 1 or i == #stripped
-            if not (is_edge and is_blank(line)) then
+        for i, line in ipairs(lines) do
+            if i == 1 then
+                line = line:gsub(vim.pesc(open) .. "%s?", "", 1)
+            end
+            if i == #lines then
+                line = line:gsub("%s?" .. vim.pesc(close) .. "$", "", 1)
+            end
+            if not ((i == 1 or i == #lines) and is_blank(line)) then
                 result[#result + 1] = line
             end
         end
@@ -149,9 +146,7 @@ function _G.__toggle_contextual(vmode)
     local function wrap_block(lines, open, close)
         local indent = get_indent(lines[1])
         local wrapped = { indent .. open }
-        for _, line in ipairs(lines) do
-            wrapped[#wrapped + 1] = line
-        end
+        vim.list_extend(wrapped, lines)
         wrapped[#wrapped + 1] = indent .. close
         return wrapped
     end
@@ -159,30 +154,28 @@ function _G.__toggle_contextual(vmode)
     local function toggle_block_comment(lines, start_row, ft)
         local markers = BLOCK_COMMENTS[ft]
         if not markers then
-            toggle_line_comment(lines, start_row)
+            toggle_line_comment(lines, start_row, ft)
             return
         end
-
         local open, close = markers[1], markers[2]
-        local new_lines = is_block_wrapped(lines, open, close)
-                and strip_block_markers(lines, open, close)
+        local first, last = vim.trim(lines[1]), vim.trim(lines[#lines])
+        local wrapped = first:sub(1, #open) == open and last:sub(-#close) == close
+        local new_lines = wrapped and strip_block_markers(lines, open, close)
             or wrap_block(lines, open, close)
         replace_range(start_row, #lines, new_lines)
     end
 
-    local function get_range(vmode)
-        if vmode == "line" or vmode == "char" then
-            return vim.fn.line("'["), vim.fn.line("']")
-        end
-        return vim.fn.line("'<"), vim.fn.line("'>")
+    local start_row, end_row
+    if vmode == "line" or vmode == "char" then
+        start_row, end_row = vim.fn.line("'["), vim.fn.line("']")
+    else
+        start_row, end_row = vim.fn.line("'<"), vim.fn.line("'>")
     end
-    local start_row, end_row = get_range(vmode)
     local lines = vim.api.nvim_buf_get_lines(0, start_row - 1, end_row, false)
-    local ft = vim.bo.filetype
-    local single_line = start_row == end_row
+    local ft = get_lang_at(start_row)
 
-    if single_line or LINE_ONLY[ft] then
-        toggle_line_comment(lines, start_row)
+    if start_row == end_row or LINE_ONLY[ft] then
+        toggle_line_comment(lines, start_row, ft)
     else
         toggle_block_comment(lines, start_row, ft)
     end
