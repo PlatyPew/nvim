@@ -82,7 +82,7 @@ return {
                 end
             end)
 
-            remap("x", "I", mc.insertVisual)
+            remap("x", "I", "<Esc>`<i")
 
             remap("v", "M", mc.matchCursors)
         end,
