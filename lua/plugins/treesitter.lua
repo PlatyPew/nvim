@@ -56,9 +56,11 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         opts = {
             highlight_definitions = true,
+            cross_file = true,
             keymaps = {
                 smart_rename = "gnr",
                 goto_definition = "gnd",
+                goto_implementation = "gni",
                 goto_next_usage = "]]",
                 goto_previous_usage = "[[",
             },
