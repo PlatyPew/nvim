@@ -11,7 +11,10 @@ return {
                     ["cmp.entry.get_documentation"] = true,
                 },
             },
-            presets = { long_message_to_split = true },
+            presets = {
+                long_message_to_split = true,
+                lsp_doc_border = true,
+            },
         },
     },
 

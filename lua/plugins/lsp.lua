@@ -51,8 +51,9 @@ return {
             { "gp", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
             { "gx", function() Snacks.picker.lsp_references() end, desc = "Find References" },
 
-            { "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, desc = "Previous Diagnostic" },
-            { "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, desc = "Next Diagnostic" },
+            { "[d", function() vim.diagnostic.jump({ count = -1, float = { border = "rounded", max_width = 80 } }) end, desc = "Previous Diagnostic" },
+            { "]d", function() vim.diagnostic.jump({ count = 1, float = { border = "rounded", max_width = 80 } }) end, desc = "Next Diagnostic" },
+            { "<Leader>ld", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
 
             { "<Leader>lO", function() Snacks.picker.lsp_symbols() end, desc = "Outline" },
             { "<Leader>lc", function() vim.lsp.buf.code_action() end, desc = "Code Action" },
@@ -72,6 +73,20 @@ return {
                         [vim.diagnostic.severity.HINT] = "󰌶 ",
                     },
                 },
+                float = {
+                    border = "rounded",
+                    source = true,
+                    header = "",
+                    prefix = function(_)
+                        return "  ", ""
+                    end,
+                    suffix = function(_)
+                        return "  ", ""
+                    end,
+                    max_width = 80,
+                    focusable = false,
+                },
+                severity_sort = true,
             })
         end,
     },
