@@ -16,7 +16,6 @@ return {
                 dap = true,
                 flash = true,
                 grug_far = true,
-                lsp_saga = true,
                 mason = true,
                 mini = { enabled = true },
                 neogit = true,

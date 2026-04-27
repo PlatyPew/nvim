@@ -41,14 +41,26 @@ return {
     {
         "neovim/nvim-lspconfig",
         ft = "markdown", -- Fix for jupytext
+        -- stylua: ignore
         keys = {
-            {
-                "<Leader>lI",
-                function()
-                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-                end,
-                desc = "Toggle Inlay Hints",
-            },
+            { "<Leader>lI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle Inlay Hints" },
+
+            { "ga", function() vim.lsp.buf.code_action() end, desc = "Code Action" },
+            { "gh", function() vim.lsp.buf.hover() end, desc = "Hover Documentation" },
+            { "K", function() vim.lsp.buf.hover() end, desc = "Hover Documentation" },
+            { "gp", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+            { "gx", function() Snacks.picker.lsp_references() end, desc = "Find References" },
+
+            { "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, desc = "Previous Diagnostic" },
+            { "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, desc = "Next Diagnostic" },
+
+            { "<Leader>lO", function() Snacks.picker.lsp_symbols() end, desc = "Outline" },
+            { "<Leader>lc", function() vim.lsp.buf.code_action() end, desc = "Code Action" },
+            { "<Leader>lh", function() vim.lsp.buf.hover() end, desc = "Hover Documentation" },
+            { "<Leader>li", function() Snacks.picker.lsp_incoming_calls() end, desc = "Incoming Calls" },
+            { "<Leader>lo", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Outgoing Calls" },
+            { "<Leader>lp", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+            { "<Leader>lx", function() Snacks.picker.lsp_references() end, desc = "Find References" },
         },
         init = function()
             vim.diagnostic.config({
@@ -62,47 +74,6 @@ return {
                 },
             })
         end,
-    },
-
-    {
-        "nvimdev/lspsaga.nvim",
-        cmd = "Lspsaga",
-        -- stylua: ignore
-        keys = {
-            { "ga", "<Cmd>Lspsaga code_action<CR>", desc = "Show Code Actions" },
-            { "gp", "<Cmd>Lspsaga goto_definition<CR>", desc = "Goto Definition" },
-            { "gh", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
-            { "K", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
-            { "gx", "<Cmd>Lspsaga finder<CR>", desc = "Find Reference" },
-
-            { "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "Previous Diagnostic" },
-            { "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", desc = "Next Diagnostic" },
-
-            { "<Leader>lO", "<Cmd>Lspsaga outline<CR>", desc = "Outline" },
-            { "<Leader>lc", "<Cmd>Lspsaga code_action<CR>", desc = "Code Action" },
-            { "<Leader>lh", "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover Documentation" },
-            { "<Leader>li", "<Cmd>Lspsaga incoming_calls<CR>", desc = "Incoming Calls" },
-            { "<Leader>lo", "<Cmd>Lspsaga outgoing_calls<CR>", desc = "Outgoing Calls" },
-            { "<Leader>lp", "<Cmd>Lspsaga goto_definition<CR>", desc = "Goto Definition" },
-            { "<Leader>lx", "<Cmd>Lspsaga finder<CR>", desc = "Find Reference" },
-        },
-        opts = {
-            ui = {
-                kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-            },
-            finder = {
-                keys = { toggle_or_open = "<CR>" },
-            },
-            callhierarchy = {
-                keys = { edit = "<CR>" },
-            },
-            outline = {
-                keys = { jump = "<CR>" },
-            },
-            rename = { in_select = false },
-            lightbulb = { enable = false },
-            symbol_in_winbar = { enable = false },
-        },
     },
 
     {
