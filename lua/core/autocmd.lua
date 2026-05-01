@@ -1,6 +1,29 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+-- Bigfile early bail-out: disable expensive opts before file is read
+autocmd("BufReadPre", {
+    group = augroup("bigfile_pre", { clear = true }),
+    pattern = "*",
+    callback = function(args)
+        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+        if not ok or not stats then
+            return
+        end
+        if stats.size > 0.5 * 1024 * 1024 then
+            vim.opt_local.swapfile = false
+            vim.opt_local.undolevels = -1
+            vim.opt_local.undoreload = 0
+            vim.opt_local.foldmethod = "manual"
+            vim.opt_local.list = false
+            vim.opt_local.spell = false
+            if vim.fn.exists(":NoMatchParen") ~= 0 then
+                vim.cmd("NoMatchParen")
+            end
+        end
+    end,
+})
+
 -- Remove comment on newline
 autocmd({ "BufNewFile", "BufRead" }, {
     pattern = "*",

@@ -50,7 +50,6 @@ return {
     -- { "colorful-menu.nvim", version = "*" },
     -- { "devdocs.nvim", version = "*" },
     -- { "emmet-vim", version = "*" },
-    -- { "faster.nvim", version = "*" },
     -- { "flash.nvim", version = "*" },
     -- { "friendly-snippets", version = "*" },
     -- { "jupytext.nvim", version = "*" },

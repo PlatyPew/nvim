@@ -16,6 +16,49 @@ return {
             quickfile = { enabled = true },
             scope = { enabled = true },
             terminal = { enabled = true },
+            bigfile = {
+                enabled = true,
+                notify = true,
+                size = 0.5 * 1024 * 1024,
+                setup = function(ctx)
+                    if vim.fn.exists(":NoMatchParen") ~= 0 then
+                        vim.cmd("NoMatchParen")
+                    end
+                    Snacks.util.wo(0, {
+                        foldmethod = "manual",
+                        statuscolumn = "",
+                        conceallevel = 0,
+                        spell = false,
+                        list = false,
+                        cursorline = false,
+                        cursorcolumn = false,
+                        wrap = false,
+                    })
+                    vim.opt_local.swapfile = false
+                    vim.opt_local.undolevels = -1
+                    vim.opt_local.undoreload = 0
+                    vim.b.completion = false
+                    vim.b.minianimate_disable = true
+                    vim.b.minihipatterns_disable = true
+                    pcall(vim.cmd, "RainbowDelimitersDisable")
+                    pcall(vim.cmd, "IBLDisable")
+                    pcall(vim.cmd, "IlluminatePauseBuf")
+                    pcall(vim.treesitter.stop, ctx.buf)
+                    for _, c in ipairs(vim.lsp.get_clients({ bufnr = ctx.buf })) do
+                        vim.lsp.buf_detach_client(ctx.buf, c.id)
+                    end
+                    vim.schedule(function()
+                        if not vim.api.nvim_buf_is_valid(ctx.buf) then
+                            return
+                        end
+                        vim.api.nvim_buf_call(ctx.buf, function()
+                            vim.cmd("syntax clear")
+                        end)
+                        vim.bo[ctx.buf].syntax = "off"
+                        vim.bo[ctx.buf].filetype = ""
+                    end)
+                end,
+            },
         },
         -- stylua: ignore
         keys = {
@@ -69,48 +112,7 @@ return {
         },
     },
 
-    {
-        "pteroctopus/faster.nvim",
-        event = "BufReadPre",
-        opts = {
-            behaviours = {
-                bigfile = {
-                    filesize = 0.5,
-                    features_disabled = {
-                        "matchparen",
-                        "lsp",
-                        "treesitter",
-                        "vimopts",
-                        "syntax",
-                        "filetype",
-                        "rainbow",
-                    },
-                },
-            },
-            features = {
-                rainbow = {
-                    on = true,
-                    defer = false,
-                    enable = function()
-                        require("rainbow-delimiters").enable(0)
-                    end,
-                    disable = function()
-                        require("rainbow-delimiters").disable(0)
-                    end,
-                    commands = function()
-                        vim.api.nvim_create_user_command("FasterEnableRainbow", function()
-                            require("rainbow-delimiters").enable(0)
-                        end, {})
-                        vim.api.nvim_create_user_command("FasterDisableRainbow", function()
-                            require("rainbow-delimiters").disable(0)
-                        end, {})
-                    end,
-                },
-            },
-        },
-    },
-
-    {
+{
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = {
