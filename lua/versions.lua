@@ -46,6 +46,8 @@ return {
     { "nvim-dap", commit = "45a69eb" },
     { "vim-suda", commit = "c492741" },
 
+    { "nvim-treesitter", enabled = false }, -- Prevent kulala from installing nvim-treesitter
+
     -- { "blink-nerdfont.nvim", version = "*" },
     -- { "colorful-menu.nvim", version = "*" },
     -- { "devdocs.nvim", version = "*" },
