@@ -1,6 +1,7 @@
 local remap = vim.keymap.set
 
 require("core.multiplexer").setup()
+require("core.commenter").setup()
 
 -- Vanilla
 -- Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
@@ -73,10 +74,6 @@ end, { expr = true })
 -- Better escape for terminal
 remap("t", "<Esc>", "<C-\\><C-n>")
 remap("t", "<C-Esc>", "<C-\\><C-n>")
-
--- Mappings for Comment
-remap("n", "gc", "<cmd>set operatorfunc=v:lua.__toggle_contextual<CR>g@")
-remap("x", "gc", "<cmd>set operatorfunc=v:lua.__toggle_contextual<CR>g@")
 
 -- Clear search on escape
 remap({ "i", "n", "s" }, "<esc>", function()
