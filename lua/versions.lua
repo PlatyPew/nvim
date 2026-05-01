@@ -55,7 +55,6 @@ return {
     -- { "friendly-snippets", version = "*" },
     -- { "jupytext.nvim", version = "*" },
     -- { "lazydev.nvim", version = "*" },
-    -- { "lspsaga.nvim", version = "*" },
     -- { "lualine.nvim", version = "*" },
     -- { "mason-null-ls.nvim", version = "*" },
     -- { "multicursor.nvim", version = "*" },
