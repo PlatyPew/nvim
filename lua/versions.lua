@@ -44,6 +44,7 @@ return {
 
     { "live-preview.nvim", commit = "c1fcf75" },
     { "nvim-dap", commit = "45a69eb" },
+    { "vim-suda", commit = "c492741" },
 
     -- { "blink-nerdfont.nvim", version = "*" },
     -- { "colorful-menu.nvim", version = "*" },
@@ -73,7 +74,6 @@ return {
     -- { "plenary.nvim", version = "*" },
     -- { "rainbow-delimiters.nvim", version = "*" },
     -- { "spring-boot.nvim", version = "*" },
-    -- { "suda.vim", version = "*" },
     -- { "supermaven-nvim", version = "*" },
     -- { "tree-sitter-manager.nvim", version = "*" },
     -- { "vim-dadbod", version = "*" },

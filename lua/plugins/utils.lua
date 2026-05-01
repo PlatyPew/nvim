@@ -49,7 +49,7 @@ return {
     },
 
     {
-        "lambdalisue/suda.vim",
+        "lambdalisue/vim-suda",
         cmd = { "SudaWrite", "SudaRead" },
         keys = {
             { "<Leader>W", "<Cmd>SudaWrite<CR>", desc = "Sudo Write" },

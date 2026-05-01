@@ -67,12 +67,12 @@
   "snap.nvim": { "branch": "main", "commit": "d7fc8560da646a18c975f617a58c922501ed95d8" },
   "sniprun": { "branch": "master", "commit": "973acfe83cff35d13b95369a5606c47565b824fb" },
   "spring-boot.nvim": { "branch": "main", "commit": "218c0c26c14d99feca778e4d13f5ec3e8b1b60f0" },
-  "suda.vim": { "branch": "master", "commit": "c492741b4679b3cdd4d9e34138209784e061d916" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tree-sitter-manager.nvim": { "branch": "main", "commit": "33a94d022e3a5a500d878b784ba7fec61559c70a" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "6b58234de921437836efe27714b2026ed2ee235a" },
   "vim-dadbod": { "branch": "master", "commit": "6d1d41da4873a445c5605f2005ad2c68c99d8770" },
   "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
   "vim-dadbod-ui": { "branch": "master", "commit": "07e92e22114cc5b1ba4938d99897d85b58e20475" },
+  "vim-suda": { "branch": "master", "commit": "c492741b4679b3cdd4d9e34138209784e061d916" },
   "which-key.nvim": { "branch": "main", "commit": "fcbf4eea17cb299c02557d576f0d568878e354a4" }
 }
