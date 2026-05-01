@@ -56,6 +56,11 @@ return {
     },
 
     {
+        "RRethy/nvim-treesitter-endwise",
+        ft = { "lua", "ruby", "vim" },
+    },
+
+    {
         "PlatyPew/nvim-treesitter-locals",
         event = { "BufReadPost", "BufNewFile" },
         opts = {
