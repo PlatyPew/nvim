@@ -33,6 +33,10 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = { "BufReadPost", "BufNewFile" },
+        -- stylua: ignore
+        keys = {
+            { "g0", function() require("treesitter-context").go_to_context(vim.v.count1) end, "n", },
+        },
         opts = {
             enable = true,
             multiwindow = true,
