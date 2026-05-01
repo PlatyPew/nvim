@@ -12,7 +12,7 @@ end
 
 function M.setup()
     for key in pairs(tmux_dir) do
-        vim.keymap.set("n", "<C-" .. key .. ">", function()
+        vim.keymap.set({ "n", "i" }, "<C-" .. key .. ">", function()
             move(key)
         end, { desc = "Multiplexer move " .. key })
     end
