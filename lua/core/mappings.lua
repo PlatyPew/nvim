@@ -1,5 +1,7 @@
 local remap = vim.keymap.set
 
+require("core.multiplexer").setup()
+
 -- Vanilla
 -- Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
 -- Increase horizontal split
