@@ -32,7 +32,6 @@ opt.whichwrap = "b,s,<,>,h,l"
 opt.wrap = true
 opt.cmdheight = 0
 opt.showcmdloc = "statusline"
-opt.winborder = "rounded"
 opt.undodir = fn.stdpath("cache") .. "/undotree"
 opt.undofile = true
 

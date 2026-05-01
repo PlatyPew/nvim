@@ -46,8 +46,8 @@ return {
             { "<Leader>lI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle Inlay Hints" },
 
             { "ga", function() vim.lsp.buf.code_action() end, desc = "Code Action" },
-            { "gh", function() vim.lsp.buf.hover() end, desc = "Hover Documentation" },
-            { "K", function() vim.lsp.buf.hover() end, desc = "Hover Documentation" },
+            { "gh", function() vim.lsp.buf.hover({ border = "rounded" }) end, desc = "Hover Documentation" },
+            { "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, desc = "Hover Documentation" },
             { "gp", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
             { "gx", function() Snacks.picker.lsp_references() end, desc = "Find References" },
 
@@ -57,7 +57,7 @@ return {
 
             { "<Leader>lO", function() Snacks.picker.lsp_symbols() end, desc = "Outline" },
             { "<Leader>lc", function() vim.lsp.buf.code_action() end, desc = "Code Action" },
-            { "<Leader>lh", function() vim.lsp.buf.hover() end, desc = "Hover Documentation" },
+            { "<Leader>lh", function() vim.lsp.buf.hover({ border = "rounded" }) end, desc = "Hover Documentation" },
             { "<Leader>li", function() Snacks.picker.lsp_incoming_calls() end, desc = "Incoming Calls" },
             { "<Leader>lo", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Outgoing Calls" },
             { "<Leader>lp", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
