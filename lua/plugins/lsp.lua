@@ -5,28 +5,12 @@ return {
         dependencies = { "mason-org/mason.nvim" },
         lazy = true,
         config = function()
-            local servers = {}
-
-            if vim.g.install then
-                servers = {
-                    bashls = {},
-                    clangd = {},
-                    lua_ls = {},
-                    basedpyright = {},
-                    rust_analyzer = {},
-                    ts_ls = {},
-                }
-            end
-
             if require("jit").os == "Linux" and require("jit").arch == "arm64" then
                 vim.lsp.config("clangd", {})
             end
 
             -- Ensure the servers above are installed
-            require("mason-lspconfig").setup({
-                ensure_installed = vim.tbl_keys(servers),
-                automatic_enable = true,
-            })
+            require("mason-lspconfig").setup({ automatic_enable = true })
         end,
     },
 

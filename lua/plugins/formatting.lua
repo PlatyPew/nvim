@@ -10,19 +10,7 @@ return {
         config = function()
             local null_ls = require("null-ls")
 
-            local ensure_installed = {}
-            if vim.g.install then
-                ensure_installed = {
-                    "clang_format",
-                    "prettier",
-                    "rustfmt",
-                    "stylua",
-                    "yapf",
-                }
-            end
-
             require("mason-null-ls").setup({
-                ensure_installed = ensure_installed,
                 automatic_installation = true,
                 automatic_setup = true,
                 handlers = {

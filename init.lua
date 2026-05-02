@@ -14,10 +14,6 @@ if vim.fn.has("nvim-0.12") ~= 1 then
     return
 end
 
-if vim.fn.expand("$NVIM_INSTALL") == "true" then
-    vim.g.install = 1
-end
-
 require("core.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

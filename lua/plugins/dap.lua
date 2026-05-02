@@ -14,17 +14,7 @@ return {
             vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error" })
             vim.fn.sign_define("DapStopped", { text = "", texthl = "String" })
 
-            local ensure_installed = {}
-            if vim.g.install then
-                ensure_installed = {
-                    "python",
-                    "codelldb",
-                    "js-debug-adapter",
-                }
-            end
-
             require("mason-nvim-dap").setup({
-                ensure_installed = ensure_installed,
                 automatic_setup = true,
                 filetypes = {
                     firefox = {
