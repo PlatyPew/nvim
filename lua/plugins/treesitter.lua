@@ -1,6 +1,7 @@
 return {
     {
         "romus204/tree-sitter-manager.nvim",
+        enabled = vim.fn.executable("tree-sitter") == 1,
         event = "BufRead",
         opts = { auto_install = true },
     },
