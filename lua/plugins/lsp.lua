@@ -9,6 +9,19 @@ return {
                 vim.lsp.config("clangd", {})
             end
 
+            vim.lsp.config("basedpyright", {
+                settings = {
+                    basedpyright = {
+                        typeCheckingMode = "basic",
+                        diagnosticSeverityOverrides = {
+                            reportUnknownMemberType = "none",
+                            reportUnknownVariableType = "none",
+                            reportUnknownArgumentType = "none",
+                        },
+                    },
+                },
+            })
+
             -- Ensure the servers above are installed
             require("mason-lspconfig").setup({ automatic_enable = true })
         end,
