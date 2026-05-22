@@ -6,7 +6,7 @@ return {
     { "gitsigns.nvim", version = "^2.1.0" },
     { "grug-far.nvim", version = "^1.6.67" },
     { "img-clip.nvim", version = "*" },
-    { "kulala.nvim", version = "^5.3.4" },
+    { "kulala.nvim", version = "^6.0.1" },
     { "mason-lspconfig.nvim", version = "^2.2.0" },
     { "mason-null-ls.nvim", version = "^2.6.0" },
     { "mason.nvim", version = "^2.2.1" },
@@ -45,8 +45,6 @@ return {
     { "live-preview.nvim", commit = "c1fcf75" },
     { "nvim-dap", commit = "45a69eb" },
     { "vim-suda", commit = "c492741" },
-
-    { "nvim-treesitter", enabled = false }, -- Prevent kulala from installing nvim-treesitter
 
     -- { "blink-nerdfont.nvim", version = "*" },
     -- { "colorful-menu.nvim", version = "*" },
