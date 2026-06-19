@@ -33,7 +33,7 @@ return {
         cmd = "Sidekick",
         -- stylua: ignore
         keys = {
-            { "<Leader>aa", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,  desc = "Toggle AI",         mode = { "n" } },
+            { "<Leader>aa", function() require("sidekick.cli").toggle({ name = "opencode", focus = true }) end,  desc = "Toggle AI",         mode = { "n" } },
             { "<Leader>ab", function() require("sidekick.cli").send({ msg = "{buffers}" }) end,                desc = "Send Context",      mode = { "n", "x" } },
             { "<Leader>ae", function() require("sidekick.cli").send({ msg = "{selection}" }) end,              desc = "Send Selection",    mode = { "x" } },
             { "<Leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end,                   desc = "Send File",         mode = { "n", "x" } },
