@@ -36,6 +36,7 @@ return {
     { "snacks.nvim", version = "^2.31.0" },
     { "snap.nvim", version = "^1.5.0" },
     { "sniprun", version = "^1.3.22" },
+    { "tree-sitter-manager.nvim", version = "v1.0.0" },
     { "which-key.nvim", version = "^3.17.0" },
 
     { "nvim-treesitter-context", branch = "master" },
@@ -73,7 +74,6 @@ return {
     -- { "rainbow-delimiters.nvim", version = "*" },
     -- { "spring-boot.nvim", version = "*" },
     -- { "supermaven-nvim", version = "*" },
-    -- { "tree-sitter-manager.nvim", version = "*" },
     -- { "vim-dadbod", version = "*" },
     -- { "vim-dadbod-completion", version = "*" },
     -- { "vim-dadbod-ui", version = "*" },
