@@ -43,8 +43,8 @@ return {
     { "nvim-treesitter-textobjects", branch = "main" },
     { "ultimate-autopair.nvim", branch = "v0.6" },
 
-    { "live-preview.nvim", commit = "c1fcf75" },
-    { "nvim-dap", commit = "45a69eb" },
+    { "live-preview.nvim", commit = "a30e54e" },
+    { "nvim-dap", commit = "9e848e0" },
     { "vim-suda", commit = "c492741" },
 
     -- { "blink-nerdfont.nvim", version = "*" },
